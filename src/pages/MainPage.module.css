@@ -20,16 +20,24 @@
 :global(#visualWrap).visualWrap {
   position: relative;
   width: 100%;
-  height: 120vh;
+  height: 100vh;
+  z-index: 1;
 }
 
 :global(#visualWrap).visualWrap .visualBox {
-  position: sticky;
-  top: 0;
+  position: relative;
   width: 100%;
   height: 100vh;
-  overflow: hidden;
+  overflow: visible;
   z-index: 10;
+}
+
+:global(#visualWrap).visualWrap :global(.visualContentBox) {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background-color: #f5f5f5;
+  isolation: isolate;
 }
 
 :global(#visualWrap).visualWrap .visualVideoBox {
@@ -39,6 +47,18 @@
   align-items: center;
   justify-content: center;
   overflow: hidden;
+  z-index: 1;
+}
+
+:global(#visualWrap).visualWrap .visualVideoBox video {
+  display: block;
+  width: 12.5vw;
+  height: 22.24vw;
+  object-fit: cover;
+  opacity: 0;
+  transform: scaleX(.01);
+  transform-origin: center;
+  will-change: opacity, transform;
 }
 
 :global(#visualWrap).visualWrap .visualTextBox {
@@ -50,28 +70,37 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-}
-
-:global(#visualWrap).visualWrap .visualTextBox h2 {
-  font-size: 7.8vw;
-  font-weight: 500;
-  color: #222;
-  font-family: 'HelveticaNowDisplay';
-  letter-spacing: -0.05vw;
-  white-space: nowrap;
-}
-
-:global(#visualWrap).visualWrap .visualTextBox h2 span {
-  margin-top: 2.08vw;
-  font-size: 0.83vw;
-  font-weight: 600;
-  color: #222;
+  overflow: visible;
+  mix-blend-mode: difference;
+  pointer-events: none;
+  z-index: 2;
 }
 
 :global(#visualWrap).visualWrap .visualText {
   display: flex;
   align-items: center;
+  gap: 0 16.67vw;
   line-height: 1;
+  overflow: visible;
+}
+
+:global(#visualWrap).visualWrap .visualText h2 {
+  opacity: 0;
+  color: #fff;
+  font-size: 7.8vw;
+  font-weight: 500;
+  font-family: 'HelveticaNowDisplay';
+  letter-spacing: -.05vw;
+  white-space: nowrap;
+  will-change: opacity, transform;
+}
+
+:global(#visualWrap).visualWrap .visualTextBox h2 span {
+  margin-top: 2.08vw;
+  color: inherit;
+  font-size: .83vw;
+  font-weight: 600;
+  font-family: 'GoogleSansCode';
 }
 
 :global(#visualWrap).visualWrap .visualText02 h2 {
@@ -79,123 +108,8 @@
   gap: 0 3.96vw;
 }
 
-/* 초기 */
-
-:global(#visualWrap).visualWrap .visualVideoBox,
-:global(#visualWrap).visualWrap .visualText {
-  opacity: 0;
-}
-
-:global(#visualWrap).visualWrap .visualText {
-  gap: 0;
-}
-
-:global(#visualWrap).visualWrap .visualText02 {
-  gap: 0 10vw;
-}
-
 :global(#visualWrap).visualWrap .visualText03 {
-  gap: 0 20vw;
-}
-
-:global(#visualWrap).visualWrap .visualText01 {
-  transform: translateX(-10vw);
-}
-
-:global(#visualWrap).visualWrap .visualText02 {
-  transform: translateX(20vw);
-}
-
-:global(#visualWrap).visualWrap .visualText03 {
-  transform: translateX(-10vw);
-}
-
-:global(#visualWrap).visualWrap .visualText h2 {
-  opacity: 1;
-  transform: translateY(0) rotate(0deg);
-  transition: transform .8s cubic-bezier(.65, 0, .35, 1), opacity .6s ease;
-}
-
-/* 비주얼 텍스트 모션 */
-
-:global(#visualWrap).visualWrap .visualText {
-  transition: opacity .8s ease, gap .8s cubic-bezier(.65, 0, .35, 1), transform .8s cubic-bezier(.65, 0, .35, 1);
-  will-change: opacity, gap, transform;
-}
-
-:global(#visualWrap).visualWrap .visualVideoBox {
-  transition: opacity 1.3s ease;
-  will-change: opacity;
-}
-
-/* 페이지 진입 */
-
-:global(#visualWrap).visualWrap .visualBox:global(.active) .visualVideoBox {
-  opacity: 1;
-}
-
-:global(#visualWrap).visualWrap .visualBox:global(.active) .visualText {
-  opacity: 1;
-  gap: 0 16.67vw;
-}
-
-:global(#visualWrap).visualWrap .visualBox:global(.active) .visualText01 {
-  transform: translateX(0);
-}
-
-:global(#visualWrap).visualWrap .visualBox:global(.active) .visualText02 {
-  transform: translateX(0);
-}
-
-:global(#visualWrap).visualWrap .visualBox:global(.active) .visualText03 {
   transform: translateX(12vw);
-}
-
-/* 비디오 크기 모션 */
-
-:global(#visualWrap).visualWrap .visualVideoBox video {
-  display: block;
-  width: 12.5vw;
-  height: 22.24vw;
-  object-fit: cover;
-  transform: scale(.85);
-  transition: transform 1.3s cubic-bezier(.65, 0, .35, 1);
-}
-
-:global(#visualWrap).visualWrap .visualBox:global(.active) .visualVideoBox video {
-  transform: scale(1);
-}
-
-/* 텍스트 하단 낙하 */
-
-:global(#visualWrap).visualWrap .visualBox:global(.step02) .visualText01 h2 {
-  transform: translateY(100vh) rotate(50deg);
-  opacity: 0;
-  transition-delay: 0s;
-}
-
-:global(#visualWrap).visualWrap .visualBox:global(.step02) .visualText02 h2:nth-child(1) {
-  transform: translateY(100vh) rotate(-50deg);
-  opacity: 0;
-  transition-delay: .05s;
-}
-
-:global(#visualWrap).visualWrap .visualBox:global(.step02) .visualText02 h2:nth-child(2) {
-  transform: translateY(100vh) rotate(50deg);
-  opacity: 0;
-  transition-delay: .1s;
-}
-
-:global(#visualWrap).visualWrap .visualBox:global(.step02) .visualText03 h2:nth-child(1) {
-  transform: translateY(100vh) rotate(50deg);
-  opacity: 0;
-  transition-delay: .15s;
-}
-
-:global(#visualWrap).visualWrap .visualBox:global(.step02) .visualText03 h2:nth-child(2) {
-  transform: translateY(100vh) rotate(-50deg);
-  opacity: 0;
-  transition-delay: .2s;
 }
 
 /* 스크롤 표시 */
@@ -215,9 +129,10 @@
 
 :global(#visualWrap).visualWrap .visualScrollText {
   display: block;
-  font-size: .83vw;
   color: #b4b4b4;
+  font-size: .83vw;
   font-weight: 600;
+  font-family: 'GoogleSansCode';
 }
 
 :global(#visualWrap).visualWrap .visualScrollLine {
@@ -241,8 +156,8 @@
 @keyframes scrollLine {
 
   0% {
-    transform: translateY(0);
     opacity: 0;
+    transform: translateY(0);
   }
 
   30% {
@@ -250,8 +165,8 @@
   }
 
   100% {
-    transform: translateY(50px);
     opacity: 0;
+    transform: translateY(50px);
   }
 
 }
@@ -259,13 +174,13 @@
 /* 제안서 다운로드 */
 
 :global(#visualWrap).visualWrap .proposalDownloadBtn {
-  width: 119px;
-  height: 119px;
   position: absolute;
   top: 219px;
   right: -100%;
+  width: 119px;
+  height: 119px;
   z-index: 999;
-  transition: all 1.3s;
+  transition: right 1.3s;
 }
 
 :global(#visualWrap).visualWrap .proposalDownloadBtn:global(.active) {
@@ -285,17 +200,18 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%,
+      -50%);
   display: flex;
   align-items: center;
   justify-content: center;
   width: 80px;
   height: 80px;
   border-radius: 50%;
+  color: #fff;
   background-color: #fd3d32;
   font-size: 24px;
   font-weight: 700;
-  color: #fff;
   font-family: 'HelveticaNowDisplay';
 }
 
@@ -318,21 +234,20 @@
     height: 50vw;
   }
 
+  :global(#visualWrap).visualWrap .visualTextBox {
+    max-width: 90vw;
+  }
+
+  :global(#visualWrap).visualWrap .visualText {
+    gap: 0 35vw;
+  }
+
   :global(#visualWrap).visualWrap .proposalDownloadBtn {
     top: 120px;
   }
 
   :global(#visualWrap).visualWrap .proposalDownloadBtn:global(.active) {
     right: 50px;
-  }
-
-  :global(#visualWrap).visualWrap .visualTextBox {
-    max-width: 90vw;
-  }
-
-  :global(#visualWrap).visualWrap .visualBox:global(.active) .visualText,
-  :global(#visualWrap).visualWrap .visualBox:global(.step01) .visualText {
-    gap: 0 35vw;
   }
 
 }
@@ -348,8 +263,7 @@
     height: 60vw;
   }
 
-  :global(#visualWrap).visualWrap .visualBox:global(.active) .visualText,
-  :global(#visualWrap).visualWrap .visualBox:global(.step01) .visualText {
+  :global(#visualWrap).visualWrap .visualText {
     gap: 0 40.7vw;
   }
 
@@ -362,14 +276,14 @@
     height: 79vw;
   }
 
-  :global(#visualWrap).visualWrap .visualBox .visualText {
-    gap: 0 16vw;
-  }
-
   :global(#visualWrap).visualWrap .visualTextBox {
     max-width: none;
     padding: 112px 20px 0;
     justify-content: flex-start;
+  }
+
+  :global(#visualWrap).visualWrap .visualText {
+    gap: 0 16vw;
   }
 
   :global(#visualWrap).visualWrap .visualTextBox h2 {
@@ -383,11 +297,16 @@
 
   :global(#visualWrap).visualWrap .visualText02 {
     padding-left: 9px;
+    gap: 0 25.7vw;
     letter-spacing: 1px;
   }
 
   :global(#visualWrap).visualWrap .visualText02 h2 {
     gap: 0 25px;
+  }
+
+  :global(#visualWrap).visualWrap .visualText03 {
+    transform: translateX(0);
   }
 
   :global(#visualWrap).visualWrap .visualScrollBox {
@@ -409,11 +328,11 @@
   }
 
   :global(#visualWrap).visualWrap .proposalDownloadBtn {
-    width: 90px;
-    height: 90px;
     top: 409px;
     right: auto;
     left: 28px;
+    width: 90px;
+    height: 90px;
   }
 
   :global(#visualWrap).visualWrap .proposalDownloadBtn:global(.active) {
@@ -425,16 +344,6 @@
     width: 60px;
     height: 60px;
     font-size: 18px;
-  }
-
-  :global(#visualWrap).visualWrap .visualBox:global(.active) .visualText02,
-  :global(#visualWrap).visualWrap .visualBox:global(.step01) .visualText02 {
-    gap: 0 25.7vw;
-  }
-
-  :global(#visualWrap).visualWrap .visualBox:global(.active) .visualText03,
-  :global(#visualWrap).visualWrap .visualBox:global(.step01) .visualText03 {
-    transform: translateX(0);
   }
 
 }
@@ -454,8 +363,17 @@
     font-size: 8px;
   }
 
+  :global(#visualWrap).visualWrap .visualText02 {
+    gap: 0 19.7vw;
+  }
+
   :global(#visualWrap).visualWrap .visualText02 h2 {
     gap: 0 18px;
+  }
+
+  :global(#visualWrap).visualWrap .visualText03 {
+    gap: 0 33.7vw;
+    transform: translateX(0);
   }
 
   :global(#visualWrap).visualWrap .proposalDownloadBtn {
@@ -467,17 +385,6 @@
     width: 40px;
     height: 40px;
     font-size: 10px;
-  }
-
-  :global(#visualWrap).visualWrap .visualBox:global(.active) .visualText02,
-  :global(#visualWrap).visualWrap .visualBox:global(.step01) .visualText02 {
-    gap: 0 19.7vw;
-  }
-
-  :global(#visualWrap).visualWrap .visualBox:global(.active) .visualText03,
-  :global(#visualWrap).visualWrap .visualBox:global(.step01) .visualText03 {
-    gap: 0 33.7vw;
-    transform: translateX(0);
   }
 
 }
@@ -754,10 +661,12 @@
   margin-bottom: 20px;
   font-weight: 600;
   color: #fff;
+  font-family: 'GoogleSansCode';
 }
 
 :global(#aboutWrap).aboutWrap .aboutTextBox .aboutTextNumber {
   margin-bottom: 20px;
+  font-family: 'GoogleSansCode';
 }
 
 :global(#aboutWrap).aboutWrap .container,
@@ -1191,6 +1100,7 @@
   margin-bottom: 20px;
   color: #222;
   font-weight: 600;
+  font-family: 'GoogleSansCode';
 }
 
 :global(#companyInfoWrap).companyInfoWrap .companyTitleBox p {
@@ -1248,6 +1158,7 @@
   display: block;
   margin-bottom: 20px;
   font-weight: 600;
+  font-family: 'GoogleSansCode';
 }
 
 :global(#companyInfoWrap).companyInfoWrap .companyInfoNumberBox .companyInfoNumber strong,
@@ -1424,6 +1335,8 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+
 }
 
 :global(#contactWrap).contactWrap .contactInfoTextBox span {
@@ -1431,6 +1344,7 @@
   margin-bottom: 20px;
   color: #fff;
   font-weight: 600;
+  font-family: 'GoogleSansCode';
 }
 
 :global(#contactWrap).contactWrap .contactInfoTextBox p {
@@ -1438,6 +1352,62 @@
   font-weight: 700;
   color: #fff;
   font-family: 'HelveticaNowDisplay';
+}
+
+:global(#contactWrap).contactWrap .contactInfoText::after {
+  content: '';
+  display: block;
+  flex-shrink: 0;
+  width: 43px;
+  height: 76px;
+  background:
+    url('/images/main/arrow_icon03.svg') no-repeat center / contain;
+  animation:
+    contactArrow 2s ease-in-out infinite;
+  will-change:
+    transform,
+    opacity,
+    clip-path;
+}
+
+@keyframes contactArrow {
+
+  0% {
+    opacity: 0;
+    clip-path:
+      inset(0 0 100% 0);
+    transform:
+      translateY(-6px);
+  }
+
+  20% {
+    opacity: 1;
+  }
+
+  60% {
+    opacity: 1;
+    clip-path:
+      inset(0 0 0 0);
+    transform:
+      translateY(0);
+  }
+
+  80% {
+    opacity: 1;
+    clip-path:
+      inset(0 0 0 0);
+    transform:
+      translateY(4px);
+  }
+
+  100% {
+    opacity: 0;
+    clip-path:
+      inset(0 0 0 0);
+    transform:
+      translateY(12px);
+  }
+
 }
 
 :global(#contactWrap).contactWrap .contactProjectText {
@@ -1461,7 +1431,7 @@
 :global(#contactWrap).contactWrap .contactProjectLine path {
   fill: none;
   stroke: #fff;
-  stroke-width: 1;
+  stroke-width: 2;
   stroke-linecap: round;
   stroke-linejoin: round;
   vector-effect: non-scaling-stroke;

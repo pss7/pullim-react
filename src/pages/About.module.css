@@ -12,72 +12,109 @@
 
 /* 소개페이지 상단 텍스트 */
 
-:global(#wrap).aboutWrap :global(.topTitleBox) :global(.topText01) {
+.aboutWrap
+:global(.topTitleBox)
+:global(.topText01) {
   color: #fff;
 }
 
 /* 헤더 */
 
-.aboutWrap :global(#headerWrap) nav ul li h2 a {
+.aboutWrap
+:global(
+  #headerWrap
+  .headerGnbBox
+  .headerGnbList
+  li
+  h2
+  a
+) {
   color: #fff;
-  font-weight: 500;
   font-size: 20px;
+  font-weight: 500;
 }
 
 /* 상단 영역 */
 
 .aboutWrap :global(.subTopBox) {
   position: relative;
-  z-index: 1;
   margin-bottom: 0;
   padding: 0 0 40px;
   display: flex;
   align-items: flex-end;
   height: 800px;
   overflow: hidden;
-  background: url('/images/sub/about_img.jpg') no-repeat center / cover;
+  background:
+    url('/images/sub/about_img.jpg')
+    no-repeat center / cover;
+  z-index: 1;
 }
 
-.aboutWrap :global(.subTopBox)::after {
+.aboutWrap
+:global(.subTopBox)::after {
   content: '';
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: -1;
-  background: url('/images/sub/about_img.jpg') no-repeat center / cover;
+  inset: 0;
+  background:
+    url('/images/sub/about_img.jpg')
+    no-repeat center / cover;
   transform: scale(1.7);
-  transition: transform 5s ease;
+  transition: all 5s;
   will-change: transform;
+  z-index: -1;
 }
 
-.aboutWrap :global(.subTopBox.active)::after {
+.aboutWrap
+:global(.subTopBox.active)::after {
   transform: scale(1);
 }
 
 /* 상단 타이틀 로드 모션 */
 
-.aboutWrap :global(.subTopBox) :global(.topTitleBox) h2,
-.aboutWrap :global(.subTopBox) :global(.topTitleBox) :global(.topText01),
-.aboutWrap :global(.subTopBox) :global(.topTitleBox) :global(.topText02) {
+.aboutWrap
+:global(.subTopBox)
+:global(.topTitleBox) h2,
+.aboutWrap
+:global(.subTopBox)
+:global(.topTitleBox)
+:global(.topText01),
+.aboutWrap
+:global(.subTopBox)
+:global(.topTitleBox)
+:global(.topText02) {
   opacity: 0;
   transform: translate3d(0, 50px, 0);
-  transition: opacity 1.7s ease, transform 1.7s ease;
+  transition:
+    opacity 1.7s ease,
+    transform 1.7s ease;
   will-change: opacity, transform;
 }
 
-.aboutWrap :global(.subTopBox) :global(.topTitleBox) :global(.topText01) {
+.aboutWrap
+:global(.subTopBox)
+:global(.topTitleBox)
+:global(.topText01) {
   transition-delay: .12s;
 }
 
-.aboutWrap :global(.subTopBox) :global(.topTitleBox) :global(.topText02) {
+.aboutWrap
+:global(.subTopBox)
+:global(.topTitleBox)
+:global(.topText02) {
   transition-delay: .24s;
 }
 
-.aboutWrap :global(.subTopBox.active) :global(.topTitleBox) h2,
-.aboutWrap :global(.subTopBox.active) :global(.topTitleBox) :global(.topText01),
-.aboutWrap :global(.subTopBox.active) :global(.topTitleBox) :global(.topText02) {
+.aboutWrap
+:global(.subTopBox.active)
+:global(.topTitleBox) h2,
+.aboutWrap
+:global(.subTopBox.active)
+:global(.topTitleBox)
+:global(.topText01),
+.aboutWrap
+:global(.subTopBox.active)
+:global(.topTitleBox)
+:global(.topText02) {
   opacity: 1;
   transform: translate3d(0, 0, 0);
 }
@@ -86,9 +123,9 @@
 
 .aboutWrap :global(.subContentBox) {
   position: relative;
-  z-index: 2;
   padding: 160px 0 120px;
   background-color: #f5f5f5;
+  z-index: 2;
 }
 
 .aboutWrap :global(.titleBox) {
@@ -102,7 +139,7 @@
 /* 비전 및 미션 영역 */
 
 .aboutWrap .aboutVisionBox {
-  margin: 0 0 6.25vw 0;
+  margin: 0 0 6.25vw;
 }
 
 .aboutWrap .aboutMissionBox {
@@ -119,43 +156,49 @@
 
 /* 여정 목록 영역 */
 
-.aboutWrap .aboutJourneyList>li {
+.aboutWrap
+.aboutJourneyList > li {
   border-bottom: 1px dashed #555;
 }
 
-.aboutWrap .aboutJourneyList li a {
+.aboutWrap
+.aboutJourneyLink {
   position: relative;
+  padding: 26px 20px 26px 40px;
   display: flex;
   align-items: center;
-  padding: 26px 20px 26px 40px;
   transition: all .3s;
 }
 
-.aboutWrap .aboutJourneyList li a .aboutJourneyYear {
+.aboutWrap
+.aboutJourneyYear {
   flex-shrink: 0;
   margin-right: 60px;
   color: #222;
-  font-weight: 500;
   font-size: 40px;
+  font-weight: 500;
   font-family: 'HelveticaNowDisplay';
 }
 
-.aboutWrap .aboutJourneyList li a .aboutJourneyTitle {
+.aboutWrap
+.aboutJourneyTitle {
   max-width: 650px;
   width: 100%;
   color: #222;
-  font-weight: 500;
   font-size: 40px;
+  font-weight: 500;
   font-family: 'HelveticaNowDisplay';
 }
 
-.aboutWrap .aboutJourneyList li a .aboutJourneyDetailList li {
+.aboutWrap
+.aboutJourneyDetailItem {
   display: flex;
   margin-bottom: 5px;
   color: #222;
 }
 
-.aboutWrap .aboutJourneyList li a .aboutJourneyDetailList li::before {
+.aboutWrap
+.aboutJourneyDetailItem::before {
   content: '';
   flex-shrink: 0;
   margin: 9px 5px 0;
@@ -165,23 +208,28 @@
   border-radius: 50%;
 }
 
-.aboutWrap .aboutJourneyList li a .aboutJourneyHoverImgBox {
-  opacity: 0;
-  visibility: hidden;
+.aboutWrap
+.aboutJourneyHoverImgBox {
   position: absolute;
   top: 0;
   left: 480px;
-  z-index: 9;
+  opacity: 0;
+  visibility: hidden;
   transform: translateY(-50%);
   transition: all .3s;
+  z-index: 9;
 }
 
-.aboutWrap .aboutJourneyList li a:hover .aboutJourneyHoverImgBox {
+.aboutWrap
+.aboutJourneyLink:hover
+.aboutJourneyHoverImgBox {
   opacity: 1;
   visibility: visible;
 }
 
-.aboutWrap .aboutJourneyList li a:hover .aboutJourneyHoverImgBox img {
+.aboutWrap
+.aboutJourneyLink:hover
+.aboutJourneyHoverImgBox img {
   display: block;
   max-width: 100%;
   height: 100%;
@@ -191,73 +239,90 @@
 /* 채널 영역 */
 
 .aboutWrap .channelBox {
-  display: flex;
-  gap: 80px 114px;
   padding: 200px 0 0;
+  display: flex;
+  align-items: flex-start;
+  gap: 80px 114px;
 }
 
-.aboutWrap .channelBox .channelTitleBox {
+.aboutWrap .channelTitleBox {
   position: sticky;
   top: 150px;
-  height: 100%;
+  align-self: flex-start;
+  height: auto;
 }
 
-.aboutWrap .channelBox .channelList li {
+.aboutWrap
+.channelList li {
   width: 360px;
   margin-bottom: 80px;
 }
 
-.aboutWrap .channelBox .channelList li:last-child {
+.aboutWrap
+.channelList li:last-child {
   margin-bottom: 0;
 }
 
-.aboutWrap .channelBox .channelList li a {
+.aboutWrap
+.channelList li a {
   display: block;
   padding: 24px 20px 20px 24px;
   background-color: #fff;
 }
 
-.aboutWrap .channelBox .channelList li a img {
+.aboutWrap
+.channelList li a img {
   display: block;
   margin-bottom: 56px;
 }
 
-.aboutWrap .channelBox .channelList li a p {
+.aboutWrap
+.channelList li a p {
   margin-bottom: 12px;
   color: #000;
 }
 
-.aboutWrap .channelBox .channelList li a span {
+.aboutWrap
+.channelList li a span {
   display: block;
   color: #b4b4b4;
-  font-weight: 600;
   font-size: 13px;
+  font-weight: 600;
 }
 
 /* 짝수 카드 위치 */
 
-.aboutWrap .channelBox .channelList li:nth-child(2n) a {
+.aboutWrap
+.channelList li:nth-child(2n) {
   transform: translateX(240px);
 }
 
 /* 호버 */
 
-.aboutWrap .aboutJourneyList li a:hover {
+.aboutWrap
+.aboutJourneyLink:hover {
   background-color: #222;
 }
 
-.aboutWrap .aboutJourneyList li a:hover .aboutJourneyYear,
-.aboutWrap .aboutJourneyList li a:hover .aboutJourneyTitle,
-.aboutWrap .aboutJourneyList li a:hover .aboutJourneyDetailList li {
+.aboutWrap
+.aboutJourneyLink:hover
+.aboutJourneyYear,
+.aboutWrap
+.aboutJourneyLink:hover
+.aboutJourneyTitle,
+.aboutWrap
+.aboutJourneyLink:hover
+.aboutJourneyDetailItem {
   color: #fff;
 }
 
-.aboutWrap .aboutJourneyList li a:hover .aboutJourneyDetailList li::before {
+.aboutWrap
+.aboutJourneyLink:hover
+.aboutJourneyDetailItem::before {
   background-color: #fff;
 }
 
 @media (max-width:1199px) {
-
   .aboutWrap :global(.subTopBox) {
     height: 700px;
   }
@@ -276,7 +341,7 @@
   }
 
   .aboutWrap .aboutVisionBox {
-    margin: 0 0 8vw 0;
+    margin: 0 0 8vw;
   }
 
   .aboutWrap .aboutMissionBox {
@@ -291,75 +356,77 @@
     margin: 0 0 8vw 37.5vw;
   }
 
-  .aboutWrap .aboutJourneyList li a {
+  .aboutWrap .aboutJourneyLink {
     padding: 20px 12px;
   }
 
-  .aboutWrap .aboutJourneyList li a .aboutJourneyYear,
-  .aboutWrap .aboutJourneyList li a .aboutJourneyTitle {
+  .aboutWrap .aboutJourneyYear,
+  .aboutWrap .aboutJourneyTitle {
     font-size: 26px;
   }
 
   .aboutWrap .channelBox {
-    flex-direction: column;
     padding: 80px 0 0;
+    flex-direction: column;
+    align-items: initial;
   }
 
-  .aboutWrap .channelBox .channelTitleBox {
+  .aboutWrap .channelTitleBox {
     position: static;
     top: auto;
+    align-self: auto;
     height: auto;
   }
 
-  .aboutWrap .channelBox .channelList li {
+  .aboutWrap
+  .channelList li {
     width: 100%;
     margin-bottom: 20px;
   }
 
-  .aboutWrap .channelBox .channelList li a {
+  .aboutWrap
+  .channelList li a {
     padding: 20px;
   }
 
-  .aboutWrap .channelBox .channelList li:nth-child(2n) a {
+  .aboutWrap
+  .channelList li:nth-child(2n) {
     transform: none;
   }
-
 }
 
 @media (max-width:1024px) {
-
   .aboutWrap :global(.subTopBox) {
     height: 500px;
   }
 
-  .aboutWrap .aboutJourneyList li a {
+  .aboutWrap .aboutJourneyLink {
     flex-wrap: wrap;
     justify-content: space-between;
   }
 
-  .aboutWrap .aboutJourneyList li a .aboutJourneyTitle {
+  .aboutWrap .aboutJourneyTitle {
     max-width: none;
     width: auto;
   }
 
-  .aboutWrap .aboutJourneyList li a .aboutJourneyYear {
+  .aboutWrap .aboutJourneyYear {
     margin-right: 0;
   }
 
-  .aboutWrap .aboutJourneyList li a .aboutJourneyDetailList {
+  .aboutWrap .aboutJourneyDetailList {
     margin-top: 20px;
     width: 100%;
   }
 
-  .aboutWrap .aboutJourneyList li a .aboutJourneyHoverImgBox {
+  .aboutWrap
+  .aboutJourneyHoverImgBox {
     right: 20px;
     left: auto;
   }
-
 }
 
 @media (max-width:768px) {
-
   .aboutWrap :global(.subContentBox) {
     padding: 80px 0;
   }
@@ -369,7 +436,7 @@
   }
 
   .aboutWrap .aboutVisionBox {
-    margin: 0 0 11vw 0;
+    margin: 0 0 11vw;
   }
 
   .aboutWrap .aboutMissionBox {
@@ -384,42 +451,41 @@
     margin: 0 0 11vw 37.5vw;
   }
 
-  .aboutWrap .aboutJourneyList li a .aboutJourneyYear,
-  .aboutWrap .aboutJourneyList li a .aboutJourneyTitle {
+  .aboutWrap .aboutJourneyYear,
+  .aboutWrap .aboutJourneyTitle {
     font-size: 22px;
   }
-
 }
 
 @media (max-width:480px) {
-
   .aboutWrap :global(.subContentBox) {
     padding: 60px 0;
   }
 
-  .aboutWrap .aboutJourneyList li a .aboutJourneyYear,
-  .aboutWrap .aboutJourneyList li a .aboutJourneyTitle {
+  .aboutWrap .aboutJourneyYear,
+  .aboutWrap .aboutJourneyTitle {
     font-size: 20px;
   }
 
-  .aboutWrap .aboutJourneyList li a .aboutJourneyHoverImgBox {
+  .aboutWrap
+  .aboutJourneyHoverImgBox {
     max-width: 200px;
     height: 110px;
   }
 
-  .aboutWrap .channelBox .channelList li a img {
+  .aboutWrap
+  .channelList li a img {
     width: 32px;
     margin-bottom: 20px;
   }
 
-  .aboutWrap .channelBox .channelList li a p {
+  .aboutWrap
+  .channelList li a p {
     font-size: 14px;
   }
-
 }
 
 @media (max-width:360px) {
-
   .aboutWrap :global(.subTopBox) {
     padding: 0 0 16px;
     height: 360px;
@@ -430,7 +496,7 @@
   }
 
   .aboutWrap .aboutVisionBox {
-    margin: 0 0 16.6vw 0;
+    margin: 0 0 16.6vw;
   }
 
   .aboutWrap .aboutMissionBox {
@@ -445,32 +511,36 @@
     margin: 0 0 16.6vw 37.5vw;
   }
 
-  .aboutWrap .aboutJourneyList li a .aboutJourneyDetailList li {
+  .aboutWrap
+  .aboutJourneyDetailItem {
     font-size: 12px;
   }
 
-  .aboutWrap .aboutJourneyList li a .aboutJourneyYear,
-  .aboutWrap .aboutJourneyList li a .aboutJourneyTitle {
+  .aboutWrap .aboutJourneyYear,
+  .aboutWrap .aboutJourneyTitle {
     font-size: 18px;
   }
 
-  .aboutWrap .aboutJourneyList li a .aboutJourneyDetailList li::before {
+  .aboutWrap
+  .aboutJourneyDetailItem::before {
+    margin: 7px 5px 0;
     width: 2px;
     height: 2px;
-    margin: 7px 5px 0;
   }
 
-  .aboutWrap .aboutJourneyList li a .aboutJourneyHoverImgBox {
+  .aboutWrap
+  .aboutJourneyHoverImgBox {
     max-width: 160px;
     height: 90px;
   }
 
-  .aboutWrap .channelBox .channelList li a p {
+  .aboutWrap
+  .channelList li a p {
     font-size: 12px;
   }
 
-  .aboutWrap .channelBox .channelList li a span {
+  .aboutWrap
+  .channelList li a span {
     font-size: 10px;
   }
-
 }

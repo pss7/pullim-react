@@ -54,7 +54,6 @@ export default function About() {
                   styles.aboutVisionBox
                 }
               >
-                {/* 제목 영역 */}
                 <div
                   className="titleBox"
                   data-aos="fade-right"
@@ -69,7 +68,6 @@ export default function About() {
                     THROUGH ADTECH
                   </p>
                 </div>
-                {/* //제목 영역 */}
 
                 <div className="infoTextBox">
                   <p
@@ -77,11 +75,11 @@ export default function About() {
                     data-aos="fade-right"
                   >
                     더 풀림은 애드테크를 기반으로
-                    IMC, 리커머스, 성인교육,
-                    환전소, 디자인 등
+                    IMC, 리커머스, 성인교육, 환전소,
+                    디자인 등
                     <br />
-                    다양한 도메인에서 새로운
-                    가치를 만들어가고 있습니다.
+                    다양한 도메인에서 새로운 가치를
+                    만들어가고 있습니다.
                   </p>
                 </div>
               </div>
@@ -93,7 +91,6 @@ export default function About() {
                   styles.aboutMissionBox
                 }
               >
-                {/* 제목 영역 */}
                 <div
                   className="titleBox"
                   data-aos="fade-right"
@@ -106,31 +103,28 @@ export default function About() {
                     ACHIEVE. ASPIRE. CHALLENGE
                   </p>
                 </div>
-                {/* //제목 영역 */}
 
                 <div className="infoTextBox">
                   <p
                     className="infoText"
                     data-aos="fade-right"
                   >
-                    우리는 새로운 가치를
-                    만들어내는 과정에서 성취감을
-                    얻고
+                    우리는 새로운 가치를 만들어내는
+                    과정에서 성취감을 얻고
                     <br />
-                    그 성취에 대한 갈증을 다시 더
-                    큰 도전으로 연결합니다.
+                    그 성취에 대한 갈증을 다시 더 큰
+                    도전으로 연결합니다.
                   </p>
 
                   <p
                     className="infoText"
                     data-aos="fade-right"
                   >
-                    이러한 갈증은 우리를
-                    수동적으로 움직이게 하는
-                    압박이 아니라
+                    이러한 갈증은 우리를 수동적으로
+                    움직이게 하는 압박이 아니라
                     <br />
-                    스스로 성장하고 변화하게
-                    만드는 주체적인 동기입니다.
+                    스스로 성장하고 변화하게 만드는
+                    주체적인 동기입니다.
                   </p>
                 </div>
               </div>
@@ -142,7 +136,6 @@ export default function About() {
                   styles.aboutFutureBox
                 }
               >
-                {/* 제목 영역 */}
                 <div
                   className="titleBox"
                   data-aos="fade-right"
@@ -157,30 +150,29 @@ export default function About() {
                     PROVE WHAT’S POSSIBLE
                   </p>
                 </div>
-                {/* //제목 영역 */}
 
                 <div className="infoTextBox">
                   <p
                     className="infoText"
                     data-aos="fade-right"
                   >
-                    하나의 영역에 안주하지 않고
-                    제로 환전소, 라임 클레스,
+                    하나의 영역에 안주하지 않고 제로
+                    환전소, 라임 클래스,
                     <br />
-                    럭스 스튜디오, 만년해로 등
-                    다양한 비즈니스 분야로 끊임
-                    없이 도전합니다.
+                    럭스 스튜디오, 만년해로 등 다양한
+                    비즈니스 분야로 끊임없이
+                    도전합니다.
                   </p>
 
                   <p
                     className="infoText"
                     data-aos="fade-right"
                   >
-                    기술적 전문성과 트렌디한
-                    감각을 모두 갖춘 파트너로서
+                    기술적 전문성과 트렌디한 감각을
+                    모두 갖춘 파트너로서
                     <br />
-                    비즈니스의 무한한 확장성과
-                    성공을 증명합니다.
+                    비즈니스의 무한한 확장성과 성공을
+                    증명합니다.
                   </p>
                 </div>
               </div>
@@ -192,7 +184,6 @@ export default function About() {
                   styles.aboutJourneyBox
                 }
               >
-                {/* 제목 영역 */}
                 <div
                   className="titleBox"
                   data-aos="fade-right"
@@ -202,19 +193,17 @@ export default function About() {
                   </span>
 
                   <p>
-                    BUILT TO GROW THROUGH
-                    CHALLENGE
+                    BUILT TO GROW THROUGH CHALLENGE
                   </p>
                 </div>
-                {/* //제목 영역 */}
 
                 <div className="infoTextBox">
                   <p
                     className="infoText"
                     data-aos="fade-right"
                   >
-                    2022년 2월 첫 걸음을 내딛은
-                    ‘더 풀림’은 끊임 없는 도전과
+                    2022년 2월 첫 걸음을 내디딘
+                    ‘더 풀림’은 끊임없는 도전과
                     혁신으로
                     <br />
                     성장 히스토리를 써 내려가고
@@ -266,8 +255,7 @@ export default function About() {
                           styles.aboutJourneyDetailItem
                         }
                       >
-                        풀림(PULLIM) 설립 및
-                        개업
+                        풀림(PULLIM) 설립 및 개업
                       </li>
 
                       <li
@@ -275,8 +263,8 @@ export default function About() {
                           styles.aboutJourneyDetailItem
                         }
                       >
-                        애드테크 기반의 오퍼월
-                        매체 네트워크 구축
+                        애드테크 기반의 오퍼월 매체
+                        네트워크 구축
                       </li>
 
                       <li
@@ -284,9 +272,8 @@ export default function About() {
                           styles.aboutJourneyDetailItem
                         }
                       >
-                        중소벤처기업부 '혁신
-                        바우처' 마케팅 수행기관
-                        선정
+                        중소벤처기업부 ‘혁신 바우처’
+                        마케팅 수행기관 선정
                       </li>
                     </ul>
                   </a>
@@ -328,8 +315,8 @@ export default function About() {
                           styles.aboutJourneyDetailItem
                         }
                       >
-                        사업 규모 확장에 따른
-                        인천 청라 사옥 이전
+                        사업 규모 확장에 따른 인천 청라
+                        사옥 이전
                       </li>
 
                       <li
@@ -337,8 +324,8 @@ export default function About() {
                           styles.aboutJourneyDetailItem
                         }
                       >
-                        자체 통합 광고 관리 ERP
-                        시스템 개발 및 구축
+                        자체 통합 광고 관리 ERP 시스템
+                        개발 및 구축
                       </li>
                     </ul>
 
@@ -391,8 +378,8 @@ export default function About() {
                           styles.aboutJourneyDetailItem
                         }
                       >
-                        글로벌 비즈니스 허브
-                        도약을 위한 서울 사옥 이전
+                        글로벌 비즈니스 허브 도약을 위한
+                        서울 사옥 이전
                       </li>
 
                       <li
@@ -400,8 +387,8 @@ export default function About() {
                           styles.aboutJourneyDetailItem
                         }
                       >
-                        프리미엄 건강기능식품
-                        브랜드 ‘만년해로’ 런칭
+                        프리미엄 건강기능식품 브랜드
+                        ‘만년해로’ 런칭
                       </li>
                     </ul>
 
@@ -441,8 +428,7 @@ export default function About() {
                         styles.aboutJourneyTitle
                       }
                     >
-                      INNOVATION &amp;
-                      SCALED-UP
+                      INNOVATION &amp; SCALED-UP
                     </span>
 
                     <ul
@@ -455,9 +441,8 @@ export default function About() {
                           styles.aboutJourneyDetailItem
                         }
                       >
-                        업무 환경 최적화 및
-                        인프라 확장을 위한 서울
-                        신규 사무실 확장 이전
+                        업무 환경 최적화 및 인프라 확장을
+                        위한 서울 신규 사무실 확장 이전
                       </li>
 
                       <li
@@ -500,8 +485,11 @@ export default function About() {
                   styles.channelBox
                 }
               >
-                <div className="channelTitleBox">
-                  {/* 제목 영역 */}
+                <div
+                  className={
+                    styles.channelTitleBox
+                  }
+                >
                   <div
                     className="titleBox"
                     data-aos="fade-right"
@@ -516,7 +504,6 @@ export default function About() {
                       THE PULLIM ANYWHERE
                     </p>
                   </div>
-                  {/* //제목 영역 */}
 
                   <div className="infoTextBox">
                     <p
@@ -529,9 +516,9 @@ export default function About() {
                       파트너, 유저들과 더욱 가깝고
                       생생하게 소통하고 있습니다.
                       <br />
-                      우리의 트렌디한 콘텐츠와
-                      유쾌한 일상, 실시간 소식을
-                      지금 바로 확인해 보세요
+                      우리의 트렌디한 콘텐츠와 유쾌한
+                      일상, 실시간 소식을 지금 바로
+                      확인해 보세요.
                     </p>
                   </div>
                 </div>
@@ -550,10 +537,9 @@ export default function About() {
                       />
 
                       <p>
-                        더 풀림의 가장 트렌디한
-                        소식과 유쾌한 사내 오피스
-                        라이프를 가장 빠르게 만나는
-                        공간
+                        더 풀림의 가장 트렌디한 소식과
+                        유쾌한 사내 오피스 라이프를
+                        가장 빠르게 만나는 공간
                       </p>
 
                       <span>
@@ -570,10 +556,9 @@ export default function About() {
                       />
 
                       <p>
-                        깊이 있는 비즈니스
-                        인사이트와 우리만의 진정성
-                        있는 성장 비하인드
-                        스토리가 담긴 채널
+                        깊이 있는 비즈니스 인사이트와
+                        우리만의 진정성 있는 성장
+                        비하인드 스토리가 담긴 채널
                       </p>
 
                       <span>
@@ -590,10 +575,9 @@ export default function About() {
                       />
 
                       <p>
-                        멈추지 않는 도전 정신과
-                        살아있는 팀워크를 생생한
-                        영상 콘텐츠로 증명하는
-                        공간
+                        멈추지 않는 도전 정신과 살아있는
+                        팀워크를 생생한 영상 콘텐츠로
+                        증명하는 공간
                       </p>
 
                       <span>
@@ -610,9 +594,9 @@ export default function About() {
                       />
 
                       <p>
-                        언제 어디서나 실시간으로
-                        가장 빠르게 해답을 얻는
-                        다이렉트 소통 창구
+                        언제 어디서나 실시간으로 가장
+                        빠르게 해답을 얻는 다이렉트
+                        소통 창구
                       </p>
 
                       <span>

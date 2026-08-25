@@ -49,7 +49,7 @@
   gap: 10px;
 }
 
-.newsWrap .newsList li a .newsTopBox .newsCategory {
+.newsWrap .newsList li a .newsCategory {
   display: inline-block;
   padding: 3px 12px;
   color: #222;
@@ -59,7 +59,7 @@
   border-radius: 50px;
 }
 
-.newsWrap .newsList li a .newsTopBox .newsDate {
+.newsWrap .newsList li a .newsDate {
   color: #b4b4b4;
   font-size: 13px;
   font-weight: 600;
@@ -90,7 +90,11 @@
 
 /* 뉴스 상세 영역 */
 
-.newsWrap .newsViewBox .newsViewHeaderBox {
+.newsWrap .newsViewBox {
+  padding-bottom: 140px;
+}
+
+.newsWrap .newsViewHeaderBox {
   margin-bottom: 24px;
   display: flex;
   align-items: center;
@@ -98,13 +102,13 @@
   gap: 20px;
 }
 
-.newsWrap .newsViewBox .newsViewHeaderBox .newsViewBackLink {
+.newsWrap .newsViewBackLink {
   color: #b4b4b4;
   font-size: 20px;
   font-weight: 600;
 }
 
-.newsWrap .newsViewBox .newsViewHeaderBox .newsViewCategory {
+.newsWrap .newsViewCategory {
   padding: 5px 20px;
   color: #222;
   font-weight: 600;
@@ -112,12 +116,12 @@
   border-radius: 50px;
 }
 
-.newsWrap .newsViewBox .newsViewHeaderBox .newsViewDate {
+.newsWrap .newsViewDate {
   color: #222;
   font-weight: 600;
 }
 
-.newsWrap .newsViewBox .newsViewTitle {
+.newsWrap .newsViewTitle {
   margin-bottom: 40px;
   color: #222;
   font-size: 32px;
@@ -125,33 +129,40 @@
   text-align: center;
 }
 
-.newsWrap .newsViewBox .newsViewContentBox {
+.newsWrap .newsViewContentBox {
   margin-bottom: 85px;
 }
 
-.newsWrap .newsViewBox .newsViewContentBox :global(.container) {
+.newsWrap .newsViewContentBox :global(.container) {
   max-width: 720px;
   padding: 0;
 }
 
-.newsWrap .newsViewBox .newsViewContentBox .newsViewSubTitle {
+.newsWrap .newsViewSubTitle {
+  margin: 40px 0 16px;
   color: #222;
   font-size: 20px;
   font-weight: 600;
 }
 
-.newsWrap .newsViewBox .newsViewContentBox .newsViewImgBox img {
+.newsWrap .newsViewImgBox img {
   display: block;
   max-width: 100%;
-  margin: 20px auto;
+  margin: 20px auto 12px;
 }
 
-.newsWrap .newsViewBox .newsViewContentBox .newsViewText {
+.newsWrap .newsViewImgBox p {
+  color: #b4b4b4;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.newsWrap .newsViewText {
   margin: 20px auto;
   color: #222;
 }
 
-.newsWrap .newsViewBox .newsViewNavBox {
+.newsWrap .newsViewNavBox {
   padding: 40px 0 0;
   display: flex;
   align-items: center;
@@ -159,20 +170,20 @@
   border-top: 1px solid #555;
 }
 
-.newsWrap .newsViewBox .newsViewNavBox .newsViewNavLabel {
+.newsWrap .newsViewNavLabel {
   display: block;
   margin-bottom: 10px;
   color: #222;
   font-weight: 600;
 }
 
-.newsWrap .newsViewBox .newsViewNavBox .newsViewNavTitle {
+.newsWrap .newsViewNavTitle {
   color: #222;
   font-size: 20px;
   font-weight: 600;
 }
 
-.newsWrap .newsViewBox .newsViewNavBox .newsViewListLink {
+.newsWrap .newsViewListLink {
   color: #b4b4b4;
   font-size: 40px;
   font-weight: 500;
@@ -181,8 +192,8 @@
 
 /* 활성화 및 호버 */
 
-.newsWrap .newsTabBox .newsTabBtn.active,
-.newsWrap .newsTabBox .newsTabBtn:hover {
+.newsWrap .newsTabBtn.active,
+.newsWrap .newsTabBtn:hover {
   color: #fff;
   background-color: #fd3d32;
   border-color: #fd3d32;
@@ -197,35 +208,32 @@
 }
 
 @media (max-width:1199px) {
-
   .newsWrap .newsList {
     gap: 30px;
   }
 
-  .newsWrap .newsViewBox .newsViewHeaderBox .newsViewBackLink {
+  .newsWrap .newsViewBackLink {
     font-size: 18px;
   }
 
-  .newsWrap .newsViewBox .newsViewTitle {
+  .newsWrap .newsViewTitle {
     font-size: 28px;
   }
 
-  .newsWrap .newsViewBox .newsViewContentBox .newsViewSubTitle {
+  .newsWrap .newsViewSubTitle {
     font-size: 18px;
   }
 
-  .newsWrap .newsViewBox .newsViewNavBox .newsViewListLink {
+  .newsWrap .newsViewListLink {
     font-size: 30px;
   }
 
-  .newsWrap .newsViewBox .newsViewNavBox .newsViewNavTitle {
+  .newsWrap .newsViewNavTitle {
     font-size: 18px;
   }
-
 }
 
 @media (max-width:1024px) {
-
   .newsWrap .newsList {
     margin-bottom: 60px;
     padding-top: 60px;
@@ -237,22 +245,20 @@
     font-size: 26px;
   }
 
-  .newsWrap .newsViewBox .newsViewNavBox {
+  .newsWrap .newsViewNavBox {
     flex-direction: column;
     align-items: flex-start;
     gap: 16px 0;
   }
 
-  .newsWrap .newsViewBox .newsViewNavBox .newsViewListLink {
+  .newsWrap .newsViewListLink {
     margin-top: 24px;
     order: 1;
     align-self: flex-end;
   }
-
 }
 
 @media (max-width:768px) {
-
   .newsWrap .newsList {
     grid-template-columns: 1fr;
     gap: 20px;
@@ -268,39 +274,43 @@
     font-size: 18px;
   }
 
-  .newsWrap .newsViewBox .newsViewContentBox {
+  .newsWrap .newsViewBox {
+    padding-bottom: 110px;
+  }
+
+  .newsWrap .newsViewContentBox {
     margin-bottom: 55px;
   }
 
-  .newsWrap .newsViewBox .newsViewHeaderBox .newsViewBackLink {
+  .newsWrap .newsViewBackLink {
     font-size: 16px;
   }
 
-  .newsWrap .newsViewBox .newsViewTitle {
+  .newsWrap .newsViewTitle {
     font-size: 26px;
   }
 
-  .newsWrap .newsViewBox .newsViewNavBox .newsViewNavLabel {
+  .newsWrap .newsViewNavLabel {
     margin-bottom: 4px;
   }
 
+  .newsWrap .newsViewSubTitle {
+    margin: 28px 0 12px;
+  }
 }
 
 @media (max-width:480px) {
-
-  .newsWrap .newsViewBox .newsViewTitle {
+  .newsWrap .newsViewTitle {
     margin-bottom: 34px;
     font-size: 22px;
   }
 
-  .newsWrap .newsViewBox .newsViewNavBox .newsViewListLink {
+  .newsWrap .newsViewListLink {
     font-size: 26px;
   }
-
 }
 
 @media (max-width:360px) {
-
   .newsWrap .newsTabBox {
     margin-bottom: 20px;
     gap: 8px;
@@ -310,7 +320,7 @@
     padding-top: 20px;
   }
 
-  .newsWrap .newsTabBox .newsTabBtn {
+  .newsWrap .newsTabBtn {
     font-size: 12px;
   }
 
@@ -318,8 +328,8 @@
     padding: 16px;
   }
 
-  .newsWrap .newsList li a .newsTopBox .newsDate,
-  .newsWrap .newsList li a .newsTopBox .newsCategory {
+  .newsWrap .newsList li a .newsDate,
+  .newsWrap .newsList li a .newsCategory {
     font-size: 10px;
   }
 
@@ -336,55 +346,58 @@
     font-size: 16px;
   }
 
-  .newsWrap .newsViewBox .newsViewHeaderBox .newsViewBackLink {
+  .newsWrap .newsViewHeaderBox,
+  .newsWrap .newsViewTitle {
+    margin-bottom: 40px;
+  }
+
+  .newsWrap .newsViewBackLink {
     font-size: 13px;
   }
 
-  .newsWrap .newsViewBox .newsViewHeaderBox .newsViewCategory {
+  .newsWrap .newsViewCategory {
     padding: 1px 7px;
     font-size: 10px;
   }
 
-  .newsWrap .newsViewBox .newsViewHeaderBox .newsViewDate {
+  .newsWrap .newsViewDate {
     font-size: 10px;
   }
 
-  .newsWrap .newsViewBox .newsViewTitle,
-  .newsWrap .newsViewBox .newsViewHeaderBox {
-    margin-bottom: 40px;
-  }
-
-  .newsWrap .newsViewBox .newsViewTitle {
+  .newsWrap .newsViewTitle {
     font-size: 13px;
   }
 
-  .newsWrap .newsViewBox .newsViewContentBox .newsViewText {
+  .newsWrap .newsViewText {
     margin: 12px auto;
     font-size: 12px;
   }
 
-  .newsWrap .newsViewBox .newsViewContentBox .newsViewSubTitle {
+  .newsWrap .newsViewSubTitle {
     font-size: 13px;
   }
 
-  .newsWrap .newsViewBox .newsViewContentBox {
+  .newsWrap .newsViewContentBox {
     margin-bottom: 40px;
   }
 
-  .newsWrap .newsViewBox .newsViewNavBox {
+  .newsWrap .newsViewImgBox p {
+    font-size: 12px;
+  }
+
+  .newsWrap .newsViewNavBox {
     padding: 16px 0 0;
   }
 
-  .newsWrap .newsViewBox .newsViewNavBox .newsViewNavLabel {
+  .newsWrap .newsViewNavLabel {
     font-size: 10px;
   }
 
-  .newsWrap .newsViewBox .newsViewNavBox .newsViewNavTitle {
+  .newsWrap .newsViewNavTitle {
     font-size: 13px;
   }
 
-  .newsWrap .newsViewBox .newsViewNavBox .newsViewListLink {
+  .newsWrap .newsViewListLink {
     font-size: 16px;
   }
-
 }

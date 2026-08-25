@@ -30,8 +30,12 @@
 .teamWrap :global(.subTopBox) :global(.topTitleBox) :global(.topText02) {
   opacity: 0;
   transform: translate3d(0, 50px, 0);
-  transition: opacity 1.7s ease, transform 1.7s ease;
-  will-change: opacity, transform;
+  transition:
+    opacity 1.7s ease,
+    transform 1.7s ease;
+  will-change:
+    opacity,
+    transform;
 }
 
 .teamWrap :global(.subTopBox) :global(.topTitleBox) :global(.topText01) {
@@ -87,30 +91,48 @@
   content: '';
   width: 16px;
   height: 16px;
-  background: url('/images/sub/plus_icon.svg') no-repeat center;
+  background:
+    url('/images/sub/plus_icon.svg')
+    no-repeat center;
 }
 
 .teamWrap .teamMemberList li a .teamInfoHoverBox {
   position: absolute;
   top: 50%;
   left: 50%;
-  z-index: 9;
   width: 16.67vw;
   opacity: 0;
   visibility: hidden;
-  transform: translate3d(-50%, -50%, 0);
+  transform:
+    translate3d(-50%, -50%, 0);
   backface-visibility: hidden;
   will-change: opacity;
-  transition: opacity .35s ease, visibility 0s linear .35s;
+  transition:
+    opacity .35s ease,
+    visibility 0s linear .35s;
+  z-index: 9;
 }
 
 .teamWrap .teamMemberList li a .teamInfoHoverBox h3 {
-  --outside-width: max(0px, calc((320px - 100cqi) / 2));
+  --outside-width:
+    max(
+      0px,
+      calc((320px - 100cqi) / 2)
+    );
   margin-bottom: .63vw;
   color: transparent;
   font-size: 1.25vw;
   font-weight: 700;
-  background: linear-gradient(to right, #fff 0, #fff var(--outside-width), #1d1d1d var(--outside-width), #1d1d1d calc(100% - var(--outside-width)), #fff calc(100% - var(--outside-width)), #fff 100%);
+  background:
+    linear-gradient(
+      to right,
+      #fff 0,
+      #fff var(--outside-width),
+      #1d1d1d var(--outside-width),
+      #1d1d1d calc(100% - var(--outside-width)),
+      #fff calc(100% - var(--outside-width)),
+      #fff 100%
+    );
   background-clip: text;
   -webkit-background-clip: text;
 }
@@ -118,29 +140,37 @@
 .teamWrap .teamMemberList li a .teamInfoHoverBox p {
   padding: 20px;
   color: #222;
-  background-color: rgba(255, 255, 255, .55);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  background-color:
+    rgba(255, 255, 255, .55);
+  backdrop-filter:
+    blur(40px);
+  -webkit-backdrop-filter:
+    blur(40px);
 }
 
 .teamWrap .teamMemberList li:nth-child(5n+1) {
-  transform: translateY(0);
+  transform:
+    translateY(0);
 }
 
 .teamWrap .teamMemberList li:nth-child(5n+2) {
-  transform: translateY(80px);
+  transform:
+    translateY(80px);
 }
 
 .teamWrap .teamMemberList li:nth-child(5n+3) {
-  transform: translateY(160px);
+  transform:
+    translateY(160px);
 }
 
 .teamWrap .teamMemberList li:nth-child(5n+4) {
-  transform: translateY(240px);
+  transform:
+    translateY(240px);
 }
 
 .teamWrap .teamMemberList li:nth-child(5n+5) {
-  transform: translateY(320px);
+  transform:
+    translateY(320px);
 }
 
 /* 팀 인터뷰 영역 */
@@ -155,12 +185,13 @@
   top: -52px;
   left: 50%;
   color: #fff;
-  font-family: 'HelveticaNowDisplay';
   font-size: 80px;
   font-weight: 500;
+  font-family: 'HelveticaNowDisplay';
   text-align: center;
   line-height: 1;
-  transform: translateX(-50%);
+  transform:
+    translateX(-50%);
 }
 
 .teamWrap .teamInterviewTitle span {
@@ -170,7 +201,8 @@
 .teamWrap .teamInterviewList {
   position: relative;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns:
+    repeat(3, 1fr);
   justify-content: space-between;
   align-items: start;
   gap: 0 200px;
@@ -183,8 +215,12 @@
 .teamWrap .teamInterviewLink {
   position: relative;
   display: grid;
-  grid-template-columns: 1fr auto;
-  grid-template-areas: 'team team' 'image image' '. member';
+  grid-template-columns:
+    1fr auto;
+  grid-template-areas:
+    'team team'
+    'image image'
+    '. member';
   align-items: center;
   gap: 16px 0;
   color: #fff;
@@ -192,17 +228,31 @@
 
 .teamWrap .teamInterviewLink::after {
   content: '';
+  grid-area: image;
+  align-self: center;
+  justify-self: center;
+  width:
+    clamp(
+      40px,
+      4.17vw,
+      80px
+    );
+  height:
+    clamp(
+      40px,
+      4.17vw,
+      80px
+    );
   opacity: 0;
   visibility: hidden;
-  position: absolute;
-  top: 50%;
-  left: 50%;
+  background:
+    url('/images/sub/play_icon.svg')
+    no-repeat center / contain;
+  pointer-events: none;
+  transition:
+    opacity .3s,
+    visibility .3s;
   z-index: 9;
-  width: 80px;
-  height: 80px;
-  background: url('/images/sub/play_icon.svg') no-repeat center / contain;
-  transform: translate(-50%, -50%);
-  transition: all .3s;
 }
 
 .teamWrap .teamInterviewLink:hover::after {
@@ -211,7 +261,9 @@
 }
 
 .teamWrap .teamInterviewItem:nth-child(2) .teamInterviewLink {
-  grid-template-areas: 'image image' 'team member';
+  grid-template-areas:
+    'image image'
+    'team member';
 }
 
 .teamWrap .teamInterviewTeam {
@@ -236,7 +288,9 @@
   height: 100%;
   object-fit: cover;
   filter: grayscale(1);
-  transition: transform .5s ease, filter .5s ease;
+  transition:
+    transform .5s ease,
+    filter .5s ease;
 }
 
 .teamWrap .teamInterviewMember {
@@ -268,11 +322,12 @@
 
 .teamWrap .teamWorkPlaceBox .teamBenefitList li a {
   position: relative;
+  padding: 40px 82px 40px 0;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 40px 82px 40px 0;
-  border-bottom: 1px dashed #555;
+  border-bottom:
+    1px dashed #555;
 }
 
 .teamWrap .teamWorkPlaceBox .teamBenefitList li a h3 {
@@ -287,16 +342,17 @@
 }
 
 .teamWrap .teamWorkPlaceBox .teamBenefitList li a .teamBenefitImgBox {
-  opacity: 0;
-  visibility: hidden;
   position: absolute;
   top: 50%;
   left: 286px;
-  z-index: 9;
   display: flex;
   align-items: flex-start;
-  transform: translateY(-50%);
+  opacity: 0;
+  visibility: hidden;
+  transform:
+    translateY(-50%);
   transition: all .3s;
+  z-index: 9;
 }
 
 .teamWrap .teamWorkPlaceBox .teamBenefitList li a .teamBenefitImgBox img {
@@ -341,11 +397,11 @@
 }
 
 .teamWrap .teamCultureBox .teamCultureTextBox {
-  display: flex;
-  gap: 20px 110px;
   position: absolute;
   bottom: 98px;
   left: 0;
+  display: flex;
+  gap: 20px 110px;
 }
 
 .teamWrap .teamCultureBox .teamCultureTextBox p {
@@ -354,8 +410,8 @@
 }
 
 .teamWrap .teamCultureBox .teamCultureTextBox p strong {
-  font-weight: 600;
   font-size: 20px;
+  font-weight: 600;
 }
 
 /* 채용 링크 영역 */
@@ -373,58 +429,67 @@
   background-color: #fff;
 }
 
-.teamWrap .teamRecruitLink .teamRecruitDefault {
+.teamWrap .teamRecruitDefault {
   display: flex;
   align-items: center;
   gap: 0 32px;
   color: #222;
-  font-weight: 500;
   font-size: 40px;
+  font-weight: 500;
   font-family: 'HelveticaNowDisplay';
-  transition: opacity .3s ease, transform .3s ease;
 }
 
-.teamWrap .teamRecruitLink .teamRecruitDefault::after {
+.teamWrap .teamRecruitDefault::after {
   content: '';
   flex-shrink: 0;
   width: 16px;
   height: 24px;
-  background: url('/images/sub/arrow_icon02.svg') no-repeat center / contain;
+  background:
+    url('/images/sub/arrow_icon02.svg')
+    no-repeat center / contain;
 }
 
-.teamWrap .teamRecruitLink .teamRecruitMarquee {
+.teamWrap .teamRecruitMarquee {
   position: absolute;
   top: 0;
   left: 0;
   display: flex;
   flex-direction: row;
+  flex-wrap: nowrap;
   align-items: center;
   width: max-content;
+  min-width: max-content;
   height: 100%;
   opacity: 0;
   color: #222;
-  font-weight: 500;
   font-size: 40px;
+  font-weight: 500;
   font-family: 'HelveticaNowDisplay';
+  white-space: nowrap;
   pointer-events: none;
   will-change: transform;
-  transition: opacity .3s ease;
 }
 
-.teamWrap .teamRecruitLink .teamRecruitGroup {
-  display: block;
+.teamWrap .teamRecruitGroup {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
   flex-shrink: 0;
+  width: max-content;
   white-space: nowrap;
 }
 
 @keyframes rollingText {
 
   from {
-    transform: translate3d(0, 0, 0);
+    transform:
+      translate3d(0, 0, 0);
   }
 
   to {
-    transform: translate3d(-50%, 0, 0);
+    transform:
+      translate3d(-50%, 0, 0);
   }
 
 }
@@ -434,7 +499,9 @@
 .teamWrap .teamMemberList li a:hover .teamInfoHoverBox {
   opacity: 1;
   visibility: visible;
-  transition: opacity .35s ease, visibility 0s;
+  transition:
+    opacity .35s ease,
+    visibility 0s;
 }
 
 .teamWrap .teamWorkPlaceBox .teamBenefitList li a:hover .teamBenefitImgBox {
@@ -443,13 +510,94 @@
 }
 
 .teamWrap .teamRecruitLink:hover .teamRecruitDefault {
-  opacity: 0;
-  transform: translateY(-20px);
+  display: none;
 }
 
 .teamWrap .teamRecruitLink:hover .teamRecruitMarquee {
   opacity: 1;
-  animation: rollingText 12s linear infinite;
+  animation:
+    rollingText 12s linear
+    infinite;
+}
+
+/* 인터뷰 비디오 팝업 */
+
+.popupVideoBox {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background-color:
+    rgba(0, 0, 0, .8);
+  z-index: 99999999999;
+}
+
+.popupVideoBox.active {
+  display: flex;
+}
+
+.popupVideoBox .popupVideo {
+  max-width: 1000px;
+  width: 100%;
+  max-height: 580px;
+  height: 100%;
+  padding: 20px;
+}
+
+.popupVideoBox .popupVideo iframe {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.popupVideoBox .popupCloseBtn {
+  position: absolute;
+  top: 32px;
+  right: 40px;
+  width: 40px;
+  height: 40px;
+  background:
+    url('/images/common/close_btn.svg')
+    no-repeat center / contain;
+  z-index: 99999;
+}
+
+:global(body.popupVideoOpen) {
+  overflow: hidden;
+}
+
+@media (max-width:768px) {
+
+  .popupVideoBox .popupCloseBtn {
+    width: 28px;
+    height: 28px;
+  }
+
+}
+
+@media (max-width:480px) {
+
+  .popupVideoBox .popupCloseBtn {
+    width: 22px;
+    height: 22px;
+  }
+
+}
+
+@media (max-width:360px) {
+
+  .popupVideoBox .popupCloseBtn {
+    top: 24px;
+    right: 24px;
+    width: 16px;
+    height: 16px;
+  }
+
 }
 
 @media (max-width:1480px) {
@@ -497,7 +645,8 @@
 
   .teamWrap .teamMemberList {
     margin-bottom: 200px;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns:
+      repeat(3, 1fr);
     gap: 70px 60px;
   }
 
@@ -510,15 +659,18 @@
   }
 
   .teamWrap .teamMemberList li:nth-child(3n+1) {
-    transform: translateY(0);
+    transform:
+      translateY(0);
   }
 
   .teamWrap .teamMemberList li:nth-child(3n+2) {
-    transform: translateY(80px);
+    transform:
+      translateY(80px);
   }
 
   .teamWrap .teamMemberList li:nth-child(3n+3) {
-    transform: translateY(160px);
+    transform:
+      translateY(160px);
   }
 
   .teamWrap .teamMemberList li a .teamMemberImgBox {
@@ -571,10 +723,10 @@
   }
 
   .teamWrap .teamWorkPlaceBox .teamBenefitList li a .teamBenefitImgBox {
-    opacity: 1;
-    visibility: visible;
     position: static;
     display: flex;
+    opacity: 1;
+    visibility: visible;
     transform: none;
   }
 
@@ -601,7 +753,8 @@
 @media (max-width:768px) {
 
   .teamWrap .teamMemberList {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns:
+      repeat(3, 1fr);
     gap: 70px 30px;
   }
 
@@ -619,18 +772,23 @@
   }
 
   .teamWrap .teamInterviewList {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns:
+      repeat(2, 1fr);
     gap: 40px 6.51vw;
   }
 
   .teamWrap .teamInterviewItem:nth-child(2) {
     margin-top: 0;
-    transform: translateY(35vw);
+    transform:
+      translateY(35vw);
   }
 
   .teamWrap .teamInterviewLink,
   .teamWrap .teamInterviewItem:nth-child(2) .teamInterviewLink {
-    grid-template-areas: 'team team' 'image image' '. member';
+    grid-template-areas:
+      'team team'
+      'image image'
+      '. member';
   }
 
   .teamWrap .teamInterviewTeam {
@@ -697,7 +855,8 @@
   }
 
   .teamWrap .teamInterviewItem:nth-child(2) {
-    transform: translateY(31vw);
+    transform:
+      translateY(31vw);
   }
 
   .teamWrap .teamInterviewLink::after {
@@ -743,20 +902,24 @@
 @media (max-width:360px) {
 
   .teamWrap .teamMemberList {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns:
+      repeat(3, 1fr);
     gap: 70px 16px;
   }
 
   .teamWrap .teamMemberList li:nth-child(3n+1) {
-    transform: translateY(0);
+    transform:
+      translateY(0);
   }
 
   .teamWrap .teamMemberList li:nth-child(3n+2) {
-    transform: translateY(48px);
+    transform:
+      translateY(48px);
   }
 
   .teamWrap .teamMemberList li:nth-child(3n+3) {
-    transform: translateY(96px);
+    transform:
+      translateY(96px);
   }
 
   .teamWrap .teamMemberList li a .teamMemberImgBox {

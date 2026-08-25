@@ -38,109 +38,81 @@ export default function useServiceMotion(
           `.${styles.serviceBrandSloganBox}`
         );
 
+      if (!sloganBoxes.length) {
+        return;
+      }
+
       sloganBoxes.forEach(
         function (sloganBox, index) {
-          const lines =
-            sloganBox.querySelectorAll(
+          const sloganLines = [
+            ...sloganBox.querySelectorAll(
               `.${styles.serviceBrandSloganLine}`
-            );
+            )
+          ];
 
-          if (!lines.length) {
+          if (!sloganLines.length) {
             return;
           }
 
           const triggerId =
             `service-slogan-${index}`;
 
-          ScrollTrigger.getById(
-            triggerId
-          )?.kill();
+          /* 기존 트리거 제거 */
+          ScrollTrigger
+            .getById(triggerId)
+            ?.kill();
 
-          gsap.set(lines, {
-            backgroundSize:
-              '0% 100%, 100% 100%'
-          });
+          /* 텍스트 채우기 초기 상태 */
+          gsap.set(
+            sloganLines,
+            {
+              backgroundSize:
+                '0% 100%, 100% 100%'
+            }
+          );
 
-          const holdState = {
-            progress: 0
-          };
-
-          const timeline =
+          /* 줄마다 순차적으로 채우기 */
+          const sloganTimeline =
             gsap.timeline({
               defaults: {
                 ease: 'none'
               }
             });
 
-          lines.forEach(
-            function (line) {
-              timeline.to(line, {
-                backgroundSize:
-                  '100% 100%, 100% 100%',
-
-                duration: 1
-              });
+          sloganLines.forEach(
+            function (sloganLine) {
+              sloganTimeline.to(
+                sloganLine,
+                {
+                  backgroundSize:
+                    '100% 100%, 100% 100%',
+                  duration: 1
+                }
+              );
             }
           );
 
-          timeline.to(
-            holdState,
-            {
-              progress: 1,
-              duration: 0.9
-            }
-          );
-
-          const trigger =
+          /*
+           * 슬로건이 화면 80% 지점에 들어오면 시작하고
+           * 페이지 마지막까지 천천히 채웁니다.
+           */
+          const sloganTrigger =
             ScrollTrigger.create({
               id: triggerId,
               trigger: sloganBox,
-              start: 'top bottom',
-
-              end: function () {
-                const rect =
-                  sloganBox
-                    .getBoundingClientRect();
-
-                const sloganTop =
-                  rect.top +
-                  window.scrollY;
-
-                const startPosition =
-                  sloganTop -
-                  window.innerHeight;
-
-                const desiredEnd =
-                  sloganTop +
-                  rect.height -
-                  window.innerHeight *
-                    0.35;
-
-                const maximumScroll =
-                  ScrollTrigger.maxScroll(
-                    window
-                  ) - 1;
-
-                return Math.max(
-                  startPosition + 1,
-                  Math.min(
-                    desiredEnd,
-                    maximumScroll
-                  )
-                );
-              },
-
-              animation: timeline,
-              scrub: 0.7,
+              start: 'top 80%',
+              end: 'max',
+              animation: sloganTimeline,
+              scrub: 1.2,
               invalidateOnRefresh: true
             });
 
           sloganTimelines.push(
-            timeline
+            sloganTimeline
           );
 
           sloganTriggers.push(
-            trigger
+            sloganTrigger
           );
         }
       );
@@ -154,7 +126,7 @@ export default function useServiceMotion(
         );
 
       if (!popup) {
-        return function () {};
+        return function () { };
       }
 
       const openButtons =
@@ -190,7 +162,7 @@ export default function useServiceMotion(
         !closeButton ||
         !popupImage
       ) {
-        return function () {};
+        return function () { };
       }
 
       /* Lenis 제어 */
@@ -201,7 +173,7 @@ export default function useServiceMotion(
         if (
           lenis &&
           typeof lenis[action] ===
-            'function'
+          'function'
         ) {
           lenis[action]();
         }
@@ -295,7 +267,7 @@ export default function useServiceMotion(
 
             objectFit:
               imageStyle.objectFit ===
-              'fill'
+                'fill'
                 ? 'cover'
                 : imageStyle.objectFit,
 

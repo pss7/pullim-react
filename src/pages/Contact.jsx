@@ -1,15 +1,46 @@
+import {
+  useEffect,
+  useRef
+} from 'react';
+
 import styles from './Contact.module.css';
+import '../styles/sub.css';
+
 import Main from '../components/layout/Main';
 import Header from '../components/layout/Header';
 import Footer from '../components/layout/Footer';
 
+import useSubMotion from '../hooks/useSubMotion';
+
 export default function Contact() {
+  const pageRef = useRef(null);
+
+  /* 서브페이지 공통 모션 및 부드러운 스크롤 */
+  useSubMotion(pageRef);
+
+  /* 이전 페이지의 스크롤 잠금 제거 */
+  useEffect(function () {
+    document.body.classList.remove(
+      'servicePopupOpen',
+      'popupVideoOpen'
+    );
+
+    document.body.style.overflow = '';
+
+    return function () {
+      document.body.style.overflow = '';
+    };
+  }, []);
 
   return (
-
-    <div id="wrap" className={styles.contactWrap}>
-
-      <Header logoSrc="/images/common/logo03.svg" />
+    <div
+      ref={pageRef}
+      id="wrap"
+      className={styles.contactWrap}
+    >
+      <Header
+        logoSrc="/images/common/logo03.svg"
+      />
 
       {/* 서브 영역 */}
       <Main id="subWrap">
@@ -17,7 +48,9 @@ export default function Contact() {
         <div className="subTopBox">
           <div className="container">
             <div className="topTitleBox">
-              <h2>CONTACT</h2>
+              <h2>
+                CONTACT
+              </h2>
 
               <p className="topText01">
                 READY TO SOLVE YOUR
@@ -44,12 +77,20 @@ export default function Contact() {
             <div className="container">
               <form
                 action=""
-                method=""
+                method="post"
                 className={styles.formWrap}
               >
                 {/* 폼 왼쪽 영역 */}
-                <div className={styles.formLeftBox}>
-                  <div className={styles.formBox}>
+                <div
+                  className={
+                    styles.formLeftBox
+                  }
+                >
+                  <div
+                    className={
+                      styles.formBox
+                    }
+                  >
                     <div className="inputTextBox">
                       <input
                         id="companyName"
@@ -67,7 +108,11 @@ export default function Contact() {
                     </div>
                   </div>
 
-                  <div className={styles.formBox}>
+                  <div
+                    className={
+                      styles.formBox
+                    }
+                  >
                     <div className="inputTextBox">
                       <input
                         id="name"
@@ -85,7 +130,11 @@ export default function Contact() {
                     </div>
                   </div>
 
-                  <div className={styles.formBox}>
+                  <div
+                    className={
+                      styles.formBox
+                    }
+                  >
                     <div className="inputTextBox">
                       <input
                         id="phone"
@@ -103,7 +152,11 @@ export default function Contact() {
                     </div>
                   </div>
 
-                  <div className={styles.formBox}>
+                  <div
+                    className={
+                      styles.formBox
+                    }
+                  >
                     <div className="inputTextBox">
                       <input
                         id="email"
@@ -123,11 +176,16 @@ export default function Contact() {
 
                   <div
                     className={`
-                    ${styles.formBox}
-                    ${styles.inpuChkFormBox}
-                  `}
+                      ${styles.formBox}
+                      ${styles.inpuChkFormBox}
+                    `}
                   >
-                    <div className={styles.cunstomInpuChkBox}>
+                    <div
+                      className={`
+                        cunstomInpuChkBox
+                        ${styles.cunstomInpuChkBox}
+                      `}
+                    >
                       <input
                         id="agreeChk"
                         name="agreeChk"
@@ -136,7 +194,9 @@ export default function Contact() {
                       />
 
                       <label htmlFor="agreeChk">
-                        <span>개인정보 수집</span>
+                        <span>
+                          개인정보 수집
+                        </span>
                         동의 및 마케팅 활용
                       </label>
                     </div>
@@ -145,11 +205,20 @@ export default function Contact() {
                 {/* //폼 왼쪽 영역 */}
 
                 {/* 폼 오른쪽 영역 */}
-                <div className={styles.formRightBox}>
-                  <div className={styles.textareaBox}>
+                <div
+                  className={
+                    styles.formRightBox
+                  }
+                >
+                  <div
+                    className={`
+                      textareaBox
+                      ${styles.textareaBox}
+                    `}
+                  >
                     <textarea
                       id="content"
-                      name=""
+                      name="content"
                       placeholder="문의내용"
                     />
 
@@ -163,19 +232,33 @@ export default function Contact() {
 
                   <button
                     type="submit"
-                    className={styles.submitBtn}
+                    className={
+                      styles.submitBtn
+                    }
                   >
-                    <span>GET IN TOUCH</span>
+                    <span>
+                      GET IN TOUCH
+                    </span>
                   </button>
                 </div>
                 {/* //폼 오른쪽 영역 */}
               </form>
 
               {/* 지도 영역 */}
-              <div className={styles.contactMapBox}>
-                <img
-                  src="/images/sub/map_img.jpg"
-                  alt=""
+              <div
+                className={
+                  styles.contactMapBox
+                }
+              >
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m5!3m3!1m2!1s0x357ca413ce0f03c9%3A0x88773fe34be27981!2z7ISc7Jq47Yq567OE7IucIOqwleuCqOq1rCDthYztl6TrnoDroZw3N-q4uCAxMS04!5e0!3m2!1sko!2skr!4v1787663462492!5m2!1sko!2skr"
+                  title="더 풀림 위치"
+                  style={{
+                    border: 0
+                  }}
+                  allowFullScreen
+                  loading="lazy"
+                  referrerPolicy="strict-origin-when-cross-origin"
                 />
               </div>
               {/* //지도 영역 */}
@@ -188,8 +271,6 @@ export default function Contact() {
       {/* //서브 영역 */}
 
       <Footer />
-
     </div>
-
   );
 }

@@ -83,7 +83,7 @@ export default function NewsDetail() {
                     >
                       <img
                         src="/images/sub/news_view_img01.jpg"
-                        alt=""
+                        alt="Performance Marketing 캠페인 이미지"
                       />
                     </div>
 
@@ -99,9 +99,9 @@ export default function NewsDetail() {
                       경험이 하나로 연결될 때 비로소 지속
                       가능한 성과를 만들어낼 수 있습니다. 더
                       풀림은 고객의 비즈니스 목표를 함께
-                      설계하며, 성과를 넘어 브랜드의
-                      장기적인 성장을 만드는 Performance
-                      Marketing을 제안합니다.
+                      설계하며, 성과를 넘어 브랜드의 장기적인
+                      성장을 만드는 Performance Marketing을
+                      제안합니다.
                     </p>
 
                     <div
@@ -111,8 +111,13 @@ export default function NewsDetail() {
                     >
                       <img
                         src="/images/sub/news_view_img02.jpg"
-                        alt=""
+                        alt="캠페인 데이터 관리 이미지"
                       />
+
+                      <p>
+                        캡션 예시 / 모든 캠페인은 명확한
+                        목표와 데이터로 관리되어야 합니다.
+                      </p>
                     </div>
 
                     <h2

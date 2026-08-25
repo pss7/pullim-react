@@ -127,6 +127,7 @@ export default function useMainMotion(styles) {
 
     const motionContext = gsap.context(
       function () {
+
         /* 비주얼 영역 */
         function initVisualMotion() {
           const visualWrap =
@@ -148,6 +149,21 @@ export default function useMainMotion(styles) {
             return;
           }
 
+          const visualVideo =
+            visualWrap.querySelector(
+              `${getClassSelector(
+                'visualVideoBox'
+              )} video`
+            );
+
+          const visualHeadings = [
+            ...visualWrap.querySelectorAll(
+              `${getClassSelector(
+                'visualText'
+              )} h2`
+            )
+          ];
+
           const popupContentBox =
             document.querySelector(
               '#popupContentBox'
@@ -165,99 +181,19 @@ export default function useMainMotion(styles) {
               '#aboutWrap'
             );
 
-          let visualStep = -1;
-
-          /* 비주얼 스크롤 단계 적용 */
-          function applyVisualStep(
-            nextStep
+          if (
+            !visualVideo ||
+            !visualHeadings.length
           ) {
-            if (
-              visualStep === nextStep
-            ) {
-              return;
-            }
-
-            visualStep = nextStep;
-
-            visualBox.classList.toggle(
-              'step01',
-              visualStep >= 1
-            );
-
-            visualBox.classList.toggle(
-              'step02',
-              visualStep >= 2
-            );
-
-            visualWrap.classList.toggle(
-              'step02',
-              visualStep >= 2
-            );
+            return;
           }
 
-          /* 스크롤 진행률을 단계로 변환 */
-          function updateVisualStep(
-            progress
-          ) {
-            if (progress < 1 / 6) {
-              applyVisualStep(0);
-              return;
-            }
+          /* 기존 비주얼 트리거 제거 */
+          ScrollTrigger
+            .getById('visual-motion')
+            ?.kill();
 
-            if (progress < 1 / 2) {
-              applyVisualStep(1);
-              return;
-            }
-
-            applyVisualStep(2);
-          }
-
-          /* 비주얼 초기 상태 */
-          visualBox.classList.remove(
-            'active',
-            'step01',
-            'step02'
-          );
-
-          visualWrap.classList.remove(
-            'step02'
-          );
-
-          popupContentBox?.classList.remove(
-            'active'
-          );
-
-          proposalDownloadBtn?.classList.remove(
-            'active'
-          );
-
-          /* 초기 상태가 먼저 그려지도록 강제 계산 */
-          void visualBox.offsetHeight;
-
-          /* 초기 화면 모션 실행 */
-          introTimer =
-            window.setTimeout(
-              function () {
-                if (isDestroyed) {
-                  return;
-                }
-
-                visualBox.classList.add(
-                  'active'
-                );
-
-                popupContentBox?.classList.add(
-                  'active'
-                );
-
-                proposalDownloadBtn?.classList.add(
-                  'active'
-                );
-              },
-              150
-            );
-
-          /* CSS sticky와 ScrollTrigger pin 충돌 방지 */
+          /* sticky와 pin 충돌 방지 */
           setInlineStyle(
             visualWrap,
             {
@@ -271,97 +207,223 @@ export default function useMainMotion(styles) {
             visualBox,
             {
               position: 'relative',
-              top: 'auto'
+              top: 'auto',
+              overflow: 'hidden'
             }
           );
 
-          /* 비주얼 마지막 구간에서 소개 영역 올리기 */
-          setInlineStyle(
-            aboutWrap,
-            {
-              position: 'relative',
-              zIndex: '2',
-              marginTop: '-100vh'
-            }
-          );
-
-          applyVisualStep(0);
-
-          const visualSnap =
-            ScrollTrigger.snapDirectional(
-              [
-                0,
-                1 / 3,
-                2 / 3
-              ]
+          /*
+           * 소개 영역을 비주얼 위로 올릴 준비
+           * pinSpacing으로 생기는 공간을 상쇄합니다.
+           */
+          if (aboutWrap) {
+            setInlineStyle(
+              aboutWrap,
+              {
+                position: 'relative',
+                zIndex: '20',
+                marginTop: '-100vh',
+                willChange: 'transform'
+              }
             );
 
-          /* 기존 비주얼 트리거 중복 방지 */
-          ScrollTrigger.getById(
-            'visual-motion'
-          )?.kill();
-
-          /* 비주얼 스크롤 모션 */
-          createMotionTrigger({
-            id: 'visual-motion',
-            trigger: visualWrap,
-            start: 'top top',
-
-            end: function () {
-              return (
-                '+=' +
-                window.innerHeight * 3
-              );
-            },
-
-            pin: visualBox,
-            pinSpacing: true,
-            anticipatePin: 1,
-            invalidateOnRefresh: true,
-
-            snap: {
-              snapTo: function (
-                value,
-                self
-              ) {
-                const handoffStart =
-                  2 / 3;
-
-                /* 소개 영역이 올라오는 구간에서는 스냅하지 않음 */
-                if (
-                  value >
-                  handoffStart
-                ) {
-                  return value;
+            gsap.set(
+              aboutWrap,
+              {
+                y: function () {
+                  return (
+                    window.innerHeight * 0.5
+                  );
                 }
+              }
+            );
+          }
 
-                return visualSnap(
-                  value,
-                  self.direction
+          /* 최종 위치를 기준으로 텍스트를 중앙에 접기 */
+          gsap.set(
+            visualHeadings,
+            {
+              autoAlpha: 0,
+
+              x: function (
+                index,
+                heading
+              ) {
+                const headingRect =
+                  heading.getBoundingClientRect();
+
+                const headingCenter =
+                  headingRect.left +
+                  headingRect.width / 2;
+
+                return (
+                  window.innerWidth / 2 -
+                  headingCenter
                 );
               },
 
-              duration: {
-                min: 0.2,
-                max: 0.55
+              y: 0,
+              rotation: 0,
+              force3D: true
+            }
+          );
+
+          /* 비디오는 중앙에서 양쪽으로 펼쳐지도록 설정 */
+          gsap.set(
+            visualVideo,
+            {
+              autoAlpha: 0,
+              scaleX: 0.01,
+              scaleY: 1,
+              transformOrigin: '50% 50%',
+              force3D: true
+            }
+          );
+
+          popupContentBox?.classList.remove(
+            'active'
+          );
+
+          proposalDownloadBtn?.classList.remove(
+            'active'
+          );
+
+          /* 로드 모션 */
+          const visualIntroTimeline =
+            gsap.timeline({
+              delay: 0.15,
+              defaults: {
+                overwrite: 'auto'
+              }
+            });
+
+          visualIntroTimeline
+            .to(
+              visualVideo,
+              {
+                autoAlpha: 1,
+                scaleX: 1,
+                duration: 1.3,
+                ease: 'power3.inOut',
+                force3D: true
+              },
+              0
+            )
+            .to(
+              visualHeadings,
+              {
+                autoAlpha: 1,
+                x: 0,
+                duration: 1.2,
+                stagger: 0.04,
+                ease: 'power4.inOut',
+                force3D: true
+              },
+              0
+            )
+            .call(
+              function () {
+                if (isDestroyed) {
+                  return;
+                }
+
+                popupContentBox?.classList.add(
+                  'active'
+                );
+
+                proposalDownloadBtn?.classList.add(
+                  'active'
+                );
+              },
+              null,
+              0.25
+            );
+
+          /* 텍스트 회전 방향 */
+          const headingRotations = [
+            50,
+            -50,
+            50,
+            50,
+            -50
+          ];
+
+          /*
+           * 스크롤 모션
+           * 기존 3배에서 1.5배로 줄였습니다.
+           */
+          const visualScrollTimeline =
+            gsap.timeline({
+              scrollTrigger: {
+                id: 'visual-motion',
+                trigger: visualWrap,
+                start: 'top top',
+
+                end: function () {
+                  return (
+                    '+=' +
+                    window.innerHeight * 1.5
+                  );
+                },
+
+                pin: visualBox,
+                pinSpacing: true,
+                scrub: 0.35,
+                anticipatePin: 1,
+                invalidateOnRefresh: true
+              }
+            });
+
+          /* 텍스트가 화면 아래까지 떨어지는 구간 */
+          visualScrollTimeline.to(
+            visualHeadings,
+            {
+              y: function () {
+                return (
+                  window.innerHeight * 1.1
+                );
               },
 
-              delay: 0.08,
-              ease: 'power1.inOut'
-            },
+              rotation: function (index) {
+                return (
+                  headingRotations[index] ||
+                  50
+                );
+              },
 
-            onUpdate: function (self) {
-              updateVisualStep(
-                self.progress
-              );
+              duration: 0.62,
+              stagger: 0.035,
+              ease: 'none',
+              force3D: true
             },
+            0
+          );
 
-            onRefresh: function (self) {
-              updateVisualStep(
-                self.progress
-              );
-            }
-          });
+          /* 마지막 구간에서 소개 영역 전체 올리기 */
+          if (aboutWrap) {
+            visualScrollTimeline.to(
+              aboutWrap,
+              {
+                y: 0,
+                duration: 0.38,
+                ease: 'none',
+                force3D: true
+              },
+              0.62
+            );
+          }
+
+          /*
+           * 기존 useMainMotion 정리 코드에서
+           * 함께 제거될 수 있도록 트리거 저장
+           */
+          if (
+            visualScrollTimeline.scrollTrigger
+          ) {
+            motionTriggers.push(
+              visualScrollTimeline.scrollTrigger
+            );
+          }
         }
 
         /* 프로젝트 영역 */
@@ -395,10 +457,10 @@ export default function useMainMotion(styles) {
           const projectItems =
             projectList
               ? Array.from(
-                  projectList.querySelectorAll(
-                    'li'
-                  )
+                projectList.querySelectorAll(
+                  'li'
                 )
+              )
               : [];
 
           if (
@@ -430,7 +492,7 @@ export default function useMainMotion(styles) {
               CARD_WIDTH,
               Math.max(
                 getProjectListWidth() -
-                  RIGHT_GAP,
+                RIGHT_GAP,
                 0
               )
             );
@@ -440,8 +502,8 @@ export default function useMainMotion(styles) {
           function getProjectCurrentX() {
             return Math.max(
               getProjectListWidth() -
-                getProjectCardWidth() -
-                RIGHT_GAP,
+              getProjectCardWidth() -
+              RIGHT_GAP,
               0
             );
           }
@@ -556,7 +618,7 @@ export default function useMainMotion(styles) {
                   if (index > 0) {
                     projectTimeline.to(
                       projectItems[
-                        index - 1
+                      index - 1
                       ],
                       {
                         x:
@@ -613,7 +675,7 @@ export default function useMainMotion(styles) {
                     return (
                       '+=' +
                       projectItems.length *
-                        PROJECT_DISTANCE
+                      PROJECT_DISTANCE
                     );
                   },
 
@@ -838,11 +900,11 @@ export default function useMainMotion(styles) {
             const nextIndex =
               Math.min(
                 companyImages.length -
-                  1,
+                1,
 
                 Math.floor(
                   progress *
-                    companyImages.length
+                  companyImages.length
                 )
               );
 
@@ -865,7 +927,7 @@ export default function useMainMotion(styles) {
                   'active',
 
                   index ===
-                    companyImageIndex
+                  companyImageIndex
                 );
               }
             );
