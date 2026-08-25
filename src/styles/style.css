@@ -1,0 +1,191 @@
+@charset "utf-8";
+
+#wrap{display: flex; flex-direction: column; min-height: 100vh;}
+main{flex: 1;}
+footer{margin-top: auto;}
+
+.container{max-width: 1680px; width: 100%; padding: 0 60px; margin: 0 auto;}
+
+@media (max-width: 1199px){
+
+  .container{padding: 0 20px;}
+
+}
+
+
+/* 푸터 영역 */
+#footerWrap{position: relative; padding: 40px 0; background-color: #FD3D32; border-top: 1px dashed #fff; z-index: 999999;}
+#footerWrap .footerLeftBox{display: flex; flex-direction: column; gap: 32px 0; margin-right: 156px;}
+#footerWrap .footerLeftBox .footerPolicyLink{display: block; font-weight: 600; color: #fff;}
+#footerWrap .footerLeftBox .footerLogoBox h1 img{display: block;}
+#footerWrap .footerBox{display: flex; width: 100%;}
+#footerWrap .footerInfoTextBox{max-width: 556px; width: 100%;}
+#footerWrap .footerInfoTextBox .footerInfoText{display: grid; grid-template-columns: repeat(2, 1fr);}
+#footerWrap .footerInfoTextBox dl{margin-bottom: 12px; display: flex; gap: 20px;}
+#footerWrap .footerInfoTextBox dl dt,
+#footerWrap .footerInfoTextBox dl dd{color: #fff;}
+#footerWrap .footerInfoTextBox address{color: #fff;}
+#footerWrap .footerInfoBox{flex: 1; text-align: right;}
+#footerWrap .footerInfoBox .footerInfoSnsBox{margin-bottom: 32px;}
+#footerWrap .footerInfoBox .footerInfoSnsList{display: flex; justify-content: flex-end; gap: 0 20px;}
+#footerWrap .footerInfoBox .footerInfoSnsList a,
+#footerWrap .footerInfoBox .footerInfoSnsList a img{display: block;}
+#footerWrap .footerInfoBox .copyright{color: #fff;}
+
+@media (max-width: 1199px){
+
+  #footerWrap .footerBox{flex-direction: column; align-items: center;}
+  #footerWrap .footerLeftBox{margin:0 0 20px;}
+  #footerWrap .footerLeftBox .footerPolicyLink{text-align: center;}
+  #footerWrap .footerInfoTextBox{max-width: none; margin-bottom: 40px;}
+  #footerWrap .footerInfoTextBox .footerInfoText{grid-template-columns: 1fr;}
+  #footerWrap .footerInfoTextBox dl{justify-content: center;}
+  #footerWrap .footerInfoTextBox address{text-align: center;}
+  #footerWrap .footerInfoBox .footerInfoSnsList{justify-content: center;}
+
+}
+
+@media (max-width: 360px){
+
+  #footerWrap{padding: 28px 0 14px;}
+  #footerWrap .footerLeftBox .footerLogoBox h1 img{width: 102px;}
+  #footerWrap .footerLeftBox .footerPolicyLink{font-size: 12px;}
+  #footerWrap .footerInfoTextBox dl{margin-bottom: 8px;}
+  #footerWrap .footerInfoBox .copyright,
+  #footerWrap .footerInfoTextBox address,
+  #footerWrap .footerInfoTextBox dl dt,
+  #footerWrap .footerInfoTextBox dl dd{font-size: 12px;}
+
+}
+
+/* 비디오 팝업 */
+#popupVideoBox{display: flex; align-items: center; justify-content: center; position: fixed; top:0; left:0; right:0; bottom: 0; background-color: rgba(0,0,0,.8); z-index: 99999999999;}
+#popupVideoBox .popupVideo{max-width: 1000px; width: 100%; max-height: 580px; height: 100%; padding: 20px;}
+#popupVideoBox .popupVideo iframe{border: 0; width: 100%; height: 100%;}
+#popupVideoBox .popupCloaseBtn{width: 40px; height: 40px; position: absolute; right:40px; top:32px; background: url(../images/common/close_btn.svg)no-repeat center / contain; z-index: 99999;}
+
+@media (max-width: 768px){
+
+  #popupVideoBox .popupCloaseBtn{width: 28px; height: 28px;}
+
+}
+
+@media (max-width: 480px){
+
+  #popupVideoBox .popupCloaseBtn{width: 22px; height: 22px;}
+
+}
+
+@media (max-width: 360px){
+
+  #popupVideoBox .popupCloaseBtn{top: 24px; right: 24px; width: 16px; height: 16px;}
+
+}
+
+
+/* 폼 */
+input {
+  padding: 12px 10px 12px 12px;
+  border: 2px solid #222;
+  border-width: 0 0 2px 0;
+  font-weight: 600;
+  font-size: 20px;
+  background-color: transparent;
+}
+
+input::placeholder {
+  color: #222;
+}
+
+input[type="checkbox"]+label {
+  display: flex;
+  align-items: center;
+  color: #222;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+input[type="checkbox"]+label::before {
+  content: '';
+  flex-shrink: 0;
+  margin-right: 20px;
+  width: 32px;
+  height: 32px;
+  border: 1px solid #222;
+}
+
+input[type="checkbox"]:checked+label::before {
+  background: url(../images/sub/check_icon.svg)no-repeat center / contain;
+  background-size: 22px;
+}
+
+textarea {
+  padding: 24px 20px 20px 24px;
+  border: 2px solid #222;
+  font-weight: 600;
+  color: #222;
+  font-size: 20px;
+  background: transparent;
+}
+
+textarea::placeholder {
+  color: #222;
+}
+
+/* 폼 - 포커스 */
+input:focus,
+textarea:focus {
+  border-color: #fff;
+  color: #fff;
+}
+
+input:focus::placeholder,
+textarea:focus::placeholder {
+  color: #fff;
+}
+
+@media (max-width: 1199px) {
+
+  input,
+  textarea {
+    font-size: 18px;
+  }
+
+}
+
+@media (max-width: 768px) {
+
+  input,
+  textarea {
+    font-size: 16px;
+  }
+
+  input[type="checkbox"]+label::before {
+    width: 28px;
+    height: 28px;
+  }
+
+  input[type="checkbox"]:checked+label::before {
+    background-size: 20px;
+  }
+
+}
+
+@media (max-width: 360px) {
+
+  input,
+  textarea {
+    font-size: 13px;
+  }
+
+  input[type="checkbox"]+label {
+    font-size: 12px;
+  }
+
+  input[type="checkbox"]+label::before {
+    margin-right: 12px;
+    width: 24px;
+    height: 24px;
+  }
+
+}

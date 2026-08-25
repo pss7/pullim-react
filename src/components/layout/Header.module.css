@@ -1,0 +1,252 @@
+@charset "UTF-8";
+
+/* 헤더 */
+.headerWrap {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: 0 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 999;
+  transition: all 0.7s;
+}
+
+.headerWrap.scroll
+.headerGnbBox
+.headerGnbList
+li
+h2
+a {
+  color: #fff;
+}
+
+.headerLogoBox h1 a,
+.headerLogoBox h1 a img {
+  display: block;
+}
+
+.headerLogoBox h1 a img.logoImg02 {
+  display: none;
+}
+
+.headerGnbList {
+  display: flex;
+  align-items: center;
+}
+
+.headerGnbList li h2 a {
+  position: relative;
+  display: block;
+  padding: 37px 20px;
+  font-size: 20px;
+  font-weight: 500;
+  color: #0a0a0a;
+  transition: all 0.7s;
+}
+
+.headerContactLink {
+  display: flex;
+  align-items: center;
+  gap: 0 16px;
+  padding: 0 16px;
+  width: 158px;
+  height: 38px;
+  font-size: 20px;
+  font-weight: 500;
+  color: #fff;
+  background-color: #fd3d32;
+}
+
+.headerContactLink::after {
+  content: '';
+  width: 8px;
+  height: 12px;
+  background:
+    url('/images/common/arrow_icon01.svg')
+    no-repeat center;
+}
+
+.mobileMenuWrap {
+  display: none;
+}
+
+@media (max-width: 1199px) {
+  .headerWrap {
+    padding: 20px 12px;
+  }
+
+  .headerLogoBox h1 a img {
+    width: 180px;
+  }
+
+  .headerGnbBox {
+    display: none;
+  }
+
+  .headerContactLink {
+    display: none;
+  }
+
+  /* 모바일 메뉴 */
+
+  .mobileMenuWrap {
+    display: block;
+  }
+
+  .mobileMenuBox {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 100px 0 84px;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    right: -3000px;
+    bottom: 0;
+    background-color: #fd3d32;
+    transition: all 0.3s;
+  }
+
+  .mobileMenu li a {
+    display: block;
+    padding: 10px 20px;
+    color: #fff;
+    font-weight: 500;
+    font-size: 36px;
+    font-family: 'HelveticaNowDisplay';
+    line-height: 1.2;
+  }
+
+  .mobileMenu li a span {
+    display: block;
+    color: #fff;
+    font-size: 10px;
+    font-weight: 600;
+    line-height: 1;
+  }
+
+  .mobileMenu li:nth-child(2) a {
+    padding-left: 64px;
+  }
+
+  .mobileMenu li:nth-child(3) a {
+    padding-left: 86px;
+  }
+
+  .mobileMenu li:nth-child(4) a {
+    padding-left: 153px;
+  }
+
+  .mobileMenu li:nth-child(5) a {
+    padding-left: 179px;
+  }
+
+  .mobileMenuBtn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    background: #fd3d32;
+  }
+
+  .mobileMenuBtn::after {
+    content: '';
+    width: 24px;
+    height: 24px;
+    background:
+      url('/images/common/mobile_btn.svg')
+      no-repeat center;
+  }
+
+  .mobileInfoBox {
+    display: flex;
+    flex-direction: column;
+    margin-top: auto;
+    gap: 20px 0;
+  }
+
+  .mobileSnsList {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0 20px;
+  }
+
+  .mobileInfoBox address {
+    font-size: 12px;
+    color: #fff;
+    text-align: center;
+  }
+
+  .proposalDownload {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 12px;
+    padding: 0 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+    background-color: #222;
+  }
+
+  .proposalDownload span {
+    display: flex;
+    align-items: center;
+    gap: 0 12px;
+    font-size: 14px;
+    font-weight: 700;
+    color: #fff;
+  }
+
+  .proposalDownload span::after {
+    content: '';
+    width: 20px;
+    height: 20px;
+    background:
+      url('/images/common/download_icon.svg')
+      no-repeat center;
+  }
+
+  .mobileMenuCloseBtn {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+  }
+
+  .mobileMenuCloseBtn::after {
+    content: '';
+    width: 16px;
+    height: 16px;
+    background:
+      url('/images/common/close_btn.svg')
+      no-repeat center;
+  }
+
+  /* 활성화 */
+
+  .mobileMenuWrap.active
+  .mobileMenuBox {
+    right: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .headerWrap {
+    padding: 6px 12px;
+  }
+
+  .headerLogoBox h1 a img {
+    width: 112px;
+  }
+}

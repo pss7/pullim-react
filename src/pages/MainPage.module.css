@@ -1,0 +1,1674 @@
+@charset "UTF-8";
+
+/* 공통 */
+
+:global(.scrollRevealLine) {
+  display: block;
+  overflow: hidden;
+}
+
+:global(.scrollRevealText) {
+  display: block;
+  font-style: normal;
+  visibility: hidden;
+  transition: none;
+  will-change: transform;
+}
+
+/* 비주얼 영역 */
+
+:global(#visualWrap).visualWrap {
+  position: relative;
+  width: 100%;
+  height: 120vh;
+}
+
+:global(#visualWrap).visualWrap .visualBox {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  z-index: 10;
+}
+
+:global(#visualWrap).visualWrap .visualVideoBox {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+:global(#visualWrap).visualWrap .visualTextBox {
+  position: absolute;
+  inset: 0;
+  max-width: 71.35vw;
+  padding: 0 1.04vw;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+:global(#visualWrap).visualWrap .visualTextBox h2 {
+  font-size: 7.8vw;
+  font-weight: 500;
+  color: #222;
+  font-family: 'HelveticaNowDisplay';
+  letter-spacing: -0.05vw;
+  white-space: nowrap;
+}
+
+:global(#visualWrap).visualWrap .visualTextBox h2 span {
+  margin-top: 2.08vw;
+  font-size: 0.83vw;
+  font-weight: 600;
+  color: #222;
+}
+
+:global(#visualWrap).visualWrap .visualText {
+  display: flex;
+  align-items: center;
+  line-height: 1;
+}
+
+:global(#visualWrap).visualWrap .visualText02 h2 {
+  display: flex;
+  gap: 0 3.96vw;
+}
+
+/* 초기 */
+
+:global(#visualWrap).visualWrap .visualVideoBox,
+:global(#visualWrap).visualWrap .visualText {
+  opacity: 0;
+}
+
+:global(#visualWrap).visualWrap .visualText {
+  gap: 0;
+}
+
+:global(#visualWrap).visualWrap .visualText02 {
+  gap: 0 10vw;
+}
+
+:global(#visualWrap).visualWrap .visualText03 {
+  gap: 0 20vw;
+}
+
+:global(#visualWrap).visualWrap .visualText01 {
+  transform: translateX(-10vw);
+}
+
+:global(#visualWrap).visualWrap .visualText02 {
+  transform: translateX(20vw);
+}
+
+:global(#visualWrap).visualWrap .visualText03 {
+  transform: translateX(-10vw);
+}
+
+:global(#visualWrap).visualWrap .visualText h2 {
+  opacity: 1;
+  transform: translateY(0) rotate(0deg);
+  transition: transform .8s cubic-bezier(.65, 0, .35, 1), opacity .6s ease;
+}
+
+/* 비주얼 텍스트 모션 */
+
+:global(#visualWrap).visualWrap .visualText {
+  transition: opacity .8s ease, gap .8s cubic-bezier(.65, 0, .35, 1), transform .8s cubic-bezier(.65, 0, .35, 1);
+  will-change: opacity, gap, transform;
+}
+
+:global(#visualWrap).visualWrap .visualVideoBox {
+  transition: opacity 1.3s ease;
+  will-change: opacity;
+}
+
+/* 페이지 진입 */
+
+:global(#visualWrap).visualWrap .visualBox:global(.active) .visualVideoBox {
+  opacity: 1;
+}
+
+:global(#visualWrap).visualWrap .visualBox:global(.active) .visualText {
+  opacity: 1;
+  gap: 0 16.67vw;
+}
+
+:global(#visualWrap).visualWrap .visualBox:global(.active) .visualText01 {
+  transform: translateX(0);
+}
+
+:global(#visualWrap).visualWrap .visualBox:global(.active) .visualText02 {
+  transform: translateX(0);
+}
+
+:global(#visualWrap).visualWrap .visualBox:global(.active) .visualText03 {
+  transform: translateX(12vw);
+}
+
+/* 비디오 크기 모션 */
+
+:global(#visualWrap).visualWrap .visualVideoBox video {
+  display: block;
+  width: 12.5vw;
+  height: 22.24vw;
+  object-fit: cover;
+  transform: scale(.85);
+  transition: transform 1.3s cubic-bezier(.65, 0, .35, 1);
+}
+
+:global(#visualWrap).visualWrap .visualBox:global(.active) .visualVideoBox video {
+  transform: scale(1);
+}
+
+/* 텍스트 하단 낙하 */
+
+:global(#visualWrap).visualWrap .visualBox:global(.step02) .visualText01 h2 {
+  transform: translateY(100vh) rotate(50deg);
+  opacity: 0;
+  transition-delay: 0s;
+}
+
+:global(#visualWrap).visualWrap .visualBox:global(.step02) .visualText02 h2:nth-child(1) {
+  transform: translateY(100vh) rotate(-50deg);
+  opacity: 0;
+  transition-delay: .05s;
+}
+
+:global(#visualWrap).visualWrap .visualBox:global(.step02) .visualText02 h2:nth-child(2) {
+  transform: translateY(100vh) rotate(50deg);
+  opacity: 0;
+  transition-delay: .1s;
+}
+
+:global(#visualWrap).visualWrap .visualBox:global(.step02) .visualText03 h2:nth-child(1) {
+  transform: translateY(100vh) rotate(50deg);
+  opacity: 0;
+  transition-delay: .15s;
+}
+
+:global(#visualWrap).visualWrap .visualBox:global(.step02) .visualText03 h2:nth-child(2) {
+  transform: translateY(100vh) rotate(-50deg);
+  opacity: 0;
+  transition-delay: .2s;
+}
+
+/* 스크롤 표시 */
+
+:global(#visualWrap).visualWrap .visualScrollBox {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.04vw;
+  transform: translateX(-50%);
+  overflow: hidden;
+  z-index: 99;
+}
+
+:global(#visualWrap).visualWrap .visualScrollText {
+  display: block;
+  font-size: .83vw;
+  color: #b4b4b4;
+  font-weight: 600;
+}
+
+:global(#visualWrap).visualWrap .visualScrollLine {
+  position: relative;
+  width: .05vw;
+  height: 3.13vw;
+  background: #e8e8e8;
+}
+
+:global(#visualWrap).visualWrap .visualScrollLine::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: .05vw;
+  height: 1.04vw;
+  background: #222;
+  animation: scrollLine 1.8s infinite;
+}
+
+@keyframes scrollLine {
+
+  0% {
+    transform: translateY(0);
+    opacity: 0;
+  }
+
+  30% {
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(50px);
+    opacity: 0;
+  }
+
+}
+
+/* 제안서 다운로드 */
+
+:global(#visualWrap).visualWrap .proposalDownloadBtn {
+  width: 119px;
+  height: 119px;
+  position: absolute;
+  top: 219px;
+  right: -100%;
+  z-index: 999;
+  transition: all 1.3s;
+}
+
+:global(#visualWrap).visualWrap .proposalDownloadBtn:global(.active) {
+  right: 124px;
+}
+
+:global(#visualWrap).visualWrap .proposalDownloadBtn img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  animation: proposalRotate 10s linear infinite;
+}
+
+:global(#visualWrap).visualWrap .proposalDownloadBtn span {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background-color: #fd3d32;
+  font-size: 24px;
+  font-weight: 700;
+  color: #fff;
+  font-family: 'HelveticaNowDisplay';
+}
+
+@keyframes proposalRotate {
+
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+
+}
+
+@media (max-width:1199px) {
+
+  :global(#visualWrap).visualWrap .visualVideoBox video {
+    width: 26vw;
+    height: 50vw;
+  }
+
+  :global(#visualWrap).visualWrap .proposalDownloadBtn {
+    top: 120px;
+  }
+
+  :global(#visualWrap).visualWrap .proposalDownloadBtn:global(.active) {
+    right: 50px;
+  }
+
+  :global(#visualWrap).visualWrap .visualTextBox {
+    max-width: 90vw;
+  }
+
+  :global(#visualWrap).visualWrap .visualBox:global(.active) .visualText,
+  :global(#visualWrap).visualWrap .visualBox:global(.step01) .visualText {
+    gap: 0 35vw;
+  }
+
+}
+
+@media (max-width:768px) {
+
+  :global(#visualWrap).visualWrap .visualTextBox {
+    max-width: 96vw;
+  }
+
+  :global(#visualWrap).visualWrap .visualVideoBox video {
+    width: 32vw;
+    height: 60vw;
+  }
+
+  :global(#visualWrap).visualWrap .visualBox:global(.active) .visualText,
+  :global(#visualWrap).visualWrap .visualBox:global(.step01) .visualText {
+    gap: 0 40.7vw;
+  }
+
+}
+
+@media (max-width:480px) {
+
+  :global(#visualWrap).visualWrap .visualVideoBox video {
+    width: 52vw;
+    height: 79vw;
+  }
+
+  :global(#visualWrap).visualWrap .visualBox .visualText {
+    gap: 0 16vw;
+  }
+
+  :global(#visualWrap).visualWrap .visualTextBox {
+    max-width: none;
+    padding: 112px 20px 0;
+    justify-content: flex-start;
+  }
+
+  :global(#visualWrap).visualWrap .visualTextBox h2 {
+    font-size: 48px;
+  }
+
+  :global(#visualWrap).visualWrap .visualTextBox h2 span {
+    margin-top: 12px;
+    font-size: 10px;
+  }
+
+  :global(#visualWrap).visualWrap .visualText02 {
+    padding-left: 9px;
+    letter-spacing: 1px;
+  }
+
+  :global(#visualWrap).visualWrap .visualText02 h2 {
+    gap: 0 25px;
+  }
+
+  :global(#visualWrap).visualWrap .visualScrollBox {
+    gap: 8px;
+  }
+
+  :global(#visualWrap).visualWrap .visualScrollText {
+    font-size: 10px;
+  }
+
+  :global(#visualWrap).visualWrap .visualScrollLine {
+    width: 1px;
+    height: 52px;
+  }
+
+  :global(#visualWrap).visualWrap .visualScrollLine::after {
+    width: 1px;
+    height: 20px;
+  }
+
+  :global(#visualWrap).visualWrap .proposalDownloadBtn {
+    width: 90px;
+    height: 90px;
+    top: 409px;
+    right: auto;
+    left: 28px;
+  }
+
+  :global(#visualWrap).visualWrap .proposalDownloadBtn:global(.active) {
+    right: auto;
+    left: 28px;
+  }
+
+  :global(#visualWrap).visualWrap .proposalDownloadBtn span {
+    width: 60px;
+    height: 60px;
+    font-size: 18px;
+  }
+
+  :global(#visualWrap).visualWrap .visualBox:global(.active) .visualText02,
+  :global(#visualWrap).visualWrap .visualBox:global(.step01) .visualText02 {
+    gap: 0 25.7vw;
+  }
+
+  :global(#visualWrap).visualWrap .visualBox:global(.active) .visualText03,
+  :global(#visualWrap).visualWrap .visualBox:global(.step01) .visualText03 {
+    transform: translateX(0);
+  }
+
+}
+
+@media (max-width:360px) {
+
+  :global(#visualWrap).visualWrap .visualVideoBox video {
+    width: 62vw;
+    height: 116vw;
+  }
+
+  :global(#visualWrap).visualWrap .visualTextBox h2 {
+    font-size: 38px;
+  }
+
+  :global(#visualWrap).visualWrap .visualTextBox h2 span {
+    font-size: 8px;
+  }
+
+  :global(#visualWrap).visualWrap .visualText02 h2 {
+    gap: 0 18px;
+  }
+
+  :global(#visualWrap).visualWrap .proposalDownloadBtn {
+    width: 64px;
+    height: 64px;
+  }
+
+  :global(#visualWrap).visualWrap .proposalDownloadBtn span {
+    width: 40px;
+    height: 40px;
+    font-size: 10px;
+  }
+
+  :global(#visualWrap).visualWrap .visualBox:global(.active) .visualText02,
+  :global(#visualWrap).visualWrap .visualBox:global(.step01) .visualText02 {
+    gap: 0 19.7vw;
+  }
+
+  :global(#visualWrap).visualWrap .visualBox:global(.active) .visualText03,
+  :global(#visualWrap).visualWrap .visualBox:global(.step01) .visualText03 {
+    gap: 0 33.7vw;
+    transform: translateX(0);
+  }
+
+}
+
+/* 팝업 영역 */
+
+:global(#popupContentBox).popupContentBox {
+  opacity: 0;
+  visibility: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: absolute;
+  left: 40px;
+  right: 40px;
+  bottom: 28px;
+  z-index: 999;
+  transition: all 1.3s;
+}
+
+:global(#popupContentBox).popupContentBox:global(.active) {
+  opacity: 1;
+  visibility: visible;
+}
+
+:global(#popupContentBox).popupContentBox .popupSlideBox {
+  width: 380px;
+  position: relative;
+  border: 1px solid #e8e8e8;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+:global(#popupContentBox).popupContentBox .popupSlideBox .popupSlide {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  padding: 19px 48px 19px 32px;
+  width: 380px;
+  background-color: #fff;
+}
+
+:global(#popupContentBox).popupContentBox .popupSlideBox .popupSlide::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 8px;
+  bottom: 0;
+  width: 3px;
+  background-color: #fd3d32;
+  border-radius: 50px;
+}
+
+:global(#popupContentBox).popupContentBox .popupSlideBox .popupSlide h3 {
+  margin-bottom: 16px;
+  font-weight: 600;
+  color: #222;
+  font-size: 16px;
+}
+
+:global(#popupContentBox).popupContentBox .popupSlideBox .popupSlide p {
+  font-size: 12px;
+  color: #222;
+}
+
+:global(#popupContentBox).popupContentBox .popupSlideBox .controlBox {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+}
+
+:global(#popupContentBox).popupContentBox .popupSlideBox .controlBox .popupSlideBtn {
+  position: relative;
+  width: 32px;
+  flex: 1;
+  border: 1px solid #e8e8e8;
+  background-color: #fff;
+  border-width: 0 0 1px 1px;
+}
+
+:global(#popupContentBox).popupContentBox .popupSlideBox .controlBox .popupSlideBtn::after {
+  content: '';
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+:global(#popupContentBox).popupContentBox .popupSlideBox .controlBox .popupSlideBtn:last-child {
+  border-bottom: 0;
+}
+
+:global(#popupContentBox).popupContentBox .popupSlideBox .controlBox .popupPrevBtn::after {
+  background: url('/images/common/arrow_icon02.svg') no-repeat center / contain;
+}
+
+:global(#popupContentBox).popupContentBox .popupSlideBox .controlBox .popupNextBtn::after {
+  background: url('/images/common/arrow_icon02.svg') no-repeat center / contain;
+  transform: translate(-50%, -50%) rotate(180deg);
+}
+
+:global(#popupContentBox).popupContentBox .popupVideoBox a {
+  padding: 19px 20px 19px 32px;
+  width: 366px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0 20px;
+  border: 1px solid #e8e8e8;
+  border-radius: 4px;
+  background-color: #fff;
+}
+
+:global(#popupContentBox).popupContentBox .popupVideoBox .popupVideoInfoText h3 {
+  font-weight: 600;
+  color: #222;
+  font-size: 16px;
+}
+
+:global(#popupContentBox).popupContentBox .popupVideoBox .popupVideoInfoText {
+  font-size: 12px;
+  font-weight: 600;
+}
+
+:global(#popupContentBox).popupContentBox .popupVideoBox .popupVideoInfoText span {
+  font-size: 12px;
+  font-weight: 600;
+  color: #b4b4b4;
+}
+
+:global(#popupContentBox).popupContentBox .popupVideoBox .popupVideoInfoText a img {
+  display: block;
+}
+
+:global(#popupContentBox).popupContentBox .popupVideoBox .popupVideo {
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+:global(#popupContentBox).popupContentBox .popupVideoBox .popupVideo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+@media (max-width:1199px) {
+
+  :global(#popupContentBox).popupContentBox {
+    left: 20px;
+    right: 20px;
+  }
+
+}
+
+@media (max-width:768px) {
+
+  :global(#popupContentBox).popupContentBox {
+    flex-direction: column;
+    gap: 12px 0;
+  }
+
+  :global(#popupContentBox).popupContentBox .popupSlideBox,
+  :global(#popupContentBox).popupContentBox .popupVideoBox {
+    width: 100%;
+  }
+
+  :global(#popupContentBox).popupContentBox .popupSlideBox .popupSlide {
+    padding: 12px 48px 12px 24px;
+  }
+
+  :global(#popupContentBox).popupContentBox .popupSlideBox .popupSlide h3 {
+    margin-bottom: 8px;
+    font-size: 12px;
+  }
+
+  :global(#popupContentBox).popupContentBox .popupSlideBox .popupSlide p {
+    font-size: 10px;
+  }
+
+  :global(#popupContentBox).popupContentBox .popupSlideBox .controlBox .popupSlideBtn::after {
+    width: 12px;
+    height: 12px;
+  }
+
+  :global(#popupContentBox).popupContentBox .popupSlideBox .controlBox .popupSlideBtn {
+    width: 32px;
+  }
+
+  :global(#popupContentBox).popupContentBox .popupVideoBox a {
+    width: 100%;
+    padding: 11px 20px 11px 24px;
+  }
+
+  :global(#popupContentBox).popupContentBox .popupVideoBox .popupVideoInfoText h3 {
+    font-size: 12px;
+  }
+
+  :global(#popupContentBox).popupContentBox .popupVideoBox .popupVideoInfoText span {
+    font-size: 10px;
+  }
+
+  :global(#popupContentBox).popupContentBox .popupVideoBox .popupVideo {
+    width: 70px;
+    border-radius: 4px;
+  }
+
+}
+
+@media (max-width:360px) {
+
+  :global(#popupContentBox).popupContentBox .popupSlideBox .popupSlide h3 {
+    margin-bottom: 6px;
+    font-size: 12px;
+  }
+
+  :global(#popupContentBox).popupContentBox .popupSlideBox .popupSlide p {
+    font-size: 10px;
+  }
+
+  :global(#popupContentBox).popupContentBox .popupSlideBox .popupSlide {
+    padding: 11px 48px 11px 24px;
+  }
+
+  :global(#popupContentBox).popupContentBox .popupSlideBox .controlBox .popupSlideBtn::after {
+    width: 12px;
+    height: 12px;
+  }
+
+  :global(#popupContentBox).popupContentBox .popupVideoBox .popupVideoInfoText h3 {
+    font-size: 12px;
+  }
+
+  :global(#popupContentBox).popupContentBox .popupVideoBox .popupVideoInfoText span {
+    font-size: 10px;
+  }
+
+  :global(#popupContentBox).popupContentBox .popupVideoBox a {
+    padding: 11px 11px 11px 24px;
+  }
+
+  :global(#popupContentBox).popupContentBox .popupVideoBox .popupVideo {
+    width: 72px;
+    height: 40px;
+  }
+
+}
+
+/* 소개 영역 */
+
+:global(#aboutWrap).aboutWrap {
+  padding: 160px 0;
+  position: relative;
+  width: 100%;
+  background: #222;
+  color: #fff;
+  overflow: hidden;
+}
+
+:global(#aboutWrap).aboutWrap .aboutContentBox {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+:global(#aboutWrap).aboutWrap .aboutTitleBox .aboutLabelText {
+  display: block;
+  margin-bottom: 20px;
+  font-weight: 600;
+  color: #fff;
+}
+
+:global(#aboutWrap).aboutWrap .aboutTextBox .aboutTextNumber {
+  margin-bottom: 20px;
+}
+
+:global(#aboutWrap).aboutWrap .container,
+:global(#aboutWrap).aboutWrap .aboutBox,
+:global(#aboutWrap).aboutWrap .aboutContentBox {
+  height: 100%;
+}
+
+:global(#aboutWrap).aboutWrap .aboutTitleBox {
+  margin-bottom: 60px;
+  text-align: center;
+}
+
+:global(#aboutWrap).aboutWrap .aboutTitleBox h2 {
+  font-size: 80px;
+  font-family: 'HelveticaNowDisplay';
+  font-weight: 500;
+  line-height: 1;
+  color: #fff;
+  word-break: keep-all;
+}
+
+:global(#aboutWrap).aboutWrap .aboutTitleBox h2 strong {
+  display: inline-block;
+  font-weight: 500;
+}
+
+:global(#aboutWrap).aboutWrap .aboutViewLink {
+  display: flex;
+  align-items: center;
+  padding-left: 20px;
+  width: 162px;
+  height: 36px;
+  margin: 0 auto 100px;
+  border: 1px solid #fff;
+  border-radius: 50px;
+}
+
+:global(#aboutWrap).aboutWrap .aboutViewLink span {
+  display: flex;
+  align-items: center;
+  gap: 0 16px;
+  font-weight: 600;
+  color: #fff;
+}
+
+:global(#aboutWrap).aboutWrap .aboutViewLink span::after {
+  content: '';
+  width: 24px;
+  height: 24px;
+  background: url('/images/main/arrow_icon.svg') no-repeat center / contain;
+}
+
+:global(#aboutWrap).aboutWrap .aboutTextBox {
+  display: flex;
+  gap: 0 183px;
+}
+
+:global(#aboutWrap).aboutWrap .aboutTextBox .aboutText p {
+  font-size: 20px;
+  font-weight: 700;
+  color: #fff;
+}
+
+:global(#aboutWrap).aboutWrap .aboutText02 {
+  padding-top: 196px;
+}
+
+@media (max-width:1199px) {
+
+  :global(#aboutWrap).aboutWrap .aboutTitleBox {
+    margin-bottom: 50px;
+  }
+
+  :global(#aboutWrap).aboutWrap .aboutTitleBox h2 {
+    font-size: 60px;
+  }
+
+  :global(#aboutWrap).aboutWrap .aboutTextBox .aboutTextNumber {
+    margin-bottom: 12px;
+    font-size: 14px;
+  }
+
+  :global(#aboutWrap).aboutWrap .aboutTextBox .aboutText p {
+    font-size: 16px;
+  }
+
+}
+
+@media (max-width:768px) {
+
+  :global(#aboutWrap).aboutWrap .aboutTextBox {
+    gap: 60px 0;
+  }
+
+  :global(#aboutWrap).aboutWrap .aboutTextBox .aboutText {
+    width: 100%;
+  }
+
+  :global(#aboutWrap).aboutWrap .aboutTitleBox h2 {
+    font-size: 40px;
+  }
+
+  :global(#aboutWrap).aboutWrap .aboutTextBox .aboutText p {
+    font-size: 14px;
+  }
+
+  :global(#aboutWrap).aboutWrap .aboutTextBox .aboutText p br {
+    display: none;
+  }
+
+}
+
+@media (max-width:480px) {
+
+  :global(#aboutWrap).aboutWrap {
+    padding: 120px 0;
+  }
+
+  :global(#aboutWrap).aboutWrap .aboutTitleBox {
+    margin-bottom: 32px;
+  }
+
+  :global(#aboutWrap).aboutWrap .aboutTitleBox span {
+    margin-bottom: 12px;
+    font-size: 14px;
+  }
+
+  :global(#aboutWrap).aboutWrap .aboutTitleBox h2 {
+    font-size: 30px;
+  }
+
+  :global(#aboutWrap).aboutWrap .aboutViewLink span {
+    gap: 0 12px;
+    font-size: 14px;
+  }
+
+  :global(#aboutWrap).aboutWrap .aboutViewLink span::after {
+    width: 16px;
+    height: 16px;
+  }
+
+  :global(#aboutWrap).aboutWrap .aboutViewLink {
+    padding-left: 12px;
+    width: 130px;
+    height: 30px;
+  }
+
+  :global(#aboutWrap).aboutWrap .aboutTextBox .aboutText p {
+    font-size: 16px;
+  }
+
+  :global(#aboutWrap).aboutWrap .aboutTextBox {
+    flex-direction: column;
+  }
+
+  :global(#aboutWrap).aboutWrap .aboutText02 {
+    padding-top: 0;
+  }
+
+}
+
+@media (max-width:360px) {
+
+  :global(#aboutWrap).aboutWrap .aboutTitleBox h2 br {
+    display: none;
+  }
+
+  :global(#aboutWrap).aboutWrap .aboutTitleBox span {
+    font-size: 10px;
+  }
+
+  :global(#aboutWrap).aboutWrap .aboutTextBox .aboutText p br {
+    display: none;
+  }
+
+  :global(#aboutWrap).aboutWrap .aboutTextBox .aboutTextNumber {
+    font-size: 10px;
+  }
+
+  :global(#aboutWrap).aboutWrap .aboutTextBox .aboutText p {
+    font-size: 14px;
+  }
+
+  :global(#aboutWrap).aboutWrap .aboutViewLink span {
+    gap: 0 8px;
+    font-size: 12px;
+  }
+
+  :global(#aboutWrap).aboutWrap .aboutViewLink {
+    padding-left: 12px;
+    width: 109px;
+    height: 22px;
+  }
+
+}
+
+/* 프로젝트 영역 */
+
+:global(#projectWrap).projectWrap {
+  position: relative;
+  background-color: #f5f5f5;
+}
+
+:global(#projectWrap).projectWrap .container {
+  width: 100%;
+  height: 100%;
+}
+
+:global(#projectWrap).projectWrap .projectBox {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+}
+
+:global(#projectWrap).projectWrap .projectContentBox {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 8.33vw 0;
+}
+
+:global(#projectWrap).projectWrap .projectTitleBox {
+  width: 100%;
+  margin: 0;
+}
+
+:global(#projectWrap).projectWrap .projectTitleBox h2 {
+  margin: 0;
+  font-size: 70px;
+  color: #222;
+  font-family: 'HelveticaNowDisplay';
+  font-weight: 500;
+  line-height: 1;
+  text-align: left;
+}
+
+:global(#projectWrap).projectWrap .projectTitleBox h2 strong {
+  font-weight: 500;
+}
+
+:global(#projectWrap).projectWrap .projectList {
+  position: relative;
+  width: 100%;
+  height: 360px;
+}
+
+:global(#projectWrap).projectWrap .projectList li {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 600px;
+  height: 360px;
+  overflow: hidden;
+  transition: width .8s cubic-bezier(.65, 0, .35, 1), transform .8s cubic-bezier(.65, 0, .35, 1);
+  will-change: width, transform;
+}
+
+:global(#projectWrap).projectWrap .projectList li .projectImgBox {
+  position: absolute;
+  inset: 0;
+}
+
+:global(#projectWrap).projectWrap .projectList li .projectImgBox img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+:global(#projectWrap).projectWrap .projectList li .projectTextBox {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 40px 40px 40px 32px;
+}
+
+:global(#projectWrap).projectWrap .projectList li .projectTextBox .projectName {
+  margin: 0;
+  font-size: 32px;
+  font-weight: 700;
+  color: #fff;
+  white-space: nowrap;
+}
+
+:global(#projectWrap).projectWrap .projectList li .projectTextBox .projectDesc {
+  margin: 0;
+  font-weight: 600;
+  color: #fff;
+  white-space: nowrap;
+}
+
+@media (max-width:1199px) {
+
+  :global(#projectWrap).projectWrap .projectTitleBox h2 {
+    font-size: 40px;
+  }
+
+  :global(#projectWrap).projectWrap .projectList li .projectTextBox .projectName {
+    font-size: 26px;
+  }
+
+}
+
+@media (max-width:1024px) {
+
+  :global(#projectWrap).projectWrap .projectList li .projectTextBox .projectName {
+    font-size: 22px;
+  }
+
+}
+
+@media (max-width:768px) {
+
+  :global(#projectWrap).projectWrap {
+    padding: 120px 0;
+  }
+
+  :global(#projectWrap).projectWrap .projectBox {
+    height: auto;
+  }
+
+  :global(#projectWrap).projectWrap .projectContentBox {
+    gap: 60px 0;
+  }
+
+  :global(#projectWrap).projectWrap .projectTitleBox h2 {
+    font-size: 30px;
+  }
+
+  :global(#projectWrap).projectWrap .projectList {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+  }
+
+  :global(#projectWrap).projectWrap .projectList li {
+    position: relative;
+    top: auto;
+    left: auto;
+    width: 100%;
+    height: 60px;
+    transform: none;
+    transition: all .7s;
+  }
+
+  :global(#projectWrap).projectWrap .projectList li:global(.active) {
+    height: 200px;
+  }
+
+  :global(#projectWrap).projectWrap .projectList li .projectTextBox {
+    padding: 30px 34px;
+  }
+
+  :global(#projectWrap).projectWrap .projectList li .projectTextBox .projectName {
+    font-size: 20px;
+  }
+
+  :global(#projectWrap).projectWrap .projectList li .projectTextBox .projectDesc {
+    font-size: 14px;
+  }
+
+}
+
+@media (max-width:360px) {
+
+  :global(#projectWrap).projectWrap {
+    padding: 80px 0;
+  }
+
+  :global(#projectWrap).projectWrap .projectContentBox {
+    gap: 40px 0;
+  }
+
+  :global(#projectWrap).projectWrap .projectList li {
+    height: 20px;
+  }
+
+  :global(#projectWrap).projectWrap .projectList li:global(.active) {
+    height: 120px;
+  }
+
+  :global(#projectWrap).projectWrap .projectTitleBox h2 {
+    font-size: 24px;
+  }
+
+  :global(#projectWrap).projectWrap .projectList li .projectTextBox {
+    padding: 12px 16px;
+  }
+
+  :global(#projectWrap).projectWrap .projectList li .projectTextBox .projectName {
+    font-size: 14px;
+  }
+
+  :global(#projectWrap).projectWrap .projectList li .projectTextBox .projectDesc {
+    font-size: 10px;
+  }
+
+}
+
+/* 회사정보 영역 */
+
+:global(#companyInfoWrap).companyInfoWrap {
+  padding: 0 0 160px;
+  background-color: #f5f5f5;
+}
+
+:global(#companyInfoWrap).companyInfoWrap .companyInfoLayoutBox {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0 100px;
+  padding-right: 100px;
+  height: 100vh;
+}
+
+:global(#companyInfoWrap).companyInfoWrap .companyTitleBox {
+  margin-bottom: 92px;
+}
+
+:global(#companyInfoWrap).companyInfoWrap .companyTitleBox span {
+  display: block;
+  margin-bottom: 20px;
+  color: #222;
+  font-weight: 600;
+}
+
+:global(#companyInfoWrap).companyInfoWrap .companyTitleBox p {
+  color: #222;
+  font-weight: 700;
+  font-size: 32px;
+}
+
+:global(#companyInfoWrap).companyInfoWrap .companyVisualBox {
+  flex: 1;
+  position: sticky;
+  top: 150px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  overflow: hidden;
+}
+
+:global(#companyInfoWrap).companyInfoWrap .companyVisualContentBox {
+  width: 100%;
+}
+
+:global(#companyInfoWrap).companyInfoWrap .companyImgBox {
+  position: relative;
+  max-width: 360px;
+  height: 240px;
+}
+
+:global(#companyInfoWrap).companyInfoWrap .companyImgBox img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity .6s ease, visibility .6s ease;
+}
+
+:global(#companyInfoWrap).companyInfoWrap .companyImgBox img:global(.active) {
+  opacity: 1;
+  visibility: visible;
+}
+
+:global(#companyInfoWrap).companyInfoWrap .companyInfoNumberBox {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 120px 0;
+}
+
+:global(#companyInfoWrap).companyInfoWrap .companyInfoNumberBox .companyInfoNumber span {
+  display: block;
+  margin-bottom: 20px;
+  font-weight: 600;
+}
+
+:global(#companyInfoWrap).companyInfoWrap .companyInfoNumberBox .companyInfoNumber strong,
+:global(#companyInfoWrap).companyInfoWrap .companyInfoNumberBox .companyInfoNumber em {
+  display: block;
+  font-size: 120px;
+  font-weight: 500;
+  color: #222;
+  font-family: 'HelveticaNowDisplay';
+  line-height: 1;
+}
+
+:global(#companyInfoWrap).companyInfoWrap .companyInfoNumberBox .companyInfoNumberValue {
+  display: flex;
+  gap: 0 30px;
+}
+
+@media (max-width:1199px) {
+
+  :global(#companyInfoWrap).companyInfoWrap {
+    padding: 0 0 120px;
+  }
+
+  :global(#companyInfoWrap).companyInfoWrap .companyTitleBox {
+    width: 100%;
+    margin-bottom: 80px;
+  }
+
+  :global(#companyInfoWrap).companyInfoWrap .companyTitleBox span {
+    margin-bottom: 18px;
+  }
+
+  :global(#companyInfoWrap).companyInfoWrap .companyTitleBox p {
+    font-size: 26px;
+  }
+
+  :global(#companyInfoWrap).companyInfoWrap .companyInfoNumberBox .companyInfoNumber strong,
+  :global(#companyInfoWrap).companyInfoWrap .companyInfoNumberBox .companyInfoNumber em {
+    font-size: 80px;
+  }
+
+  :global(#companyInfoWrap).companyInfoWrap .companyInfoNumberBox {
+    gap: 70px 0;
+  }
+
+  :global(#companyInfoWrap).companyInfoWrap .companyInfoNumberBox .companyInfoNumberValue {
+    gap: 0 17px;
+  }
+
+}
+
+@media (max-width:1024px) {
+
+  :global(#companyInfoWrap).companyInfoWrap .companyTitleBox {
+    width: 100%;
+    margin-bottom: 70px;
+  }
+
+  :global(#companyInfoWrap).companyInfoWrap .companyInfoLayoutBox {
+    padding-right: 0;
+  }
+
+}
+
+@media (max-width:768px) {
+
+  :global(#companyInfoWrap).companyInfoWrap .companyTitleBox {
+    margin-bottom: 60px;
+  }
+
+  :global(#companyInfoWrap).companyInfoWrap .companyTitleBox p {
+    font-size: 20px;
+  }
+
+  :global(#companyInfoWrap).companyInfoWrap .companyInfoNumberBox {
+    gap: 40px 0;
+  }
+
+  :global(#companyInfoWrap).companyInfoWrap .companyInfoNumberBox .companyInfoNumber strong,
+  :global(#companyInfoWrap).companyInfoWrap .companyInfoNumberBox .companyInfoNumber em {
+    font-size: 46px;
+  }
+
+  :global(#companyInfoWrap).companyInfoWrap .companyInfoNumberBox .companyInfoNumber span {
+    margin-bottom: 10px;
+    font-size: 14px;
+  }
+
+  :global(#companyInfoWrap).companyInfoWrap .companyInfoLayoutBox {
+    height: 70vh;
+    gap: 0 50px;
+  }
+
+  :global(#companyInfoWrap).companyInfoWrap .companyInfoNumberBox .companyInfoNumberValue {
+    gap: 0 10px;
+  }
+
+}
+
+@media (max-width:480px) {
+
+  :global(#companyInfoWrap).companyInfoWrap .companyTitleBox {
+    margin-bottom: 56px;
+  }
+
+  :global(#companyInfoWrap).companyInfoWrap .companyTitleBox span {
+    margin-bottom: 12px;
+  }
+
+  :global(#companyInfoWrap).companyInfoWrap .companyTitleBox p {
+    font-size: 18px;
+  }
+
+  :global(#companyInfoWrap).companyInfoWrap .companyTitleBox p br {
+    display: none;
+  }
+
+  :global(#companyInfoWrap).companyInfoWrap .companyInfoNumberBox .companyInfoNumber strong,
+  :global(#companyInfoWrap).companyInfoWrap .companyInfoNumberBox .companyInfoNumber em {
+    font-size: 30px;
+  }
+
+  :global(#companyInfoWrap).companyInfoWrap .companyInfoNumberBox .companyInfoNumberValue {
+    gap: 0 5px;
+  }
+
+  :global(#companyInfoWrap).companyInfoWrap .companyImgBox {
+    height: 0;
+    padding-top: 83%;
+  }
+
+}
+
+@media (max-width:360px) {
+
+  :global(#companyInfoWrap).companyInfoWrap .companyInfoLayoutBox {
+    height: 53vh;
+  }
+
+  :global(#companyInfoWrap).companyInfoWrap .companyTitleBox {
+    margin-bottom: 40px;
+  }
+
+  :global(#companyInfoWrap).companyInfoWrap .companyTitleBox span {
+    font-size: 10px;
+  }
+
+  :global(#companyInfoWrap).companyInfoWrap .companyTitleBox p {
+    font-size: 14px;
+  }
+
+}
+
+/* 문의하기 영역 */
+
+:global(#contactWrap).contactWrap {
+  position: relative;
+  padding: 40px 0;
+  background-color: #fd3d32;
+  z-index: 55555;
+}
+
+:global(#contactWrap).contactWrap .contactTitleBox h2 {
+  margin-bottom: 235px;
+  font-weight: 700;
+  color: #222;
+  font-family: 'HelveticaNowDisplay';
+  font-size: 120px;
+  line-height: 1;
+  word-break: keep-all;
+}
+
+:global(#contactWrap).contactWrap .contactContentBox {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+:global(#contactWrap).contactWrap .contactInfoTextBox span {
+  display: block;
+  margin-bottom: 20px;
+  color: #fff;
+  font-weight: 600;
+}
+
+:global(#contactWrap).contactWrap .contactInfoTextBox p {
+  font-size: 24px;
+  font-weight: 700;
+  color: #fff;
+  font-family: 'HelveticaNowDisplay';
+}
+
+:global(#contactWrap).contactWrap .contactProjectText {
+  position: relative;
+  display: inline-block;
+}
+
+:global(#contactWrap).contactWrap .contactProjectLine {
+  position: absolute;
+  z-index: 1;
+  top: -30%;
+  left: -10%;
+  width: 120%;
+  height: 160%;
+  display: block;
+  overflow: visible;
+  pointer-events: none;
+  visibility: hidden;
+}
+
+:global(#contactWrap).contactWrap .contactProjectLine path {
+  fill: none;
+  stroke: #fff;
+  stroke-width: 1;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+}
+
+:global(#contactWrap).contactWrap .contactInfoBox {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 28px 0;
+}
+
+:global(#contactWrap).contactWrap .contactInfoBox p {
+  color: #fff;
+  font-weight: 700;
+  font-size: 24px;
+  text-align: right;
+}
+
+:global(#contactWrap).contactWrap .contactInfoBox .contactInfoText {
+  display: flex;
+  flex-direction: column;
+  gap: 30px 0;
+}
+
+:global(#contactWrap).contactWrap .contactInfoBox .contactInfoText::after {
+  content: '';
+  width: 43px;
+  height: 76px;
+  background: url('/images/main/arrow_icon03.svg') no-repeat center / contain;
+}
+
+:global(#contactWrap).contactWrap .contactLink {
+  padding: 0 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 480px;
+  height: 80px;
+  background-color: #222;
+}
+
+:global(#contactWrap).contactWrap .contactLink span {
+  display: flex;
+  align-items: center;
+  gap: 0 32px;
+  font-size: 40px;
+  font-weight: 500;
+  color: #fff;
+  font-family: 'HelveticaNowDisplay';
+}
+
+:global(#contactWrap).contactWrap .contactLink span::after {
+  content: '';
+  width: 16px;
+  height: 24px;
+  background: url('/images/main/arrow_icon02.svg') no-repeat center / contain;
+}
+
+@media (max-width:1199px) {
+
+  :global(#contactWrap).contactWrap .contactContentBox {
+    flex-direction: column;
+    align-items: normal;
+    gap: 100px 0;
+  }
+
+  :global(#contactWrap).contactWrap .contactLink {
+    align-self: flex-end;
+  }
+
+  :global(#contactWrap).contactWrap .contactTitleBox h2 {
+    margin-bottom: 80px;
+    font-size: 70px;
+  }
+
+  :global(#contactWrap).contactWrap .contactInfoTextBox p {
+    font-size: 20px;
+  }
+
+  :global(#contactWrap).contactWrap .contactInfoTextBox span {
+    margin-bottom: 12px;
+  }
+
+  :global(#contactWrap).contactWrap .contactLink span {
+    font-size: 26px;
+  }
+
+  :global(#contactWrap).contactWrap .contactLink {
+    width: 330px;
+    height: 60px;
+  }
+
+  :global(#contactWrap).contactWrap .contactInfoBox p {
+    font-size: 20px;
+  }
+
+}
+
+@media (max-width:768px) {
+
+  :global(#contactWrap).contactWrap .contactTitleBox h2 {
+    font-size: 40px;
+  }
+
+  :global(#contactWrap).contactWrap .contactInfoTextBox p {
+    font-size: 18px;
+  }
+
+  :global(#contactWrap).contactWrap .contactLink span {
+    gap: 0 25px;
+    font-size: 20px;
+  }
+
+  :global(#contactWrap).contactWrap .contactLink span::after {
+    width: 14px;
+    height: 21px;
+  }
+
+  :global(#contactWrap).contactWrap .contactLink {
+    width: 250px;
+  }
+
+}
+
+@media (max-width:480px) {
+
+  :global(#contactWrap).contactWrap .contactTitleBox h2 {
+    font-size: 34px;
+  }
+
+  :global(#contactWrap).contactWrap .contactInfoTextBox span {
+    font-size: 14px;
+  }
+
+  :global(#contactWrap).contactWrap .contactInfoTextBox p {
+    font-size: 16px;
+  }
+
+  :global(#contactWrap).contactWrap .contactInfoBox p {
+    font-size: 18px;
+  }
+
+  :global(#contactWrap).contactWrap .contactInfoBox .contactInfoText::after {
+    width: 34px;
+    height: 60px;
+  }
+
+  :global(#contactWrap).contactWrap .contactInfoBox {
+    gap: 10px 0;
+  }
+
+  :global(#contactWrap).contactWrap .contactInfoBox .contactInfoText {
+    gap: 20px 0;
+  }
+
+}
+
+@media (max-width:360px) {
+
+  :global(#contactWrap).contactWrap {
+    padding: 20px 0;
+  }
+
+  :global(#contactWrap).contactWrap .contactTitleBox h2 {
+    font-size: 24px;
+  }
+
+  :global(#contactWrap).contactWrap .contactInfoBox .contactInfoText {
+    gap: 8px 0;
+  }
+
+  :global(#contactWrap).contactWrap .contactInfoTextBox span {
+    font-size: 10px;
+  }
+
+  :global(#contactWrap).contactWrap .contactInfoTextBox p {
+    font-size: 12px;
+  }
+
+  :global(#contactWrap).contactWrap .contactLink {
+    width: 160px;
+    height: 40px;
+  }
+
+  :global(#contactWrap).contactWrap .contactLink span {
+    gap: 0 20px;
+    font-size: 16px;
+  }
+
+  :global(#contactWrap).contactWrap .contactLink span::after {
+    width: 8px;
+    height: 12px;
+  }
+
+  :global(#contactWrap).contactWrap .contactInfoBox p {
+    font-size: 12px;
+  }
+
+  :global(#contactWrap).contactWrap .contactInfoBox {
+    gap: 8px 0;
+  }
+
+  :global(#contactWrap).contactWrap .contactInfoBox .contactInfoText::after {
+    margin-left: 15px;
+    width: 15px;
+    height: 35px;
+  }
+
+}

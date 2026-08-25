@@ -1,0 +1,193 @@
+/* 문의 영역 */
+
+.contactWrap {
+  background-color: #fd3d32;
+}
+
+.contactWrap :global(.topTitleBox .topText01) {
+  color: #fff;
+}
+
+.contactWrap :global(#headerWrap) nav ul li h2 a {
+  color: #fff;
+}
+
+.contactWrap :global(#headerWrap .headerContactLink) {
+  color: #fd3d32;
+  background-color: #fff;
+}
+
+.contactWrap :global(#headerWrap .headerContactLink)::after {
+  background: url(../images/common/arrow_icon03.svg) no-repeat center;
+}
+
+.contactWrap :global(.topTitleBox) h2 {
+  color: #fff;
+}
+
+.contactWrap :global(.topTitleBox .topText01) {
+  color: #222;
+}
+
+/* 문의 폼 */
+
+.contactWrap .formWrap {
+  margin-bottom: 68px;
+  display: flex;
+  gap: 40px 120px;
+}
+
+.contactWrap .formBox {
+  margin-bottom: 28px;
+}
+
+.contactWrap .formBox:last-child {
+  margin-bottom: 0;
+}
+
+.contactWrap .inpuChkFormBox {
+  margin-top: 28px;
+}
+
+.contactWrap .cunstomInpuChkBox label span {
+  text-decoration: underline;
+}
+
+.contactWrap .textareaBox {
+  margin-bottom: 32px;
+}
+
+.contactWrap .textareaBox textarea {
+  height: 360px;
+}
+
+.contactWrap .formLeftBox {
+  max-width: 480px;
+  width: 100%;
+}
+
+.contactWrap .formRightBox {
+  flex: 1;
+  text-align: right;
+}
+
+.contactWrap textarea,
+.contactWrap input {
+  width: 100%;
+}
+
+.contactWrap .submitBtn {
+  width: 480px;
+  height: 80px;
+  background-color: #222;
+}
+
+.contactWrap .submitBtn span {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0 32px;
+  color: #fff;
+  font-weight: 500;
+  font-size: 40px;
+  font-family: 'HelveticaNowDisplay';
+}
+
+.contactWrap .submitBtn span::after {
+  content: '';
+  width: 16px;
+  height: 24px;
+  background: url(../images/sub/arrow_icon01.svg) no-repeat center / contain;
+}
+
+/* 지도 영역 */
+
+.contactWrap .contactMapBox {
+  height: 400px;
+}
+
+.contactWrap .contactMapBox img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+@media (max-width: 1199px) {
+  .contactWrap .formWrap {
+    flex-direction: column;
+  }
+
+  .contactWrap .formLeftBox {
+    max-width: none;
+  }
+
+  .contactWrap .submitBtn {
+    width: 400px;
+    height: 60px;
+  }
+
+  .contactWrap .submitBtn span {
+    font-size: 30px;
+  }
+}
+
+@media (max-width: 768px) {
+  .contactWrap .textareaBox textarea {
+    height: 320px;
+  }
+
+  .contactWrap .submitBtn {
+    width: 350px;
+    height: 60px;
+  }
+}
+
+@media (max-width: 480px) {
+  .contactWrap .submitBtn span {
+    gap: 0 20px;
+    font-size: 26px;
+  }
+
+  .contactWrap .submitBtn span::after {
+    width: 13px;
+    height: 20px;
+  }
+
+  .contactWrap .submitBtn {
+    width: 300px;
+    height: 60px;
+  }
+}
+
+@media (max-width: 360px) {
+  .contactWrap .formWrap {
+    margin-bottom: 40px;
+  }
+
+  .contactWrap .formBox {
+    margin-bottom: 20px;
+  }
+
+  .contactWrap .submitBtn {
+    width: 160px;
+    height: 40px;
+  }
+
+  .contactWrap .submitBtn span {
+    font-size: 16px;
+  }
+
+  .contactWrap .submitBtn span::after {
+    width: 8px;
+    height: 12px;
+  }
+
+  .contactWrap .textareaBox textarea {
+    padding: 12px 10px 10px 12px;
+  }
+
+  .contactWrap .contactMapBox {
+    height: 320px;
+  }
+}

@@ -1,0 +1,367 @@
+@charset "UTF-8";
+
+/* 서브 공통 영역 */
+
+#subWrap {
+  padding: 240px 0 0;
+}
+
+.subContentBox {
+  padding: 0 0 100px;
+}
+
+.subTopBox {
+  margin-bottom: 120px;
+}
+
+.topTitleBox {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 0 20px;
+}
+
+.topTitleBox h2 {
+  flex-shrink: 0;
+  color: #fd3d32;
+  font-weight: 500;
+  font-family: 'HelveticaNowDisplay';
+  font-size: 60px;
+  line-height: 1;
+}
+
+.topTitleBox .topText01 {
+  align-self: flex-end;
+  color: #222;
+  font-size: 80px;
+  font-weight: 500;
+  font-family: 'HelveticaNowDisplay';
+  line-height: 1;
+  word-break: keep-all;
+  text-align: right;
+}
+
+.topTitleBox .topText02 {
+  margin-top: 60px;
+  color: #222;
+  font-size: 20px;
+  font-weight: 600;
+  text-align: right;
+}
+
+.titleBox span {
+  display: block;
+  margin-bottom: 20px;
+  color: #222;
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.titleBox p {
+  color: #222;
+  font-size: 40px;
+  font-weight: 500;
+  font-family: 'HelveticaNowDisplay';
+  line-height: 1;
+  letter-spacing: -1px;
+}
+
+.infoTextBox {
+  display: flex;
+  gap: 80px;
+}
+
+.infoText {
+  color: #222;
+  font-weight: 600;
+}
+
+/* 상단 타이틀 로드 모션 */
+
+.subTopBox .topTitleBox h2,
+.subTopBox .topTitleBox .topText01,
+.subTopBox .topTitleBox .topText02 {
+  opacity: 0;
+  transform: translate3d(0, 50px, 0);
+  transition: opacity 1.7s ease, transform 1.7s ease;
+  will-change: opacity, transform;
+}
+
+.subTopBox .topTitleBox .topText01 {
+  transition-delay: .12s;
+}
+
+.subTopBox .topTitleBox .topText02 {
+  transition-delay: .24s;
+}
+
+.subTopBox.active .topTitleBox h2,
+.subTopBox.active .topTitleBox .topText01,
+.subTopBox.active .topTitleBox .topText02 {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+/* 한 줄씩 올라오는 텍스트 */
+
+.scrollRevealLine {
+  display: block;
+  overflow: hidden;
+}
+
+.scrollRevealText {
+  display: block;
+  font-style: normal;
+  visibility: hidden;
+  transition: none;
+  will-change: transform;
+}
+
+/* 폼 */
+
+input {
+  padding: 12px 10px 12px 12px;
+  border: 2px solid #222;
+  border-width: 0 0 2px 0;
+  font-weight: 600;
+  font-size: 20px;
+  background-color: transparent;
+}
+
+input::placeholder {
+  color: #222;
+}
+
+input[type="checkbox"]+label {
+  display: flex;
+  align-items: center;
+  color: #222;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+input[type="checkbox"]+label::before {
+  content: '';
+  flex-shrink: 0;
+  margin-right: 20px;
+  width: 32px;
+  height: 32px;
+  border: 1px solid #222;
+}
+
+input[type="checkbox"]:checked+label::before {
+  background: url('/images/sub/check_icon.svg') no-repeat center / 22px;
+}
+
+textarea {
+  padding: 24px 20px 20px 24px;
+  border: 2px solid #222;
+  color: #222;
+  font-weight: 600;
+  font-size: 20px;
+  background-color: transparent;
+}
+
+textarea::placeholder {
+  color: #222;
+}
+
+/* 폼 포커스 */
+
+input:focus,
+textarea:focus {
+  color: #fff;
+  border-color: #fff;
+}
+
+input:focus::placeholder,
+textarea:focus::placeholder {
+  color: #fff;
+}
+
+/* 가운데 영역 */
+
+.container {
+  max-width: 1560px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 60px;
+}
+
+@media (max-width:1199px) {
+
+  .topTitleBox h2 {
+    font-size: 50px;
+  }
+
+  .topTitleBox .topText01 {
+    font-size: 65px;
+  }
+
+  .topTitleBox .topText02 {
+    margin-top: 50px;
+    font-size: 18px;
+  }
+
+  .titleBox p {
+    font-size: 36px;
+  }
+
+  input,
+  textarea {
+    font-size: 18px;
+  }
+
+  .container {
+    padding: 0 20px;
+  }
+
+}
+
+@media (max-width:1024px) {
+
+  .topTitleBox h2 {
+    font-size: 40px;
+  }
+
+  .topTitleBox .topText01 {
+    font-size: 50px;
+  }
+
+}
+
+@media (max-width:768px) {
+
+  #subWrap {
+    padding: 180px 0 0;
+  }
+
+  .subContentBox {
+    padding: 0 0 50px;
+  }
+
+  .subTopBox {
+    margin-bottom: 80px;
+  }
+
+  .topTitleBox h2 {
+    font-size: 30px;
+  }
+
+  .topTitleBox .topText01 {
+    font-size: 36px;
+  }
+
+  .topTitleBox .topText02 {
+    margin-top: 40px;
+    font-size: 16px;
+  }
+
+  .titleBox p {
+    font-size: 26px;
+  }
+
+  input,
+  textarea {
+    font-size: 16px;
+  }
+
+  input[type="checkbox"]+label::before {
+    width: 28px;
+    height: 28px;
+  }
+
+  input[type="checkbox"]:checked+label::before {
+    background-size: 20px;
+  }
+
+}
+
+@media (max-width:480px) {
+
+  #subWrap {
+    padding: 110px 0 0;
+  }
+
+  .topTitleBox h2 {
+    font-size: 26px;
+  }
+
+  .topTitleBox .topText01 {
+    font-size: 28px;
+  }
+
+  .topTitleBox .topText01 br {
+    display: none;
+  }
+
+  .topTitleBox .topText02 {
+    margin-top: 28px;
+    font-size: 14px;
+  }
+
+  .topTitleBox .topText02 br {
+    display: none;
+  }
+
+  .titleBox span {
+    margin-bottom: 12px;
+    font-size: 14px;
+  }
+
+  .titleBox p {
+    font-size: 22px;
+  }
+
+  .infoText {
+    font-size: 14px;
+  }
+
+  .infoText br {
+    display: none;
+  }
+
+}
+
+@media (max-width:360px) {
+
+  .topTitleBox h2 {
+    font-size: 18px;
+  }
+
+  .topTitleBox .topText01 {
+    font-size: 24px;
+  }
+
+  .topTitleBox .topText02 {
+    font-size: 12px;
+  }
+
+  .titleBox span {
+    font-size: 10px;
+  }
+
+  .titleBox p {
+    font-size: 18px;
+  }
+
+  .infoText {
+    font-size: 12px;
+  }
+
+  input,
+  textarea {
+    font-size: 13px;
+  }
+
+  input[type="checkbox"]+label {
+    font-size: 12px;
+  }
+
+  input[type="checkbox"]+label::before {
+    margin-right: 12px;
+    width: 24px;
+    height: 24px;
+  }
+
+}

@@ -1,0 +1,141 @@
+/* 푸터 영역 */
+
+:global(#footerWrap) {
+  position: relative;
+  padding: 40px 0;
+  z-index: 999999;
+  background-color: #fd3d32;
+  border-top: 1px dashed #fff;
+}
+
+:global(#footerWrap) .footerLeftBox {
+  display: flex;
+  flex-direction: column;
+  gap: 32px 0;
+  margin-right: 156px;
+}
+
+:global(#footerWrap) .footerLeftBox .footerPolicyLink {
+  display: block;
+  color: #fff;
+  font-weight: 600;
+}
+
+:global(#footerWrap) .footerLeftBox .footerLogoBox h1 img {
+  display: block;
+}
+
+:global(#footerWrap) .footerBox {
+  display: flex;
+  width: 100%;
+}
+
+:global(#footerWrap) .footerInfoTextBox {
+  max-width: 556px;
+  width: 100%;
+}
+
+:global(#footerWrap) .footerInfoTextBox .footerInfoText {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+:global(#footerWrap) .footerInfoTextBox dl {
+  margin-bottom: 12px;
+  display: flex;
+  gap: 20px;
+}
+
+:global(#footerWrap) .footerInfoTextBox dl dt,
+:global(#footerWrap) .footerInfoTextBox dl dd {
+  color: #fff;
+}
+
+:global(#footerWrap) .footerInfoTextBox address {
+  color: #fff;
+}
+
+:global(#footerWrap) .footerInfoBox {
+  flex: 1;
+  text-align: right;
+}
+
+:global(#footerWrap) .footerInfoBox .footerInfoSnsBox {
+  margin-bottom: 32px;
+}
+
+:global(#footerWrap) .footerInfoBox .footerInfoSnsList {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0 20px;
+}
+
+:global(#footerWrap) .footerInfoBox .footerInfoSnsList a,
+:global(#footerWrap) .footerInfoBox .footerInfoSnsList a img {
+  display: block;
+}
+
+:global(#footerWrap) .footerInfoBox .copyright {
+  color: #fff;
+}
+
+@media (max-width: 1199px) {
+  :global(#footerWrap) .footerBox {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  :global(#footerWrap) .footerLeftBox {
+    margin: 0 0 20px;
+  }
+
+  :global(#footerWrap) .footerLeftBox .footerPolicyLink {
+    text-align: center;
+  }
+
+  :global(#footerWrap) .footerInfoTextBox {
+    max-width: none;
+    margin-bottom: 40px;
+  }
+
+  :global(#footerWrap) .footerInfoTextBox .footerInfoText {
+    grid-template-columns: 1fr;
+  }
+
+  :global(#footerWrap) .footerInfoTextBox dl {
+    justify-content: center;
+  }
+
+  :global(#footerWrap) .footerInfoTextBox address {
+    text-align: center;
+  }
+
+  :global(#footerWrap) .footerInfoBox .footerInfoSnsList {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 360px) {
+  :global(#footerWrap) {
+    padding: 28px 0 14px;
+  }
+
+  :global(#footerWrap) .footerLeftBox .footerLogoBox h1 img {
+    width: 102px;
+  }
+
+  :global(#footerWrap) .footerLeftBox .footerPolicyLink {
+    font-size: 12px;
+  }
+
+  :global(#footerWrap) .footerInfoTextBox dl {
+    margin-bottom: 8px;
+  }
+
+  :global(#footerWrap) .footerInfoBox .copyright,
+  :global(#footerWrap) .footerInfoTextBox address,
+  :global(#footerWrap) .footerInfoTextBox dl dt,
+  :global(#footerWrap) .footerInfoTextBox dl dd {
+    font-size: 12px;
+  }
+}
