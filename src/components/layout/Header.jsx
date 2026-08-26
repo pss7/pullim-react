@@ -6,7 +6,7 @@ import {
 import styles from './Header.module.css';
 import { Link } from 'react-router-dom';
 
-export default function Header({ logoSrc = '/images/common/logo.svg'}) {
+export default function Header({ logoSrc = '/images/common/logo.svg' }) {
 
   const [
     isMobileMenuOpen,
@@ -129,71 +129,46 @@ export default function Header({ logoSrc = '/images/common/logo.svg'}) {
               <ul className={styles.mobileMenu}>
                 <li>
                   <h2>
-                    <a
-                      href="#"
-                      onClick={
-                        handleMobileMenuClose
-                      }
-                    >
+                    <Link to="/about">
                       <span>[ 01 ]</span>
                       ABOUT
-                    </a>
+                    </Link>
                   </h2>
                 </li>
 
                 <li>
                   <h2>
-                    <a
-                      href="#"
-                      onClick={
-                        handleMobileMenuClose
-                      }
-                    >
+                    <Link to="/team">
                       <span>[ 02 ]</span>
                       TEAM
-                    </a>
+                    </Link>
                   </h2>
                 </li>
 
                 <li>
                   <h2>
-                    <a
-                      href="#"
-                      onClick={
-                        handleMobileMenuClose
-                      }
-                    >
+                    <Link to="/service">
                       <span>[ 03 ]</span>
                       SERVICE
-                    </a>
+                    </Link>
                   </h2>
                 </li>
 
                 <li>
                   <h2>
-                    <a
-                      href="#"
-                      onClick={
-                        handleMobileMenuClose
-                      }
-                    >
+                    <Link to="/news">
                       <span>[ 04 ]</span>
                       NEWS
-                    </a>
+                    </Link>
                   </h2>
                 </li>
 
                 <li>
                   <h2>
-                    <a
-                      href="#"
-                      onClick={
-                        handleMobileMenuClose
-                      }
-                    >
+                    <Link to="/contact">
                       <span>[ 05 ]</span>
                       CONTACT
-                    </a>
+                    </Link>
                   </h2>
                 </li>
               </ul>
@@ -203,7 +178,7 @@ export default function Header({ logoSrc = '/images/common/logo.svg'}) {
               <div className={styles.mobileSnsBox}>
                 <ul className={styles.mobileSnsList}>
                   <li>
-                    <a href="#">
+                    <a href="#" target="_blank" title='새 창 열기'>
                       <img
                         src="/images/common/youtube_icon.svg"
                         alt="유튜브"
@@ -212,7 +187,7 @@ export default function Header({ logoSrc = '/images/common/logo.svg'}) {
                   </li>
 
                   <li>
-                    <a href="#">
+                    <a href="#" target="_blank" title='새 창 열기'>
                       <img
                         src="/images/common/instagram_icon.svg"
                         alt="인스타그램"
@@ -221,7 +196,7 @@ export default function Header({ logoSrc = '/images/common/logo.svg'}) {
                   </li>
 
                   <li>
-                    <a href="#">
+                    <a href="#" target="_blank" title='새 창 열기'>
                       <img
                         src="/images/common/blog_icon.svg"
                         alt="블로그"
@@ -230,7 +205,7 @@ export default function Header({ logoSrc = '/images/common/logo.svg'}) {
                   </li>
 
                   <li>
-                    <a href="#">
+                    <a href="#" target="_blank" title='새 창 열기'>
                       <img
                         src="/images/common/kakao_icon.svg"
                         alt="카카오톡"

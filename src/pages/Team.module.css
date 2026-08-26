@@ -92,8 +92,7 @@
   width: 16px;
   height: 16px;
   background:
-    url('/images/sub/plus_icon.svg')
-    no-repeat center;
+    url('/images/sub/plus_icon.svg') no-repeat center;
 }
 
 .teamWrap .teamMemberList li a .teamInfoHoverBox {
@@ -115,24 +114,20 @@
 
 .teamWrap .teamMemberList li a .teamInfoHoverBox h3 {
   --outside-width:
-    max(
-      0px,
-      calc((320px - 100cqi) / 2)
-    );
+    max(0px,
+      calc((320px - 100cqi) / 2));
   margin-bottom: .63vw;
   color: transparent;
   font-size: 1.25vw;
   font-weight: 700;
   background:
-    linear-gradient(
-      to right,
+    linear-gradient(to right,
       #fff 0,
       #fff var(--outside-width),
       #1d1d1d var(--outside-width),
       #1d1d1d calc(100% - var(--outside-width)),
       #fff calc(100% - var(--outside-width)),
-      #fff 100%
-    );
+      #fff 100%);
   background-clip: text;
   -webkit-background-clip: text;
 }
@@ -232,22 +227,17 @@
   align-self: center;
   justify-self: center;
   width:
-    clamp(
-      40px,
+    clamp(40px,
       4.17vw,
-      80px
-    );
+      80px);
   height:
-    clamp(
-      40px,
+    clamp(40px,
       4.17vw,
-      80px
-    );
+      80px);
   opacity: 0;
   visibility: hidden;
   background:
-    url('/images/sub/play_icon.svg')
-    no-repeat center / contain;
+    url('/images/sub/play_icon.svg') no-repeat center / contain;
   pointer-events: none;
   transition:
     opacity .3s,
@@ -447,8 +437,7 @@
   width: 16px;
   height: 24px;
   background:
-    url('/images/sub/arrow_icon02.svg')
-    no-repeat center / contain;
+    url('/images/sub/arrow_icon02.svg') no-repeat center / contain;
 }
 
 .teamWrap .teamRecruitMarquee {
@@ -518,8 +507,7 @@
 .teamWrap .teamRecruitLink:hover .teamRecruitMarquee {
   opacity: 1;
   animation:
-    rollingText 12s linear
-    infinite;
+    rollingText 12s linear infinite;
 }
 
 /* 인터뷰 비디오 팝업 */
@@ -564,8 +552,7 @@
   width: 40px;
   height: 40px;
   background:
-    url('/images/common/close_btn.svg')
-    no-repeat center / contain;
+    url('/images/common/close_btn.svg') no-repeat center / contain;
   z-index: 99999;
 }
 

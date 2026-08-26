@@ -20,35 +20,18 @@
 
 /* 헤더 */
 
-.contactWrap
-  :global(
-    #headerWrap
-    .headerGnbBox
-    .headerGnbList
-    li
-    h2
-    a
-  ) {
+.contactWrap :global(#headerWrap .headerGnbBox .headerGnbList li h2 a) {
   color: #fff;
 }
 
-.contactWrap
-  :global(
-    #headerWrap
-    .headerContactLink
-  ) {
+.contactWrap :global(#headerWrap .headerContactLink) {
   color: #fd3d32;
   background-color: #fff;
 }
 
-.contactWrap
-  :global(
-    #headerWrap
-    .headerContactLink
-  )::after {
+.contactWrap :global(#headerWrap .headerContactLink)::after {
   background:
-    url('/images/common/arrow_icon03.svg')
-    no-repeat center;
+    url('/images/common/arrow_icon03.svg') no-repeat center;
 }
 
 /* 문의 폼 */
@@ -71,10 +54,7 @@
   margin-top: 28px;
 }
 
-.contactWrap
-  .cunstomInpuChkBox
-  label
-  span {
+.contactWrap .cunstomInpuChkBox label span {
   text-decoration: underline;
 }
 
@@ -126,8 +106,7 @@
   width: 16px;
   height: 24px;
   background:
-    url('/images/sub/arrow_icon01.svg')
-    no-repeat center / contain;
+    url('/images/sub/arrow_icon01.svg') no-repeat center / contain;
 }
 
 /* 지도 영역 */
