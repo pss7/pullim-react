@@ -276,6 +276,18 @@ export default function About() {
                         마케팅 수행기관 선정
                       </li>
                     </ul>
+
+                    <div
+                      className={
+                        styles.aboutJourneyHoverImgBox
+                      }
+                    >
+                      <img
+                        src="/images/sub/about_img01.jpg"
+                        alt=""
+                      />
+                    </div>
+
                   </a>
                 </li>
 

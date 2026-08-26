@@ -55,10 +55,10 @@
 }
 
 @font-face {
-    font-family: 'GoogleSansCode';
+    font-family: 'ChakraPetch';
     font-style: normal;
     font-weight: 600;
-    src: url(../assets/fonts/GoogleSansCode-SemiBold.woff2) format('font-woff2'),
-        url(../assets/fonts/GoogleSansCode-SemiBold.woff) format('woff'),
-        url(../assets/fonts/GoogleSansCode-SemiBold.otf) format('opentype');
+    src: url(../assets/fonts/ChakraPetch-SemiBold.woff2) format('font-woff2'),
+        url(../assets/fonts/ChakraPetch-SemiBold.woff) format('woff'),
+        url(../assets/fonts/ChakraPetch-SemiBold.otf) format('opentype');
 }

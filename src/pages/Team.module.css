@@ -186,7 +186,7 @@
   left: 50%;
   color: #fff;
   font-size: 80px;
-  font-weight: 500;
+  font-weight: 300;
   font-family: 'HelveticaNowDisplay';
   text-align: center;
   line-height: 1;
@@ -322,7 +322,7 @@
 
 .teamWrap .teamWorkPlaceBox .teamBenefitList li a {
   position: relative;
-  padding: 40px 82px 40px 0;
+  padding: 40px 0;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -337,6 +337,8 @@
 }
 
 .teamWrap .teamWorkPlaceBox .teamBenefitList li a p {
+  max-width: 600px;
+  width: 100%;
   color: #fff;
   font-size: 20px;
 }
@@ -717,6 +719,7 @@
   }
 
   .teamWrap .teamWorkPlaceBox .teamBenefitList li a p {
+    max-width: none;
     margin-bottom: 20px;
     font-size: 18px;
     text-align: right;

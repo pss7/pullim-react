@@ -1,16 +1,24 @@
-import { useLayoutEffect } from 'react';
+import {
+  useLayoutEffect
+} from 'react';
 
 import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
-gsap.registerPlugin(ScrollTrigger);
+import {
+  ScrollTrigger
+} from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(
+  ScrollTrigger
+);
 
 export default function useServiceMotion(
   pageRef,
   styles
 ) {
   useLayoutEffect(() => {
-    const page = pageRef.current;
+    const page =
+      pageRef.current;
 
     if (!page) {
       return;
@@ -19,17 +27,38 @@ export default function useServiceMotion(
     const sloganTriggers = [];
     const sloganTimelines = [];
 
-    let refreshFrame;
-    let activeTimeline;
-    let transitionImage;
-    let isDestroyed = false;
-
-    const state = {
+    const popupState = {
+      popup: null,
+      popupImage: null,
+      popupContents: [],
+      sourceButton: null,
       sourceImage: null,
-      sourceVisibility: '',
+      sourceImageBox: null,
+      sourceBoxVisibility: '',
       isAnimating: false,
       isOpen: false
     };
+
+    let activeTimeline;
+    let transitionImage;
+    let refreshFrame;
+    let isDestroyed = false;
+
+    /* Lenis 스크롤 제어 */
+    function controlScroll(
+      action
+    ) {
+      const lenis =
+        window.lenis;
+
+      if (
+        lenis &&
+        typeof lenis[action] ===
+          'function'
+      ) {
+        lenis[action]();
+      }
+    }
 
     /* 서비스 슬로건 */
     function initServiceSlogan() {
@@ -38,12 +67,11 @@ export default function useServiceMotion(
           `.${styles.serviceBrandSloganBox}`
         );
 
-      if (!sloganBoxes.length) {
-        return;
-      }
-
       sloganBoxes.forEach(
-        function (sloganBox, index) {
+        function (
+          sloganBox,
+          index
+        ) {
           const sloganLines = [
             ...sloganBox.querySelectorAll(
               `.${styles.serviceBrandSloganLine}`
@@ -57,12 +85,10 @@ export default function useServiceMotion(
           const triggerId =
             `service-slogan-${index}`;
 
-          /* 기존 트리거 제거 */
           ScrollTrigger
             .getById(triggerId)
             ?.kill();
 
-          /* 텍스트 채우기 초기 상태 */
           gsap.set(
             sloganLines,
             {
@@ -71,8 +97,7 @@ export default function useServiceMotion(
             }
           );
 
-          /* 줄마다 순차적으로 채우기 */
-          const sloganTimeline =
+          const timeline =
             gsap.timeline({
               defaults: {
                 ease: 'none'
@@ -80,9 +105,9 @@ export default function useServiceMotion(
             });
 
           sloganLines.forEach(
-            function (sloganLine) {
-              sloganTimeline.to(
-                sloganLine,
+            function (line) {
+              timeline.to(
+                line,
                 {
                   backgroundSize:
                     '100% 100%, 100% 100%',
@@ -92,591 +117,588 @@ export default function useServiceMotion(
             }
           );
 
-          /*
-           * 슬로건이 화면 80% 지점에 들어오면 시작하고
-           * 페이지 마지막까지 천천히 채웁니다.
-           */
-          const sloganTrigger =
+          const trigger =
             ScrollTrigger.create({
               id: triggerId,
               trigger: sloganBox,
               start: 'top 80%',
               end: 'max',
-              animation: sloganTimeline,
+              animation: timeline,
               scrub: 1.2,
               invalidateOnRefresh: true
             });
 
           sloganTimelines.push(
-            sloganTimeline
+            timeline
           );
 
           sloganTriggers.push(
-            sloganTrigger
+            trigger
           );
         }
       );
     }
 
-    /* 서비스 팝업 */
-    function initServicePopup() {
-      const popup =
-        page.querySelector(
-          '#servicePopupWrap'
-        );
-
-      if (!popup) {
-        return function () { };
+    /* 전환용 이미지 제거 */
+    function removeTransitionImage() {
+      if (!transitionImage) {
+        return;
       }
 
+      gsap.killTweensOf(
+        transitionImage
+      );
+
+      transitionImage.remove();
+      transitionImage = null;
+    }
+
+    /* 전환용 이미지 생성 */
+    function createTransitionImage(
+      image
+    ) {
+      removeTransitionImage();
+
+      const rect =
+        image.getBoundingClientRect();
+
+      const clonedImage =
+        image.cloneNode(true);
+
+      clonedImage.removeAttribute(
+        'id'
+      );
+
+      clonedImage.className =
+        'servicePopupTransitionImage';
+
+      document.body.appendChild(
+        clonedImage
+      );
+
+      gsap.set(
+        clonedImage,
+        {
+          position: 'fixed',
+          top: rect.top,
+          left: rect.left,
+          width: rect.width,
+          height: rect.height,
+          margin: 0,
+          objectFit: 'cover',
+          autoAlpha: 1,
+          pointerEvents: 'none',
+          transformOrigin:
+            'center center',
+          zIndex: 100000
+        }
+      );
+
+      transitionImage =
+        clonedImage;
+
+      return clonedImage;
+    }
+
+    /* 팝업 상태 초기화 */
+    function resetPopupState() {
+      popupState.popup = null;
+      popupState.popupImage = null;
+      popupState.popupContents = [];
+      popupState.sourceButton = null;
+      popupState.sourceImage = null;
+      popupState.sourceImageBox = null;
+      popupState.sourceBoxVisibility = '';
+      popupState.isAnimating = false;
+      popupState.isOpen = false;
+    }
+
+    /* 팝업 이미지 로드 확인 */
+    async function waitForImage(
+      image
+    ) {
+      if (
+        image.complete &&
+        image.naturalWidth
+      ) {
+        return;
+      }
+
+      if (
+        typeof image.decode ===
+        'function'
+      ) {
+        try {
+          await image.decode();
+          return;
+        } catch {
+          /* 이미지 load 이벤트로 다시 확인 */
+        }
+      }
+
+      await new Promise(
+        function (resolve) {
+          image.addEventListener(
+            'load',
+            resolve,
+            {
+              once: true
+            }
+          );
+
+          image.addEventListener(
+            'error',
+            resolve,
+            {
+              once: true
+            }
+          );
+        }
+      );
+    }
+
+    /* 서비스 팝업 열기 */
+    async function openPopup(
+      event
+    ) {
+      event.preventDefault();
+
+      if (
+        popupState.isAnimating ||
+        popupState.isOpen
+      ) {
+        return;
+      }
+
+      const openButton =
+        event.currentTarget;
+
+      const popupSelector =
+        openButton.dataset.popup;
+
+      const popup =
+        page.querySelector(
+          popupSelector
+        );
+
+      const sourceImageBox =
+        openButton.querySelector(
+          `.${styles.serviceImgBox}`
+        );
+
+      const sourceImage =
+        sourceImageBox
+          ?.querySelector(
+            '.hover'
+          ) ||
+        sourceImageBox
+          ?.querySelector(
+            'img'
+          );
+
+      const popupImage =
+        popup?.querySelector(
+          '.servicePopupImage'
+        );
+
+      const closeButton =
+        popup?.querySelector(
+          '.servicePopupCloseBtn'
+        );
+
+      if (
+        !popup ||
+        !sourceImageBox ||
+        !sourceImage ||
+        !popupImage ||
+        !closeButton
+      ) {
+        return;
+      }
+
+      popupState.popup =
+        popup;
+
+      popupState.popupImage =
+        popupImage;
+
+      popupState.sourceButton =
+        openButton;
+
+      popupState.sourceImage =
+        sourceImage;
+
+      popupState.sourceImageBox =
+        sourceImageBox;
+
+      popupState.sourceBoxVisibility =
+        sourceImageBox.style.visibility;
+
+      popupState.popupContents = [
+        ...popup.querySelectorAll(
+          '.servicePopupKeyword'
+        ),
+
+        popup.querySelector(
+          '.servicePopupImgBox > p'
+        ),
+
+        popup.querySelector(
+          '.servicePopupTextBox'
+        ),
+
+        closeButton
+      ].filter(Boolean);
+
+      popupState.isAnimating =
+        true;
+
+      createTransitionImage(
+        sourceImage
+      );
+
+      sourceImageBox.style.visibility =
+        'hidden';
+
+      popup.classList.add(
+        'active'
+      );
+
+      popup.style.visibility =
+        'hidden';
+
+      popup.setAttribute(
+        'aria-hidden',
+        'false'
+      );
+
+      document.body.classList.add(
+        'servicePopupOpen'
+      );
+
+      controlScroll('stop');
+
+      await waitForImage(
+        popupImage
+      );
+
+      if (isDestroyed) {
+        return;
+      }
+
+      popup.style.visibility =
+        'visible';
+
+      const popupImageRect =
+        popupImage
+          .getBoundingClientRect();
+
+      gsap.set(
+        popupImage,
+        {
+          autoAlpha: 0
+        }
+      );
+
+      gsap.set(
+        popupState.popupContents,
+        {
+          autoAlpha: 0,
+          y: 30
+        }
+      );
+
+      gsap.set(
+        popup,
+        {
+          backgroundColor:
+            'rgba(245,245,245,0)'
+        }
+      );
+
+      activeTimeline =
+        gsap.timeline({
+          onComplete:
+            function () {
+              removeTransitionImage();
+
+              popupState.isAnimating =
+                false;
+
+              popupState.isOpen =
+                true;
+
+              closeButton.focus();
+            }
+        });
+
+      /* 목록 이미지에서 팝업 이미지로 확대 */
+      activeTimeline.to(
+        transitionImage,
+        {
+          top:
+            popupImageRect.top,
+
+          left:
+            popupImageRect.left,
+
+          width:
+            popupImageRect.width,
+
+          height:
+            popupImageRect.height,
+
+          duration: 1.35,
+          ease: 'power4.inOut',
+          force3D: true,
+          overwrite: 'auto'
+        },
+        0
+      );
+
+      /* 배경 표시 */
+      activeTimeline.to(
+        popup,
+        {
+          backgroundColor:
+            '#f5f5f5',
+
+          duration: .6,
+          ease: 'power2.out'
+        },
+        0
+      );
+
+      /* 팝업 콘텐츠 표시 */
+      activeTimeline.to(
+        popupState.popupContents,
+        {
+          autoAlpha: 1,
+          y: 0,
+          duration: .7,
+          stagger: .06,
+          ease: 'power3.out'
+        },
+        .45
+      );
+
+      /* 전환 이미지 숨기기 */
+      activeTimeline.to(
+        transitionImage,
+        {
+          autoAlpha: 0,
+          duration: .25,
+          ease: 'none'
+        },
+        1.1
+      );
+
+      /* 실제 팝업 이미지 표시 */
+      activeTimeline.to(
+        popupImage,
+        {
+          autoAlpha: 1,
+          duration: .25,
+          ease: 'none'
+        },
+        1.1
+      );
+    }
+
+    /* 서비스 팝업 닫기 */
+    function closePopup() {
+      if (
+        popupState.isAnimating ||
+        !popupState.isOpen ||
+        !popupState.popup ||
+        !popupState.popupImage ||
+        !popupState.sourceImage ||
+        !popupState.sourceImageBox
+      ) {
+        return;
+      }
+
+      popupState.isAnimating =
+        true;
+
+      const popup =
+        popupState.popup;
+
+      const popupImage =
+        popupState.popupImage;
+
+      const popupImageRect =
+        popupImage
+          .getBoundingClientRect();
+
+      const sourceImageRect =
+        popupState.sourceImage
+          .getBoundingClientRect();
+
+      createTransitionImage(
+        popupImage
+      );
+
+      gsap.set(
+        popupImage,
+        {
+          autoAlpha: 0
+        }
+      );
+
+      activeTimeline =
+        gsap.timeline({
+          onComplete:
+            function () {
+              removeTransitionImage();
+
+              popupState.sourceImageBox
+                .style.visibility =
+                popupState
+                  .sourceBoxVisibility;
+
+              popup.classList.remove(
+                'active'
+              );
+
+              popup.style.removeProperty(
+                'visibility'
+              );
+
+              popup.setAttribute(
+                'aria-hidden',
+                'true'
+              );
+
+              gsap.set(
+                popupImage,
+                {
+                  clearProps:
+                    'opacity,visibility'
+                }
+              );
+
+              gsap.set(
+                popupState.popupContents,
+                {
+                  clearProps:
+                    'opacity,visibility,transform'
+                }
+              );
+
+              gsap.set(
+                popup,
+                {
+                  clearProps:
+                    'backgroundColor'
+                }
+              );
+
+              document.body.classList.remove(
+                'servicePopupOpen'
+              );
+
+              controlScroll('start');
+
+              popupState.sourceButton
+                ?.focus();
+
+              resetPopupState();
+            }
+        });
+
+      /* 팝업 콘텐츠 숨기기 */
+      activeTimeline.to(
+        popupState.popupContents,
+        {
+          autoAlpha: 0,
+          y: 20,
+          duration: .35,
+          stagger: .03,
+          ease: 'power2.in'
+        },
+        0
+      );
+
+      /* 팝업 이미지 축소 */
+      activeTimeline.to(
+        transitionImage,
+        {
+          top:
+            sourceImageRect.top,
+
+          left:
+            sourceImageRect.left,
+
+          width:
+            sourceImageRect.width,
+
+          height:
+            sourceImageRect.height,
+
+          duration: 1.2,
+          ease: 'power4.inOut',
+          force3D: true,
+          overwrite: 'auto'
+        },
+        0
+      );
+
+      /* 팝업 배경 숨기기 */
+      activeTimeline.to(
+        popup,
+        {
+          backgroundColor:
+            'rgba(245,245,245,0)',
+
+          duration: .7,
+          ease: 'power2.inOut'
+        },
+        .25
+      );
+
+      /* 목록 이미지 다시 표시 */
+      activeTimeline.set(
+        popupState.sourceImageBox,
+        {
+          visibility: 'visible'
+        },
+        1.05
+      );
+
+      activeTimeline.to(
+        transitionImage,
+        {
+          autoAlpha: 0,
+          duration: .15,
+          ease: 'none'
+        },
+        1.05
+      );
+    }
+
+    /* ESC 키 닫기 */
+    function handleKeydown(
+      event
+    ) {
+      if (
+        event.key === 'Escape'
+      ) {
+        closePopup();
+      }
+    }
+
+    /* 팝업 이벤트 연결 */
+    function initServicePopup() {
       const openButtons =
         page.querySelectorAll(
           '.servicePopupOpenBtn'
         );
 
-      const closeButton =
-        popup.querySelector(
+      const closeButtons =
+        page.querySelectorAll(
           '.servicePopupCloseBtn'
         );
-
-      const popupImage =
-        popup.querySelector(
-          '.servicePopupImage'
-        );
-
-      const popupContents = [
-        ...popup.querySelectorAll(
-          '.servicePopupKeyword'
-        ),
-        popup.querySelector(
-          '.servicePopupImgBox > p'
-        ),
-        popup.querySelector(
-          '.servicePopupTextBox'
-        ),
-        closeButton
-      ].filter(Boolean);
-
-      if (
-        !openButtons.length ||
-        !closeButton ||
-        !popupImage
-      ) {
-        return function () { };
-      }
-
-      /* Lenis 제어 */
-      function controlScroll(action) {
-        const lenis =
-          window.lenis;
-
-        if (
-          lenis &&
-          typeof lenis[action] ===
-          'function'
-        ) {
-          lenis[action]();
-        }
-      }
-
-      /* 팝업 이미지 로드 */
-      function loadPopupImage(
-        imageSource
-      ) {
-        return new Promise(
-          function (resolve) {
-            if (!imageSource) {
-              resolve();
-              return;
-            }
-
-            if (
-              popupImage.getAttribute(
-                'src'
-              ) !== imageSource
-            ) {
-              popupImage.setAttribute(
-                'src',
-                imageSource
-              );
-            }
-
-            if (
-              popupImage.complete &&
-              popupImage.naturalWidth
-            ) {
-              resolve();
-              return;
-            }
-
-            popupImage.addEventListener(
-              'load',
-              resolve,
-              {
-                once: true
-              }
-            );
-
-            popupImage.addEventListener(
-              'error',
-              resolve,
-              {
-                once: true
-              }
-            );
-          }
-        );
-      }
-
-      /* 전환용 이미지 생성 */
-      function createTransitionImage(
-        image,
-        rect
-      ) {
-        removeTransitionImage();
-
-        const clonedImage =
-          image.cloneNode(true);
-
-        const imageStyle =
-          window.getComputedStyle(
-            image
-          );
-
-        clonedImage.removeAttribute(
-          'id'
-        );
-
-        clonedImage.classList.add(
-          'servicePopupTransitionImage'
-        );
-
-        document.body.appendChild(
-          clonedImage
-        );
-
-        gsap.set(
-          clonedImage,
-          {
-            position: 'fixed',
-            top: rect.top,
-            left: rect.left,
-            width: rect.width,
-            height: rect.height,
-            margin: 0,
-
-            objectFit:
-              imageStyle.objectFit ===
-                'fill'
-                ? 'cover'
-                : imageStyle.objectFit,
-
-            autoAlpha: 1,
-            pointerEvents: 'none',
-            transformOrigin:
-              'center center',
-            zIndex: 100000
-          }
-        );
-
-        transitionImage =
-          clonedImage;
-
-        return clonedImage;
-      }
-
-      /* 전환용 이미지 제거 */
-      function removeTransitionImage() {
-        if (!transitionImage) {
-          return;
-        }
-
-        gsap.killTweensOf(
-          transitionImage
-        );
-
-        transitionImage.remove();
-
-        transitionImage = null;
-      }
-
-      /* 팝업 열기 */
-      async function openPopup(event) {
-        event.preventDefault();
-
-        if (
-          state.isAnimating ||
-          state.isOpen
-        ) {
-          return;
-        }
-
-        const openButton =
-          event.currentTarget;
-
-        const sourceImage =
-          openButton.querySelector(
-            `.${styles.serviceImgBox} img`
-          );
-
-        if (!sourceImage) {
-          return;
-        }
-
-        state.isAnimating = true;
-        state.sourceImage =
-          sourceImage;
-
-        state.sourceVisibility =
-          sourceImage.style.visibility;
-
-        const sourceRect =
-          sourceImage
-            .getBoundingClientRect();
-
-        createTransitionImage(
-          sourceImage,
-          sourceRect
-        );
-
-        sourceImage.style.visibility =
-          'hidden';
-
-        popup.style.display =
-          'flex';
-
-        popup.style.visibility =
-          'hidden';
-
-        popup.setAttribute(
-          'aria-hidden',
-          'false'
-        );
-
-        document.body.classList.add(
-          'servicePopupOpen'
-        );
-
-        controlScroll('stop');
-
-        const popupImageSource =
-          openButton.dataset
-            .popupImage;
-
-        const popupImageAlt =
-          openButton.dataset
-            .popupAlt || '';
-
-        popupImage.alt =
-          popupImageAlt;
-
-        await loadPopupImage(
-          popupImageSource
-        );
-
-        if (isDestroyed) {
-          return;
-        }
-
-        popup.style.visibility =
-          'visible';
-
-        const popupImageRect =
-          popupImage
-            .getBoundingClientRect();
-
-        gsap.set(
-          popupImage,
-          {
-            autoAlpha: 0
-          }
-        );
-
-        gsap.set(
-          popupContents,
-          {
-            autoAlpha: 0,
-            y: 30
-          }
-        );
-
-        gsap.set(
-          popup,
-          {
-            backgroundColor:
-              'rgba(245, 245, 245, 0)'
-          }
-        );
-
-        activeTimeline =
-          gsap.timeline({
-            onComplete:
-              function () {
-                removeTransitionImage();
-
-                state.isAnimating =
-                  false;
-
-                state.isOpen =
-                  true;
-
-                closeButton.focus();
-              }
-          });
-
-        /* 목록 이미지에서 팝업 이미지로 확대 */
-        activeTimeline.to(
-          transitionImage,
-          {
-            top:
-              popupImageRect.top,
-
-            left:
-              popupImageRect.left,
-
-            width:
-              popupImageRect.width,
-
-            height:
-              popupImageRect.height,
-
-            duration: 1.35,
-            ease: 'power4.inOut',
-            force3D: true,
-            overwrite: 'auto'
-          },
-          0
-        );
-
-        /* 팝업 배경 표시 */
-        activeTimeline.to(
-          popup,
-          {
-            backgroundColor:
-              '#f5f5f5',
-
-            duration: 0.6,
-            ease: 'power2.out'
-          },
-          0
-        );
-
-        /* 팝업 콘텐츠 표시 */
-        activeTimeline.to(
-          popupContents,
-          {
-            autoAlpha: 1,
-            y: 0,
-            duration: 0.7,
-            stagger: 0.06,
-            ease: 'power3.out'
-          },
-          0.45
-        );
-
-        /* 전환 이미지 숨기기 */
-        activeTimeline.to(
-          transitionImage,
-          {
-            autoAlpha: 0,
-            duration: 0.25,
-            ease: 'none'
-          },
-          1.1
-        );
-
-        /* 실제 팝업 이미지 표시 */
-        activeTimeline.to(
-          popupImage,
-          {
-            autoAlpha: 1,
-            duration: 0.25,
-            ease: 'none'
-          },
-          1.1
-        );
-      }
-
-      /* 팝업 닫기 */
-      function closePopup() {
-        if (
-          state.isAnimating ||
-          !state.isOpen ||
-          !state.sourceImage
-        ) {
-          return;
-        }
-
-        state.isAnimating = true;
-
-        const popupImageRect =
-          popupImage
-            .getBoundingClientRect();
-
-        const sourceRect =
-          state.sourceImage
-            .getBoundingClientRect();
-
-        createTransitionImage(
-          popupImage,
-          popupImageRect
-        );
-
-        gsap.set(
-          popupImage,
-          {
-            autoAlpha: 0
-          }
-        );
-
-        activeTimeline =
-          gsap.timeline({
-            onComplete:
-              function () {
-                removeTransitionImage();
-
-                state.sourceImage
-                  .style.visibility =
-                  state.sourceVisibility;
-
-                popup.style.display =
-                  'none';
-
-                popup.style.visibility =
-                  'hidden';
-
-                popup.setAttribute(
-                  'aria-hidden',
-                  'true'
-                );
-
-                gsap.set(
-                  popupImage,
-                  {
-                    clearProps:
-                      'opacity,visibility'
-                  }
-                );
-
-                gsap.set(
-                  popupContents,
-                  {
-                    clearProps:
-                      'opacity,visibility,transform'
-                  }
-                );
-
-                gsap.set(
-                  popup,
-                  {
-                    clearProps:
-                      'backgroundColor'
-                  }
-                );
-
-                document.body
-                  .classList.remove(
-                    'servicePopupOpen'
-                  );
-
-                controlScroll(
-                  'start'
-                );
-
-                const sourceButton =
-                  state.sourceImage
-                    .closest(
-                      '.servicePopupOpenBtn'
-                    );
-
-                state.sourceImage =
-                  null;
-
-                state.sourceVisibility =
-                  '';
-
-                state.isAnimating =
-                  false;
-
-                state.isOpen =
-                  false;
-
-                sourceButton?.focus();
-              }
-          });
-
-        /* 팝업 콘텐츠 숨기기 */
-        activeTimeline.to(
-          popupContents,
-          {
-            autoAlpha: 0,
-            y: 20,
-            duration: 0.35,
-            stagger: 0.03,
-            ease: 'power2.in'
-          },
-          0
-        );
-
-        /* 팝업 이미지에서 목록 이미지로 축소 */
-        activeTimeline.to(
-          transitionImage,
-          {
-            top: sourceRect.top,
-            left: sourceRect.left,
-            width: sourceRect.width,
-            height: sourceRect.height,
-            duration: 1.2,
-            ease: 'power4.inOut',
-            force3D: true,
-            overwrite: 'auto'
-          },
-          0
-        );
-
-        /* 팝업 배경 숨기기 */
-        activeTimeline.to(
-          popup,
-          {
-            backgroundColor:
-              'rgba(245, 245, 245, 0)',
-
-            duration: 0.7,
-            ease: 'power2.inOut'
-          },
-          0.25
-        );
-
-        /* 목록 이미지 다시 표시 */
-        activeTimeline.set(
-          state.sourceImage,
-          {
-            visibility:
-              'visible'
-          },
-          1.05
-        );
-
-        activeTimeline.to(
-          transitionImage,
-          {
-            autoAlpha: 0,
-            duration: 0.15,
-            ease: 'none'
-          },
-          1.05
-        );
-      }
-
-      /* ESC 키 닫기 */
-      function handleKeydown(event) {
-        if (
-          event.key ===
-          'Escape'
-        ) {
-          closePopup();
-        }
-      }
 
       openButtons.forEach(
         function (button) {
@@ -687,9 +709,13 @@ export default function useServiceMotion(
         }
       );
 
-      closeButton.addEventListener(
-        'click',
-        closePopup
+      closeButtons.forEach(
+        function (button) {
+          button.addEventListener(
+            'click',
+            closePopup
+          );
+        }
       );
 
       document.addEventListener(
@@ -697,7 +723,6 @@ export default function useServiceMotion(
         handleKeydown
       );
 
-      /* 팝업 이벤트 정리 */
       return function () {
         openButtons.forEach(
           function (button) {
@@ -708,42 +733,19 @@ export default function useServiceMotion(
           }
         );
 
-        closeButton.removeEventListener(
-          'click',
-          closePopup
+        closeButtons.forEach(
+          function (button) {
+            button.removeEventListener(
+              'click',
+              closePopup
+            );
+          }
         );
 
         document.removeEventListener(
           'keydown',
           handleKeydown
         );
-
-        activeTimeline?.kill();
-
-        removeTransitionImage();
-
-        if (state.sourceImage) {
-          state.sourceImage
-            .style.visibility =
-            state.sourceVisibility;
-        }
-
-        popup.style.display =
-          'none';
-
-        popup.style.visibility =
-          'hidden';
-
-        popup.setAttribute(
-          'aria-hidden',
-          'true'
-        );
-
-        document.body.classList.remove(
-          'servicePopupOpen'
-        );
-
-        controlScroll('start');
       };
     }
 
@@ -759,7 +761,7 @@ export default function useServiceMotion(
         }
       );
 
-    /* 서비스 페이지 종료 시 정리 */
+    /* 컴포넌트 종료 시 정리 */
     return function () {
       isDestroyed = true;
 
@@ -768,6 +770,46 @@ export default function useServiceMotion(
       );
 
       cleanupPopup();
+
+      activeTimeline?.kill();
+
+      removeTransitionImage();
+
+      if (
+        popupState.sourceImageBox
+      ) {
+        popupState.sourceImageBox
+          .style.visibility =
+          popupState
+            .sourceBoxVisibility;
+      }
+
+      page
+        .querySelectorAll(
+          '.servicePopupWrap'
+        )
+        .forEach(
+          function (popup) {
+            popup.classList.remove(
+              'active'
+            );
+
+            popup.removeAttribute(
+              'style'
+            );
+
+            popup.setAttribute(
+              'aria-hidden',
+              'true'
+            );
+          }
+        );
+
+      document.body.classList.remove(
+        'servicePopupOpen'
+      );
+
+      controlScroll('start');
 
       sloganTriggers.forEach(
         function (trigger) {
