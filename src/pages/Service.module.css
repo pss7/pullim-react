@@ -2,172 +2,494 @@
 
 /* 서비스 영역 */
 
-.serviceWrap :global(.subContentBox){padding:0 0 200px;}
+.serviceWrap :global(.subContentBox) {
+  padding: 0 0 200px;
+}
 
-.serviceWrap .serviceList{margin-bottom:150px;}
+.serviceList {
+  margin-bottom: 150px;
+}
 
-.serviceWrap .serviceList li{border-bottom:1px solid #e8e8e8;}
+.serviceList li {
+  border-bottom:
+    1px solid #e8e8e8;
+}
 
-.serviceWrap .serviceList li a{padding:40px;display:flex;align-items:center;gap:20px 120px;}
+.serviceList li a {
+  padding: 40px;
+  display: flex;
+  align-items: center;
+  gap: 20px 120px;
+}
 
-.serviceWrap .serviceList li a .serviceImgBox{position:relative;max-width:720px;width:100%;height:0;padding-top:14.7%;overflow:hidden;}
+.serviceImgBox {
+  position: relative;
+  max-width: 720px;
+  width: 100%;
+  height: 0;
+  padding-top: 14.7%;
+}
 
-.serviceWrap .serviceList li a .serviceImgBox img{display:block;position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:1;visibility:visible;transition:opacity .3s ease,visibility .3s ease,transform .6s cubic-bezier(.65,0,.35,1);}
+.serviceImgBox img {
+  display: block;
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition:
+    opacity .3s ease,
+    visibility .3s ease;
+}
 
-.serviceWrap .serviceList li a .serviceImgBox .img{opacity:1;visibility:visible;z-index:1;}
+.serviceImgBox .img {
+  opacity: 1;
+  visibility: visible;
+}
 
-.serviceWrap .serviceList li a .serviceImgBox .hover{opacity:0;visibility:hidden;z-index:2;}
+.serviceImgBox .hover {
+  opacity: 0;
+  visibility: hidden;
+}
 
-.serviceWrap .serviceList li a:hover .serviceImgBox .img{opacity:0;visibility:hidden;}
+.serviceList li a:hover
+.serviceImgBox .img {
+  opacity: 0;
+  visibility: hidden;
+}
 
-.serviceWrap .serviceList li a:hover .serviceImgBox .hover{opacity:1;visibility:visible;}
+.serviceList li a:hover
+.serviceImgBox .hover {
+  opacity: 1;
+  visibility: visible;
+}
 
-.serviceWrap .serviceList li a:hover .serviceImgBox img{transform:scale(1.03);}
+.serviceCategory {
+  display: block;
+  margin-bottom: 20px;
+  color: #222;
+  font-weight: 600;
+  font-family: 'ChakraPetch';
+}
 
-.serviceWrap .serviceList li a .serviceTextBox{flex:1;}
+.serviceDescription {
+  color: #222;
+  font-weight: 600;
+  word-break: keep-all;
+}
 
-.serviceWrap .serviceList li a .serviceCategory{display:block;margin-bottom:20px;color:#222;font-weight:600;font-family:'ChakraPetch';}
-
-.serviceWrap .serviceList li a .serviceDescription{color:#222;font-weight:600;word-break:keep-all;}
-
-.serviceWrap .serviceList li a .serviceDescription br{display:none;}
-
+.serviceDescription br {
+  display: none;
+}
 
 /* 브랜드 슬로건 */
 
-.serviceWrap .serviceBrandSloganBox{position:relative;}
+.serviceBrandSloganBox {
+  position: relative;
+}
 
-.serviceWrap .serviceBrandSloganBox p{text-align:center;}
+.serviceBrandSloganBox p {
+  text-align: center;
+}
 
-.serviceWrap .serviceBrandSloganBox span{font-size:80px;font-weight:500;font-family:'HelveticaNowDisplay';line-height:1;}
+.serviceBrandSloganBox span {
+  font-size: 80px;
+  font-weight: 500;
+  font-family:
+    'HelveticaNowDisplay';
+  line-height: 1;
+}
 
-.serviceWrap .serviceBrandSloganBox .serviceBrandSloganLine{display:inline-block;width:max-content;max-width:100%;color:transparent;background:linear-gradient(to right,#222 0%,#222 100%) no-repeat left center / 0% 100%,linear-gradient(to right,#b4b4b4 0%,#b4b4b4 100%) no-repeat left center / 100% 100%;background-clip:text;-webkit-background-clip:text;will-change:background-size;}
+.serviceBrandSloganLine {
+  display: inline-block;
+  width: max-content;
+  max-width: 100%;
+  color: transparent;
 
+  background:
+    linear-gradient(
+      to right,
+      #222 0%,
+      #222 100%
+    )
+    no-repeat left center /
+    0% 100%,
 
-/* 서비스 팝업 영역 */
+    linear-gradient(
+      to right,
+      #b4b4b4 0%,
+      #b4b4b4 100%
+    )
+    no-repeat left center /
+    100% 100%;
 
-:global(.servicePopupWrap){display:none;align-items:center;justify-content:center;position:fixed;inset:0;padding:60px;background-color:#f5f5f5;visibility:hidden;z-index:99999;}
+  background-clip: text;
+  -webkit-background-clip:
+    text;
 
-:global(.servicePopupWrap.active){display:flex;visibility:visible;}
+  will-change:
+    background-size;
+}
 
-:global(.servicePopupWrap .servicePopupBox){display:flex;align-items:center;justify-content:center;gap:2.08vw 5.73vw;}
+/* 서비스 팝업 */
 
-:global(.servicePopupWrap .servicePopupImgBox){position:relative;}
+:global(.servicePopupWrap) {
+  display: none;
+  visibility: hidden;
+  position: fixed;
+  inset: 0;
+  padding: 60px;
+  align-items: center;
+  justify-content: center;
+  background-color: #f5f5f5;
+  pointer-events: none;
+  z-index: 99999999;
+}
 
-:global(.servicePopupWrap .servicePopupImage){display:block;width:48.96vw;height:auto;}
+:global(.servicePopupWrap.active) {
+  display: flex;
+  visibility: visible;
+  pointer-events: auto;
+}
 
-:global(.servicePopupWrap .servicePopupKeyword){position:absolute;color:#fff;font-size:4.17vw;font-weight:500;font-family:'HelveticaNowDisplay';mix-blend-mode:difference;}
+:global(.servicePopupBox) {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2.08vw 5.73vw;
+}
 
-:global(.servicePopupWrap .servicePopupKeywordTop){top:-3.75vw;left:2.08vw;}
+:global(.servicePopupImgBox) {
+  position: relative;
+}
 
-:global(.servicePopupWrap .servicePopupKeywordBottom){right:2.08vw;bottom:-2.92vw;}
+/* 팝업 슬라이더 */
 
-:global(.servicePopupWrap .servicePopupImgBox > p){position:absolute;top:2.08vw;right:-8.28vw;color:#fff;font-size:1.67vw;font-weight:700;mix-blend-mode:difference;}
+:global(.servicePopupSlider) {
+  position: relative;
+  width: 48.96vw;
+  overflow: hidden;
+  background-color: #ddd;
+  cursor: none;
+  outline: none;
+  touch-action: manipulation;
+}
 
-:global(.servicePopupWrap .servicePopupTextBox){position:relative;}
+:global(.servicePopupSliderTrack) {
+  display: flex;
+  width: 100%;
+  transform:
+    translate3d(0, 0, 0);
+  transition:
+    transform .75s
+    cubic-bezier(.65, 0, .35, 1);
+  will-change: transform;
+}
 
-:global(.servicePopupWrap .servicePopupText){color:#0a0a0a;font-size:.83vw;font-weight:600;}
+:global(.servicePopupSlide) {
+  flex: 0 0 100%;
+  width: 100%;
+  overflow: hidden;
+}
 
-:global(.servicePopupWrap .servicePopupCloseBtn){position:absolute;top:32px;right:40px;width:40px;height:40px;background:url('/images/sub/close_icon.svg') no-repeat center / contain;}
+:global(.servicePopupImage) {
+  display: block;
+  width: 100%;
+  height: auto;
+  user-select: none;
+  pointer-events: none;
+  -webkit-user-drag: none;
+}
 
+/* 슬라이더 커서 */
+
+:global(.servicePopupSliderCursor) {
+  opacity: 0;
+  visibility: hidden;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 64px;
+  height: 64px;
+  background:
+    url('/images/sub/slide_arrow.svg')
+    no-repeat center / contain;
+  pointer-events: none;
+  transform:
+    translate(-50%, -50%)
+    rotate(0deg);
+  transition:
+    opacity .2s ease,
+    visibility .2s ease,
+    transform .2s ease;
+  z-index: 30;
+}
+
+:global(.servicePopupSliderCursor.active) {
+  opacity: 1;
+  visibility: visible;
+}
+
+:global(.servicePopupSliderCursor.isPrev) {
+  transform:
+    translate(-50%, -50%)
+    rotate(180deg);
+}
+
+/* 팝업 이미지 위 텍스트 */
+
+:global(.servicePopupKeyword) {
+  position: absolute;
+  color: #fff;
+  font-size: 4.17vw;
+  font-weight: 500;
+  font-family:
+    'HelveticaNowDisplay';
+  mix-blend-mode: difference;
+  pointer-events: none;
+  z-index: 10;
+}
+
+:global(.servicePopupKeywordTop) {
+  top: -3.75vw;
+  left: 2.08vw;
+}
+
+:global(.servicePopupKeywordBottom) {
+  right: 2.08vw;
+  bottom: -2.92vw;
+}
+
+:global(.servicePopupImgBox > p) {
+  position: absolute;
+  top: 2.08vw;
+  right: -8.28vw;
+  color: #fff;
+  font-size: 1.67vw;
+  font-weight: 700;
+  mix-blend-mode: difference;
+  pointer-events: none;
+  z-index: 10;
+}
+
+:global(.servicePopupText) {
+  color: #0a0a0a;
+  font-size: .83vw;
+  font-weight: 600;
+}
+
+/* 팝업 닫기 버튼 */
+
+:global(.servicePopupCloseBtn) {
+  position: absolute;
+  top: 32px;
+  right: 40px;
+  width: 40px;
+  height: 40px;
+  background:
+    url('/images/sub/close_icon.svg')
+    no-repeat center / contain;
+  z-index: 40;
+}
 
 /* 팝업 전환 이미지 */
 
-:global(.servicePopupTransitionImage){display:block;position:fixed;margin:0;object-fit:cover;pointer-events:none;will-change:top,left,width,height,transform,opacity;z-index:100000;}
-
+:global(.servicePopupTransitionImage) {
+  display: block;
+  position: fixed;
+  margin: 0;
+  max-width: none;
+  pointer-events: none;
+  transform-origin:
+    center center;
+  will-change:
+    top,
+    left,
+    width,
+    height,
+    opacity;
+  z-index: 100000;
+}
 
 /* 팝업 열림 */
 
-:global(body.servicePopupOpen){overflow:hidden;}
-
-
-/* 1199px 이하 */
-
-@media (max-width:1199px){
-
-  .serviceWrap .serviceList{margin-bottom:120px;}
-
-  .serviceWrap .serviceList li a{padding:40px 0;flex-direction:column;gap:40px 0;}
-
-  .serviceWrap .serviceList li a .serviceImgBox{max-width:none;padding-top:23%;}
-
-  .serviceWrap .serviceList li a .serviceTextBox{width:100%;}
-
-  .serviceWrap .serviceBrandSloganBox span{font-size:50px;}
-
-  :global(.servicePopupWrap){padding:20px;}
-
-  :global(.servicePopupWrap .servicePopupBox){flex-direction:column;align-items:flex-start;}
-
-  :global(.servicePopupWrap .servicePopupImage){width:62vw;}
-
-  :global(.servicePopupWrap .servicePopupKeywordBottom){bottom:5.67vw;}
-
-  :global(.servicePopupWrap .servicePopupImgBox > p){position:static;margin-top:3.34vw;font-size:2vw;}
-
-  :global(.servicePopupWrap .servicePopupText){font-size:1.4vw;}
-
-  :global(.servicePopupWrap .servicePopupCloseBtn){top:24px;right:24px;width:20px;height:20px;}
-
+:global(body.servicePopupOpen) {
+  overflow: hidden;
 }
 
+/* 마우스 커서를 지원하지 않는 기기 */
 
-/* 768px 이하 */
+@media (hover:none),
+(pointer:coarse) {
+  :global(.servicePopupSlider) {
+    cursor: pointer;
+  }
 
-@media (max-width:768px){
-
-  .serviceWrap :global(.subContentBox){padding:0 0 100px;}
-
-  .serviceWrap .serviceBrandSloganBox span{font-size:30px;}
-
-  :global(.servicePopupWrap .servicePopupImage){width:100%;}
-
-  :global(.servicePopupWrap .servicePopupKeyword){font-size:6vw;}
-
-  :global(.servicePopupWrap .servicePopupKeywordTop){top:-5.75vw;}
-
-  :global(.servicePopupWrap .servicePopupKeywordBottom){bottom:8.8vw;}
-
-  :global(.servicePopupWrap .servicePopupImgBox > p){position:static;margin-top:5vw;font-size:3vw;}
-
-  :global(.servicePopupWrap .servicePopupText){font-size:2.2vw;}
-
+  :global(.servicePopupSliderCursor) {
+    display: none;
+  }
 }
 
+/* 1199px */
 
-/* 480px 이하 */
+@media (max-width:1199px) {
+  .serviceList {
+    margin-bottom: 120px;
+  }
 
-@media (max-width:480px){
+  .serviceList li a {
+    padding: 40px 0;
+    flex-direction: column;
+    gap: 40px 0;
+  }
 
-  :global(.servicePopupWrap .servicePopupCloseBtn){width:16px;height:16px;}
+  .serviceImgBox {
+    max-width: none;
+    padding-top: 23%;
+  }
 
+  .serviceTextBox {
+    width: 100%;
+  }
+
+  .serviceBrandSloganBox span {
+    font-size: 50px;
+  }
+
+  :global(.servicePopupWrap) {
+    padding: 20px;
+  }
+
+  :global(.servicePopupBox) {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  :global(.servicePopupSlider) {
+    width: 62vw;
+  }
+
+  :global(.servicePopupKeywordBottom) {
+    bottom: 5.67vw;
+  }
+
+  :global(.servicePopupImgBox > p) {
+    position: static;
+    margin-top: 3.34vw;
+    font-size: 2vw;
+  }
+
+  :global(.servicePopupText) {
+    font-size: 1.4vw;
+  }
+
+  :global(.servicePopupCloseBtn) {
+    top: 24px;
+    right: 24px;
+    width: 20px;
+    height: 20px;
+  }
+
+  :global(.servicePopupSliderCursor) {
+    width: 52px;
+    height: 52px;
+  }
 }
 
+/* 768px */
 
-/* 360px 이하 */
+@media (max-width:768px) {
+  .serviceWrap :global(.subContentBox) {
+    padding: 0 0 100px;
+  }
 
-@media (max-width:360px){
+  .serviceBrandSloganBox span {
+    font-size: 30px;
+  }
 
-  .serviceWrap .serviceList li a{padding:20px 0;gap:20px 0;}
+  :global(.servicePopupSlider) {
+    width: 100%;
+  }
 
-  .serviceWrap .serviceList li a .serviceImgBox{padding-top:31%;}
+  :global(.servicePopupKeyword) {
+    font-size: 6vw;
+  }
 
-  .serviceWrap .serviceList li a .serviceCategory{margin-bottom:12px;font-size:10px;}
+  :global(.servicePopupKeywordTop) {
+    top: -5.75vw;
+  }
 
-  .serviceWrap .serviceList li a .serviceDescription{font-size:10px;}
+  :global(.servicePopupKeywordBottom) {
+    bottom: 8.8vw;
+  }
 
-  .serviceWrap .serviceBrandSloganBox span{font-size:24px;}
+  :global(.servicePopupImgBox > p) {
+    position: static;
+    margin-top: 5vw;
+    font-size: 3vw;
+  }
 
-  :global(.servicePopupWrap .servicePopupBox){gap:5vw 0;}
+  :global(.servicePopupText) {
+    font-size: 2.2vw;
+  }
+}
 
-  :global(.servicePopupWrap .servicePopupKeyword){font-size:6.7vw;}
+/* 480px */
 
-  :global(.servicePopupWrap .servicePopupKeywordTop){top:-6.7vw;}
+@media (max-width:480px) {
+  :global(.servicePopupCloseBtn) {
+    width: 16px;
+    height: 16px;
+  }
+}
 
-  :global(.servicePopupWrap .servicePopupKeywordBottom){bottom:17.8vw;}
+/* 360px */
 
-  :global(.servicePopupWrap .servicePopupImgBox > p){margin-top:11.34vw;font-size:4vw;}
+@media (max-width:360px) {
+  .serviceList li a {
+    padding: 20px 0;
+    gap: 20px 0;
+  }
 
-  :global(.servicePopupWrap .servicePopupText){font-size:3.4vw;}
+  .serviceImgBox {
+    padding-top: 31%;
+  }
 
+  .serviceCategory {
+    margin-bottom: 12px;
+    font-size: 10px;
+  }
+
+  .serviceDescription {
+    font-size: 10px;
+  }
+
+  .serviceBrandSloganBox span {
+    font-size: 24px;
+  }
+
+  :global(.servicePopupBox) {
+    gap: 5vw 0;
+  }
+
+  :global(.servicePopupKeyword) {
+    font-size: 6.7vw;
+  }
+
+  :global(.servicePopupKeywordTop) {
+    top: -6.7vw;
+  }
+
+  :global(.servicePopupKeywordBottom) {
+    bottom: 17.8vw;
+  }
+
+  :global(.servicePopupImgBox > p) {
+    margin-top: 11.34vw;
+    font-size: 4vw;
+  }
+
+  :global(.servicePopupText) {
+    font-size: 3.4vw;
+  }
 }
