@@ -6,7 +6,7 @@
   background-color: #222;
 }
 
-/* 헤더 */ 
+/* 헤더 */
 
 :global(#wrap).teamWrap :global(#headerWrap) nav ul li h2 a {
   color: #fff;
@@ -133,14 +133,23 @@
 }
 
 .teamWrap .teamMemberList li a .teamInfoHoverBox p {
+  position: relative;
   padding: 20px;
   color: #222;
+  background-color: transparent;
+  isolation: isolate;
+  z-index: 2;
+}
+
+.teamWrap .teamMemberList li a .teamInfoHoverBox p::before {
+  content: '';
+  position: absolute;
+  inset: 0;
   background-color:
-    rgba(255, 255, 255, .55);
-  backdrop-filter:
-    blur(40px);
-  -webkit-backdrop-filter:
-    blur(40px);
+    rgba(255, 255, 255, .5);
+  filter: blur(1px);
+  pointer-events: none;
+  z-index: -1;
 }
 
 .teamWrap .teamMemberList li:nth-child(5n+1) {
