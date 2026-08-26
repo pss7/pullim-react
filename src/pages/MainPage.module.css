@@ -697,7 +697,7 @@
 }
 
 :global(#contactWrap).contactWrap .contactTitleBox h2 {
-  margin-bottom: 235px;
+  margin-bottom: 40px;
   color: #222;
   font-size: 120px;
   font-weight: 700;
@@ -708,7 +708,7 @@
 
 :global(#contactWrap).contactWrap .contactContentBox {
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   justify-content: space-between;
 }
 
@@ -935,7 +935,7 @@
   :global(#contactWrap).contactWrap .contactContentBox {
     flex-direction: column;
     align-items: normal;
-    gap: 100px 0;
+    gap: 60px 0;
   }
 
   :global(#contactWrap).contactWrap .contactTitleBox h2 {
