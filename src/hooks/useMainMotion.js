@@ -392,8 +392,8 @@ export default function useMainMotion(styles) {
 
         const projectItems = projectList
           ? Array.from(
-              projectList.querySelectorAll('li')
-            )
+            projectList.querySelectorAll('li')
+          )
           : [];
 
         if (
@@ -428,8 +428,8 @@ export default function useMainMotion(styles) {
         function getProjectCurrentX() {
           return Math.max(
             getProjectListWidth() -
-              getProjectCardWidth() -
-              RIGHT_GAP,
+            getProjectCardWidth() -
+            RIGHT_GAP,
             0
           );
         }
@@ -548,7 +548,7 @@ export default function useMainMotion(styles) {
                   return (
                     '+=' +
                     projectItems.length *
-                      PROJECT_DISTANCE
+                    PROJECT_DISTANCE
                   );
                 },
 
@@ -714,7 +714,7 @@ export default function useMainMotion(styles) {
             companyImages.length - 1,
             Math.floor(
               progress *
-                companyImages.length
+              companyImages.length
             )
           );
 
@@ -753,25 +753,97 @@ export default function useMainMotion(styles) {
               return;
             }
 
-            const value = {
+            /* 쉼표 없는 최종 숫자 */
+            const targetText = String(target);
+
+            const computedStyle =
+              window.getComputedStyle(number);
+
+            const measureElement =
+              document.createElement('span');
+
+            measureElement.textContent =
+              targetText;
+
+            Object.assign(
+              measureElement.style,
+              {
+                position: 'fixed',
+                top: '-9999px',
+                left: '-9999px',
+                display: 'inline-block',
+                visibility: 'hidden',
+                whiteSpace: 'nowrap',
+                fontFamily:
+                  computedStyle.fontFamily,
+                fontSize:
+                  computedStyle.fontSize,
+                fontWeight:
+                  computedStyle.fontWeight,
+                fontStyle:
+                  computedStyle.fontStyle,
+                letterSpacing:
+                  computedStyle.letterSpacing,
+                lineHeight:
+                  computedStyle.lineHeight,
+                fontVariantNumeric:
+                  'tabular-nums',
+                pointerEvents: 'none'
+              }
+            );
+
+            document.body.appendChild(
+              measureElement
+            );
+
+            const targetWidth = Math.ceil(
+              measureElement
+                .getBoundingClientRect()
+                .width
+            );
+
+            measureElement.remove();
+
+            number.style.minWidth =
+              `${targetWidth}px`;
+
+            const countValue = {
               current: 0
             };
 
-            gsap.to(value, {
+            let previousValue = -1;
+
+            gsap.to(countValue, {
               current: target,
               duration: 1.5,
               ease: 'power3.out',
+              overwrite: 'auto',
 
               onUpdate() {
-                number.textContent =
+                const nextValue = Math.min(
+                  target,
                   Math.floor(
-                    value.current
-                  ).toLocaleString();
+                    countValue.current
+                  )
+                );
+
+                if (
+                  nextValue ===
+                  previousValue
+                ) {
+                  return;
+                }
+
+                previousValue = nextValue;
+
+                /* 쉼표 없이 표시 */
+                number.textContent =
+                  String(nextValue);
               },
 
               onComplete() {
                 number.textContent =
-                  target.toLocaleString();
+                  targetText;
               }
             });
           });
@@ -853,7 +925,7 @@ export default function useMainMotion(styles) {
               Math.max(
                 0,
                 companySection.offsetHeight -
-                  companyLayout.offsetHeight
+                companyLayout.offsetHeight
               );
 
             return (
