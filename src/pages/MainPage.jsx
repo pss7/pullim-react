@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import SliderModule from 'react-slick';
 
 import styles from './MainPage.module.css';
@@ -30,6 +30,11 @@ export default function MainPage() {
   const popupSliderRef = useRef(null);
 
   useMainMotion(styles);
+
+  const [
+    companyVideoOpen,
+    setCompanyVideoOpen
+  ] = useState(false);
 
   /* 다음 팝업 슬라이드 */
   function handlePopupNext() {
@@ -205,9 +210,15 @@ export default function MainPage() {
               </div>
               {/* //팝업 슬라이드 영역 */}
 
-              {/* 팝업 비디오 영역 */}
+              {/* 기업 소개 영상 영역 */}
               <div className={styles.popupVideoBox}>
-                <a href="#">
+                <a
+                  href="#"
+                  onClick={function (event) {
+                    event.preventDefault();
+                    setCompanyVideoOpen(true);
+                  }}
+                >
                   <div
                     className={
                       styles.popupVideoInfoText
@@ -225,7 +236,8 @@ export default function MainPage() {
                   </div>
                 </a>
               </div>
-              {/* //팝업 비디오 영역 */}
+              {/* //기업 소개 영상 영역 */}
+
             </div>
             {/* //팝업 정보 영역 */}
 
@@ -885,6 +897,42 @@ export default function MainPage() {
         </div>
       </section>
       {/* //문의하기 영역 */}
+
+      {/* 기업 소개 영상 팝업 */}
+      <div
+        className={`
+    companyVideoPopup
+    ${companyVideoOpen
+            ? 'active'
+            : ''
+          }
+  `}
+        aria-hidden={!companyVideoOpen}
+      >
+        <div className="companyVideoPopupFrame">
+          <iframe
+            src={
+              companyVideoOpen
+                ? 'https://www.youtube.com/embed/wWzDcDeFumU?autoplay=1&mute=1&loop=1&playlist=wWzDcDeFumU&playsinline=1&rel=0'
+                : undefined
+            }
+            title="더 풀림 기업 소개 영상"
+            allow="autoplay; encrypted-media; picture-in-picture"
+            allowFullScreen
+          />
+        </div>
+
+        <button
+          type="button"
+          className="companyVideoPopupCloseBtn"
+          aria-label="기업 소개 영상 팝업 닫기"
+          onClick={function () {
+            setCompanyVideoOpen(false);
+          }}
+        />
+      </div>
+      {/* //기업 소개 영상 팝업 */}
+      
     </>
   );
 }
